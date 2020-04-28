@@ -28,7 +28,23 @@
 	  
     <style type="text/css">
        body { background: #f0ead6 !important; } /* #e8e4c9: Dirty white - Adding !important forces the browser to overwrite the default style applied by Bootstrap */
-     </style>
+    </style>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 10px;
+      background-color: #f0ead6;
+      padding: 10px;
+   }
+
+  .grid-container > div {
+      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 20px 0;
+      font-size: 30px;
+    }
+  </style>
   </head>
 
   <body>
@@ -88,13 +104,13 @@ The overarching goal of all my projects is to develop physical models from data.
 		inorganic or dead matter, their interest can bear scarcely any comparison with that which
 		attaches to the same force when connected with the nervous system and with life." <p>
 		<p></p>
-		For an early review of this field have a look at <a href="https://www.annualreviews.org/doi/pdf/10.1146/annurev.bb.06.060177.002305">Jaffe and Nuccittelli (1977)</a>
+		For an early review of this field have a look at <a href="https://www.annualreviews.org/doi/pdf/10.1146/annurev.bb.06.060177.002305" style="color:darkgreen">Jaffe and Nuccittelli (1977)</a>
 	   
 <!-- Example row of columns -->
-	<font color="black">
-        <div class="row">
-		<div class="col-lg-9"> <!-- style="background-color:Black;">   -->	
-				<h6>Cellular Cultures: Multi-scale Cell Aggregate Electroporation</h6>
+	      
+	<div class="grid-container">
+		<div> 
+			<h6>Cellular Cultures: Multi-scale Cell Aggregate Electroporation</h6>
 				<h6>Computational Biology</h6>
 				<p>
 					 <ul>
@@ -103,7 +119,27 @@ The overarching goal of all my projects is to develop physical models from data.
 					<li> <i>For the first time</i>, direct simulations of the multi-scale electroporation phenomena such as shadowing effect, permeabilization saturation, tissue-scale homogenization, and memory effects have become possible.</li>
 					<li> The proposed framework surpasses the existing implementations by enabling simulations of arbitrarily large tissues given enough number of processors being available.</li>
 					</ul>
-			</p>
+			        </p>
+		</div>
+	      
+	      	<div>
+			<img src="img/ElectroFluct.png" class="img-fluid rounded-circle" alt="Cell's Photo">
+		</div>
+	</div>
+	<font color="black">
+	
+        <div class="row">
+		<div class="col-lg-9"> <!-- style="background-color:Black;">   -->	
+				<h6>Cellular Cultures: Multi-scale Cell Aggregate Electroporation</h6>
+				<h6>Computational Biology</h6>
+				<p>
+					<ul>
+				    	<li> An efficient framework for <i>direct</i> simulations of the mesoscale cell aggregates (tissue scale) is proposed.</li>
+					<li> The Electropermeabilization model is simulated on a Voronoi mesh in a parallel environment that is developed in the context of the level-set method.</li>
+					<li> <i>For the first time</i>, direct simulations of the multi-scale electroporation phenomena such as shadowing effect, permeabilization saturation, tissue-scale homogenization, and memory effects have become possible.</li>
+					<li> The proposed framework surpasses the existing implementations by enabling simulations of arbitrarily large tissues given enough number of processors being available.</li>
+					</ul>
+			        </p>
         	</div>
 	  	<div class="col-lg-3"> <!-- style="background-color:Black;"> -->
         		<img src="img/ElectroFluct.png" class="img-fluid rounded-circle" alt="Cell's Photo">
