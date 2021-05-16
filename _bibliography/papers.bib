@@ -23,14 +23,18 @@
 
 @article{pakravan2020solving,
   Abbr={JCP},
-  title={Solving inverse-PDE problems with physics-aware neural networks},
-  author={Pakravan, Samira and Mistani, Pouria and Aragon-Calvo, Miguel Angel and Gibou, Frederic},
-  journal={Journal of Computational Physics},
-  year={2021},
-  url={https://arxiv.org/pdf/2001.03608.pdf},
+  title = {Solving inverse-PDE problems with physics-aware neural networks},
+  journal = {Journal of Computational Physics},
+  volume = {440},
+  pages = {110414},
+  year = {2021},
+  issn = {0021-9991},
+  doi = {https://doi.org/10.1016/j.jcp.2021.110414},
+  url = {https://www.sciencedirect.com/science/article/pii/S0021999121003090},
   pdf={BiPDE.pdf},
-  html={https://arxiv.org/abs/2001.03608},
-  abstract={We propose a novel composite framework to find unknown fields in the context of inverse problems for partial differential equations (PDEs). We blend the high expressibility of deep neural networks as universal function estimators with the accuracy and reliability of existing numerical algorithms for partial differential equations as custom layers in semantic autoencoders. Our design brings together techniques of computational mathematics, machine learning and pattern recognition under one umbrella to incorporate domain-specific knowledge and physical constraints to discover the underlying hidden fields. The network is explicitly aware of the governing physics through a hard-coded PDE solver layer in contrast to most existing methods that incorporate the governing equations in the loss function or rely on trainable convolutional layers to discover proper discretizations from data. This subsequently focuses the computational load to only the discovery of the hidden fields and therefore is more data efficient. We call this architecture Blended inverse-PDE networks (hereby dubbed BiPDE networks) and demonstrate its applicability for recovering the variable diffusion coefficient in Poisson problems in one and two spatial dimensions, as well as the diffusion coefficient in the time-dependent and nonlinear Burgers' equation in one dimension. We also show that this approach is robust to noise.}
+  html={https://www.sciencedirect.com/science/article/pii/S0021999121003090},
+  keywords = {Inverse problems, Differential equations, Deep learning, Scientific machine learning, Numerical methods},
+  abstract = {We propose a novel composite framework to find unknown fields in the context of inverse problems for partial differential equations (PDEs). We blend the high expressibility of deep neural networks as universal function estimators with the accuracy and reliability of existing numerical algorithms for partial differential equations as custom layers in semantic autoencoders. Our design brings together techniques of computational mathematics, machine learning and pattern recognition under one umbrella to incorporate domain-specific knowledge and physical constraints to discover the underlying hidden fields. The network is explicitly aware of the governing physics through a hard-coded PDE solver layer in contrast to most existing methods that incorporate the governing equations in the loss function or rely on trainable convolutional layers to discover proper discretizations from data. This subsequently focuses the computational load to only the discovery of the hidden fields and therefore is more data efficient. We call this architecture Blended inverse-PDE networks (hereby dubbed BiPDE networks) and demonstrate its applicability for recovering the variable diffusion coefficient in Poisson problems in one and two spatial dimensions, as well as the diffusion coefficient in the time-dependent and nonlinear Burgers' equation in one dimension. We also show that the learned hidden parameters are robust to added noise on input data.}
 }
 
 @incollection{mistani2019tensor,
