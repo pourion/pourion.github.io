@@ -37,15 +37,15 @@
     .grid-container {
       display: grid;
       grid-template-columns: auto auto;
-      grid-gap: 10px;
-      background-color: #eeeeed;
+      grid-gap: 50px;
+      background-color: #ffffff;
       padding: 10px;
     }
 
     .grid-container>div {
       background-color: #ffffff;
       text-align: left;
-      padding: 20px 0;
+      padding: 0px 0;
       font-size: 15px;
     }
   </style>
@@ -100,8 +100,7 @@
         compute-expensive) numerical simulations.
       </p>
       <p>
-        According to <a href="https://ccom.ucsd.edu/~mholst/pubs/dist/Hols94d.pdf5" style="color:darkgreen">Holst
-          (1994)</a>, "steps required to solve a scientific problem of current
+        According to Holst (1994), "steps required to solve a scientific problem of current
         interest using modern computers [involve]:
       <ul>
         <li>(1) Statement of the physical problem as a governing system of equations</li>
@@ -112,7 +111,7 @@
         <li>(6) Analysis of the results."</li>
       </ul>
       <p>At different stages of my career I have focused on any of these steps. </p>
-      
+
       <p>For an overview of my research work please watch my 2020 presentation below:</p>
       <div class="row">
         <div class="col-lg-3"></div>
@@ -130,12 +129,55 @@
 
 
       <!-- Example row of columns -->
-      <div class="row"></div>
-      <h4> Research Highlights:</h4>
-      <div class="grid-container">
+      <div class="row">
+        <h1> Research Highlights</h1>
+      </div>
+      <hr class="solid">
+
+      <div class="row">
+
         <div>
-          <h6>Cell Aggregate Electroporation</h6>
-          <h6>Computational Biophysics</h6>
+          <h2>- Machine Learning:</h2>
+          <hr class="solid">
+          <h4>Neuro-Symbolic PDE Solver</h4>
+          <p>
+
+            We present a scalable strategy for development of mesh-free hybrid neuro-symbolic partial differential
+            equation solvers based on existing mesh-based numerical discretization methods. Particularly, this strategy
+            can be used to efficiently train neural network surrogate models for the solution functions and operators of
+            partial differential equations while retaining the accuracy and convergence properties of the
+            state-of-the-art numerical solvers. The presented neural bootstrapping method (hereby dubbed NBM) is based
+            on evaluation of the finite discretization residuals of the PDE system obtained on implicit Cartesian cells
+            centered on a set of random collocation points with respect to trainable parameters of the neural network.
+            We apply NBM to the important class of elliptic problems with jump conditions across irregular interfaces in
+            three spatial dimensions. We show the method is convergent such that model accuracy improves by increasing
+            number of collocation points in the domain. The algorithms presented here are implemented and released in a
+            software package named JAX-DIPS, standing for differentiable interfacial PDE solver.
+            JAX-DIPS is purely developed in JAX, offering end-to-end differentiability from mesh generation to the
+            higher level discretization abstractions, geometric integrations, and interpolations, thus facilitating
+            research into use of differentiable algorithms for developing hybrid PDE solvers.
+          </p>
+          <img src="img/nbm.png" class="img-fluid" alt="Cell's Photo">
+        </div>
+
+      </div>
+
+
+
+
+      <hr class="rounded">
+
+      <div class="row">
+  
+          <h2>- HPC Simulations:</h2>
+     
+      </div>
+      <hr class="solid">
+
+      <div class="grid-container">
+
+        <div>
+          <h4>Computational Biophysics: Cell Aggregate Electroporation</h4>
           <p>
           <ul>
             <li> An efficient framework for <i>direct</i> simulations of the mesoscale cell aggregates (tissue scale) is
@@ -156,8 +198,7 @@
         </div>
 
         <div>
-          <h6>Epitaxial Growth</h6>
-          <h6>Computational Materials Science</h6>
+          <h4>Computational Materials Science: Epitaxial Growth</h4>
           <p>
           <ul>
             <li> An efficient framework for simulating various features of epitaxial growth at the mesoscale is
@@ -176,8 +217,7 @@
         </div>
 
         <div>
-          <h6>Formation and Evolution of Dwarf Galaxies</h6>
-          <h6>Computational Astrophysics</h6>
+          <h4>Computational Astrophysics: Formation and Evolution of Dwarf Galaxies</h4>
           <p>
             Galaxy clusters contain a large population of low-mass dwarf elliptical galaxies whose exact origin is
             unclear: their colours, structural properties and kinematics differ substantially from those of dwarf
