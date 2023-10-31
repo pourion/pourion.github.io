@@ -1,0 +1,74 @@
+.row {
+    margin-bottom: 20px;
+    /* Adjust the value to control the spacing */
+}
+
+/* Event Section Container */
+.event-section {
+    /* background-color: #f5f5f5; */
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Event Card Styling */
+.event-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+    display: inline-block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    max-width: 1000px;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Event Title */
+.event-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Event Date and Time */
+.event-details {
+    font-size: 16px;
+    color: #777;
+    text-align: center;
+}
+
+/* Event Description */
+.event-description {
+    font-size: 16px;
+    color: #777;
+    /* margin-top: 10px; */
+    text-align: center;
+    font-style: italic;
+}
+
+/* Button to Learn More */
+.event-button {
+    background-color: rgb(178, 2, 194);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+}
+
+.event-button:hover {
+    background-color: #000000;
+    color: #f1e100;
+}
