@@ -159,7 +159,7 @@ export const MILESTONES: Milestone[] = [
     role: 'Creator',
     short: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU.',
     long: 'Built and open-sourced JAX-DIPS — a differentiable 3D interfacial PDE solver in JAX that runs on GPU/TPU/CPU. Trains compact neural networks to solve elliptic PDEs with jump conditions, ubiquitous in life sciences and materials. The Neural Bootstrapping Method (NBM) for finite discretization is at the core of the method. Published in 2022 (Journal of Computational Physics, with the related Neuro-symbolic PDE solver appearing at NeurIPS 2022 ML4PS).',
-    image: '/img/0_dragons.png',
+    image: '/img/jaxdips.png',
     links: [
       { label: 'GitHub', href: 'https://github.com/JAX-DIPS/JAX-DIPS' },
       { label: 'JCP paper', href: 'https://www.sciencedirect.com/science/article/pii/S0021999123005569' },
