@@ -77,7 +77,7 @@ export const MILESTONES: Milestone[] = [
     year: 2016,
     endYear: 2020,
     yearLabel: '2016 – 2020',
-    lanes: ['hpc'],
+    lanes: ['hpc', 'bio'],
     primaryLane: 'hpc',
     title: 'PhD · UCSB · level-set PDE methods',
     org: 'UC Santa Barbara',
