@@ -10,6 +10,9 @@ interface Pub {
   highlight?: boolean;
 }
 
+// All entries below match Pouria's Google Scholar listing
+// (https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en).
+
 const papers: Pub[] = [
   {
     year: 2024,
@@ -20,8 +23,8 @@ const papers: Pub[] = [
     highlight: true,
   },
   {
-    year: 2022,
-    authors: 'P. Mistani, S. Pakravan, R. Ilango, F. Gibou',
+    year: 2023,
+    authors: 'P. A. Mistani, S. Pakravan, R. Ilango, F. Gibou',
     title: 'JAX-DIPS: Neural bootstrapping of finite discretization methods and application to elliptic problems with discontinuities',
     venue: 'Journal of Computational Physics',
     href: 'https://www.sciencedirect.com/science/article/pii/S0021999123005569',
@@ -31,41 +34,92 @@ const papers: Pub[] = [
     year: 2022,
     authors: 'P. Mistani, S. Pakravan, R. Ilango, S. Choudhry, F. Gibou',
     title: 'Neuro-symbolic partial differential equation solver',
-    venue: 'NeurIPS 2022 Workshop on Machine Learning for the Physical Sciences (ML4PS)',
+    venue: 'NeurIPS 2022 Workshop on Machine Learning and the Physical Sciences (ML4PS)',
+    href: 'https://arxiv.org/abs/2210.14907',
   },
   {
     year: 2021,
-    authors: 'S. Pakravan, P. Mistani, M. A. Aragon-Calvo, F. Gibou',
+    authors: 'S. Pakravan, P. A. Mistani, M. A. Aragon-Calvo, F. Gibou',
     title: 'Solving inverse-PDE problems with physics-aware neural networks (BiPDE)',
-    venue: 'Journal of Computational Physics (arXiv preprint, 2020)',
+    venue: 'Journal of Computational Physics',
     href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999121003090',
     highlight: true,
   },
   {
-    year: 2021,
-    authors: 'P. Mistani',
-    title: 'Massively parallel simulations of cellular electroporation at tissue scale',
-    venue: 'PhD Dissertation, UC Santa Barbara',
-  },
-  {
-    year: 2018,
-    authors: 'P. Mistani, A. Guittet, D. Bochkov, J. Schneider, D. Margetis, C. Ratsch, F. Gibou',
-    title: 'The island dynamics model on parallel quadtree grids',
-    venue: 'Journal of Computational Physics',
-  },
-  {
-    year: 2018,
+    year: 2019,
     authors: 'P. Mistani, A. Guittet, C. Poignard, F. Gibou',
     title: 'A parallel Voronoi-based approach for mesoscale simulations of cell aggregate electropermeabilization',
     venue: 'Journal of Computational Physics',
     href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999118308052',
   },
   {
+    year: 2018,
+    authors: 'P. Mistani, A. Guittet, D. Bochkov, J. Schneider, D. Margetis, C. Ratsch, F. Gibou',
+    title: 'The island dynamics model on parallel quadtree grids',
+    venue: 'Journal of Computational Physics',
+    href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999118300767',
+  },
+  {
     year: 2016,
-    authors: 'P. Mistani, L. Sales, A. Pillepich, et al.',
+    authors: 'P. A. Mistani, L. V. Sales, A. Pillepich, R. Sanchez-Janssen, M. Vogelsberger, et al.',
     title: 'On the assembly of dwarf galaxies in clusters and their efficient formation of globular clusters',
     venue: 'Monthly Notices of the Royal Astronomical Society (MNRAS)',
     href: 'https://academic.oup.com/mnras/article/455/3/2323/991525',
+  },
+];
+
+const preprintsAndThesis: Pub[] = [
+  {
+    year: 2020,
+    authors: 'P. Akbari Mistani',
+    title: 'Large Scale Simulations and Stochastic Modeling of Interfacial Transport Processes',
+    venue: 'PhD Dissertation, UC Santa Barbara',
+    href: 'https://escholarship.org/uc/item/93j5j8mf',
+  },
+  {
+    year: 2020,
+    authors: 'P. A. Mistani, S. Pakravan, F. G. Gibou',
+    title: 'A fractional stochastic theory for interfacial polarization of cell aggregates',
+    venue: 'arXiv preprint',
+    href: 'https://arxiv.org/abs/2008.11819',
+  },
+];
+
+const bookChapters: Pub[] = [
+  {
+    year: 2019,
+    authors: 'P. Mistani, S. Pakravan, F. Gibou',
+    title: 'Towards a tensor network representation of complex systems',
+    venue: 'Sustainable Interdependent Networks II · Springer',
+    href: 'https://link.springer.com/chapter/10.1007/978-3-319-98923-5_4',
+  },
+  {
+    year: 2019,
+    authors: 'P. Mistani, S. Pakravan, F. Gibou',
+    title: 'Tensor network renormalization as an ultra-calculus for complex system dynamics',
+    venue: 'Sustainable Interdependent Networks II · Springer',
+    href: 'https://link.springer.com/chapter/10.1007/978-3-319-98923-5_5',
+  },
+];
+
+const conferences: Pub[] = [
+  {
+    year: 2018,
+    authors: 'P. Mistani, A. Guittet, C. Poignard, F. Gibou',
+    title: 'Multi-scale simulations of cell aggregate electropermeabilization',
+    venue: 'Southern California Applied Mathematics Symposium (SOCAMS)',
+  },
+  {
+    year: 2018,
+    authors: 'P. Mistani, F. Gibou',
+    title: 'Multi-scale simulations of epitaxial growth: mound formation',
+    venue: 'Southern California Applied Mathematics Symposium (SOCAMS)',
+  },
+  {
+    year: 2014,
+    authors: 'P. A. Mistani, S. Sotoudeh',
+    title: 'Velocity dispersion profile of Cetus dwarf spheroidal galaxy',
+    venue: '8th Sackler Conference on Dark Matter, Harvard University',
   },
 ];
 
@@ -97,14 +151,21 @@ const openSource = [
   {
     name: 'JAX-DIPS',
     role: 'Lead developer',
-    blurb: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU.',
+    blurb: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU. Implements neural bootstrapping of finite discretization methods.',
     href: 'https://github.com/JAX-DIPS/JAX-DIPS',
   },
+];
+
+const contributions = [
   {
-    name: 'VERL — Volcano Engine for RL',
-    role: 'Contributor',
-    blurb: 'Multi-turn agentic tool-use RL (PR #3712).',
-    href: 'https://github.com/volcengine/verl',
+    project: 'VERL — Volcano Engine for RL',
+    href: 'https://github.com/volcengine/verl/pull/3712',
+    note: 'Merged PR #3712 — multi-turn agentic tool-use RL.',
+  },
+  {
+    project: 'SGLang',
+    href: 'https://github.com/sgl-project/sglang',
+    note: 'Merged contribution to the LLM inference framework.',
   },
 ];
 
@@ -123,21 +184,21 @@ const talks = [
 ];
 ---
 
-<Base title="Publications — Pouria Mistani" description="Selected publications, patents, open source, and talks by Pouria Mistani — physical AI and large-scale simulation.">
+<Base title="Publications — Pouria Mistani" description="Papers, patents, thesis, preprints, book chapters, conferences, and open source by Pouria Mistani.">
   <section class="pubs-hero">
     <div class="container-wide">
       <p class="eyebrow">Publications &amp; patents</p>
-      <h1 class="pubs-hero-title">9+ peer-reviewed papers. 4 patents. <em>One thesis</em> on cell-aggregate electroporation at tissue scale.</h1>
+      <h1 class="pubs-hero-title">Peer-reviewed papers, <em>patents</em>, preprints, and talks.</h1>
       <p class="muted pubs-hero-note">
-        Full list on
-        <a href="https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+        Mirrors my
+        <a href="https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar profile</a>.
       </p>
     </div>
   </section>
 
   <section class="pubs-section container-wide">
     <header class="pubs-section-head">
-      <p class="eyebrow">Selected papers</p>
+      <p class="eyebrow">Peer-reviewed papers</p>
       <h2>Papers.</h2>
     </header>
     <ol class="pubs-list">
@@ -187,6 +248,84 @@ const talks = [
 
   <section class="pubs-section container-wide">
     <header class="pubs-section-head">
+      <p class="eyebrow">Preprints &amp; thesis</p>
+      <h2>Preprints &amp; thesis.</h2>
+    </header>
+    <ol class="pubs-list">
+      {preprintsAndThesis.map((p) => (
+        <li class="pub-row">
+          <span class="pub-year mono">{p.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">
+              {p.href
+                ? <a href={p.href} target="_blank" rel="noopener">{p.title}<span class="arrow" aria-hidden="true">↗</span></a>
+                : p.title}
+            </p>
+            <p class="pub-meta mono">
+              <span class="pub-authors">{p.authors}</span>
+              <span class="pub-sep">·</span>
+              <span class="pub-venue">{p.venue}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Book chapters</p>
+      <h2>Book chapters.</h2>
+    </header>
+    <ol class="pubs-list">
+      {bookChapters.map((p) => (
+        <li class="pub-row">
+          <span class="pub-year mono">{p.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">
+              {p.href
+                ? <a href={p.href} target="_blank" rel="noopener">{p.title}<span class="arrow" aria-hidden="true">↗</span></a>
+                : p.title}
+            </p>
+            <p class="pub-meta mono">
+              <span class="pub-authors">{p.authors}</span>
+              <span class="pub-sep">·</span>
+              <span class="pub-venue">{p.venue}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Conferences &amp; posters</p>
+      <h2>Conferences.</h2>
+    </header>
+    <ol class="pubs-list">
+      {conferences.map((p) => (
+        <li class="pub-row">
+          <span class="pub-year mono">{p.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">
+              {p.href
+                ? <a href={p.href} target="_blank" rel="noopener">{p.title}<span class="arrow" aria-hidden="true">↗</span></a>
+                : p.title}
+            </p>
+            <p class="pub-meta mono">
+              <span class="pub-authors">{p.authors}</span>
+              <span class="pub-sep">·</span>
+              <span class="pub-venue">{p.venue}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
       <p class="eyebrow">Open source</p>
       <h2>Code in the wild.</h2>
     </header>
@@ -201,6 +340,21 @@ const talks = [
         </li>
       ))}
     </ul>
+
+    <div class="contributions">
+      <p class="eyebrow contributions-label">Merged contributions to upstream projects</p>
+      <ul class="contributions-list">
+        {contributions.map((c) => (
+          <li class="contribution-row">
+            <a href={c.href} target="_blank" rel="noopener" class="contribution-link mono">
+              {c.project}
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <span class="contribution-note">{c.note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <section class="pubs-section container-wide">
@@ -380,6 +534,56 @@ const talks = [
     color: var(--ink-muted);
     font-size: 0.95rem;
     line-height: 1.55;
+  }
+
+  .contributions {
+    margin-top: var(--s-8);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--hairline);
+  }
+  .contributions-label {
+    margin-bottom: var(--s-4);
+  }
+  .contributions-list {
+    list-style: none;
+    padding: 0;
+  }
+  .contribution-row {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-3) 0;
+    align-items: baseline;
+  }
+  .contribution-link {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    background-image: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s var(--ease-out);
+  }
+  .contribution-link:hover {
+    color: var(--accent);
+  }
+  .contribution-link .arrow {
+    color: var(--ink-dim);
+    font-size: 0.85em;
+    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+  }
+  .contribution-link:hover .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+  .contribution-note {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  @media (max-width: 768px) {
+    .contribution-row { grid-template-columns: 1fr; gap: var(--s-1); }
   }
 
   @media (max-width: 768px) {
