@@ -1,10 +1,18 @@
 export type Lane = 'astro' | 'hpc' | 'ai' | 'bio' | 'chip';
 
-export const LANES: Record<Lane, { label: string; color: string; cssVar: string }> = {
+export interface LaneMeta {
+  label: string;
+  color: string;
+  cssVar: string;
+  /** Year from which the lane is "passively monitored" — renders a dashed continuation. */
+  passiveAfter?: number;
+}
+
+export const LANES: Record<Lane, LaneMeta> = {
   astro: { label: 'Astrophysics & cosmology',    color: '#E63946', cssVar: 'var(--lane-astro)' },
   hpc:   { label: 'Numerical methods & HPC',     color: '#4CC9F0', cssVar: 'var(--lane-hpc)' },
   ai:    { label: 'AI for simulation',           color: '#FFB703', cssVar: 'var(--lane-ai)' },
-  bio:   { label: 'Biophysics & life sciences',  color: '#80ED99', cssVar: 'var(--lane-bio)' },
+  bio:   { label: 'Biophysics & life sciences',  color: '#80ED99', cssVar: 'var(--lane-bio)', passiveAfter: 2024 },
   chip:  { label: 'Chip design & semiconductors', color: '#B388EB', cssVar: 'var(--lane-chip)' },
 };
 
@@ -13,6 +21,8 @@ export const LANE_ORDER: Lane[] = ['astro', 'hpc', 'ai', 'bio', 'chip'];
 export interface Milestone {
   id: string;
   year: number;
+  /** End year for multi-year "chapter" milestones (renders a bar on the lane). Omit for point events. */
+  endYear?: number;
   yearLabel: string;
   lanes: Lane[];
   primaryLane: Lane;
@@ -29,14 +39,15 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'illustris',
     year: 2013,
+    endYear: 2016,
     yearLabel: '2013 – 2016',
-    lanes: ['astro'],
+    lanes: ['astro', 'hpc'],
     primaryLane: 'astro',
     title: 'Illustris · dwarf galaxies',
     org: 'UC Riverside',
     role: 'Graduate Research Assistant',
-    short: 'Theory of dwarf-galaxy formation; terabytes of Illustris cosmological data.',
-    long: 'Entry into large-scale numerical simulation. Developed a theory for the formation of dwarf galaxies and analyzed terabytes of cosmological data from the Illustris Simulation Suite — one of the largest cosmological N-body + hydrodynamics simulations ever run. First peer-reviewed publication in MNRAS. The experience set the lifelong question: how do you reproduce, in other domains, what Illustris achieved for the universe?',
+    short: 'Theory of dwarf-galaxy formation; terabytes of Illustris cosmological data; the entry point into large-scale numerical simulation.',
+    long: 'Entry into large-scale numerical simulation. Developed a theory for the formation of dwarf galaxies and analyzed terabytes of cosmological data from the Illustris Simulation Suite — one of the largest cosmological N-body + hydrodynamics simulations ever run. The numerical-methods and HPC training that defined the rest of my career started here. First peer-reviewed publication in MNRAS. The experience set the lifelong question: how do you reproduce, in other domains, what Illustris achieved for the universe?',
     image: '/img/newCluster.png',
     links: [
       { label: 'Illustris project', href: 'https://www.illustris-project.org/' },
@@ -46,6 +57,7 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'ucsb-phd',
     year: 2016,
+    endYear: 2020,
     yearLabel: '2016 – 2020',
     lanes: ['hpc'],
     primaryLane: 'hpc',
@@ -55,6 +67,19 @@ export const MILESTONES: Milestone[] = [
     short: 'Two parallel HPC simulation codebases in C++/MPI — cell-aggregate electroporation and epitaxial growth.',
     long: 'PhD in Mechanical Engineering / Computational Science & Engineering. Authored two state-of-the-art parallel HPC simulation codebases in C++/MPI — one for cell-aggregate electroporation, one for epitaxial growth — both published in the Journal of Computational Physics. Developed a reduced-order stochastic theory for interfacial polarization of cell aggregates. Specialized in level-set methods for irregular free-boundary elliptic PDEs — the same machinery that maps directly onto epitaxy, etching, and lithography in semiconductor manufacturing.',
     image: '/img/Dirichlet_L1000_proc_zoom.png',
+  },
+  {
+    id: 'nbm',
+    year: 2017,
+    yearLabel: '2017',
+    lanes: ['ai', 'hpc'],
+    primaryLane: 'ai',
+    title: 'Neural Bootstrapping Method',
+    org: 'UCSB · CASL Lab',
+    role: 'Research lead',
+    short: 'First hybrid AI / numerical method for surrogate modeling — the start of the AI-for-simulation thread.',
+    long: 'Built one of my first AI-for-simulation algorithms — neural bootstrapping of finite discretization methods, with hybrid optimization techniques for surrogate modeling and early neural-operator ideas. The seed of the long arc that runs through JAX-DIPS (JCP 2023), Neuro-symbolic PDE solver (NeurIPS 2022), NVIDIA Modulus, and the EM surrogates I train on top of Voltaire today.',
+    image: '/img/nbm.png',
   },
   {
     id: 'avicenna',
@@ -89,6 +114,7 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'merck',
     year: 2020,
+    endYear: 2021,
     yearLabel: '2020 – 2021',
     lanes: ['bio', 'hpc'],
     primaryLane: 'bio',
@@ -101,6 +127,7 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'nvidia',
     year: 2021,
+    endYear: 2023,
     yearLabel: '2021 – 2023',
     lanes: ['ai', 'hpc', 'bio'],
     primaryLane: 'ai',
@@ -143,8 +170,9 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'synopsys',
     year: 2024,
+    endYear: 2025,
     yearLabel: '2024 – 2025',
-    lanes: ['chip', 'ai'],
+    lanes: ['chip', 'ai', 'hpc'],
     primaryLane: 'chip',
     title: 'Synopsys · founding engineer, GenAI Solutions',
     org: 'Synopsys',
@@ -155,6 +183,7 @@ export const MILESTONES: Milestone[] = [
   {
     id: 'voltai',
     year: 2025,
+    endYear: 2026,
     yearLabel: '2025 – now',
     lanes: ['chip', 'hpc', 'ai'],
     primaryLane: 'chip',
