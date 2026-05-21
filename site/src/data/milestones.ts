@@ -248,8 +248,8 @@ export const MILESTONES: Milestone[] = [
     title: 'VoltAI · designed & built Voltaire',
     org: 'VoltAI',
     role: 'Machine Learning Researcher',
-    short: 'Exascale physics-simulation platform · 32× speedup · 200M mesh elements.',
-    long: 'Founding engineer of the physical-design and verification team at VoltAI. Defined, architected, and built Voltaire — VoltAI\'s exascale physics-simulation platform — from scratch in five months. The multi-GPU codebase delivered a 32× speedup over the multi-CPU production baseline on 3D-IC signal-integrity extraction at 200M mesh elements. Also trained EM neural operators as surrogates on top of Voltaire that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
+    short: 'Agentic physics-intelligence platform — reasons about physical design and debugs hypotheses from signal-integrity metrics.',
+    long: 'Founding engineer of the physical-design and verification team at VoltAI. Defined, architected, and built Voltaire — an agentic physics-intelligence platform capable of reasoning about physical design and debugging / hypothesizing from calculated signal-integrity metrics. Pairs a multi-GPU electromagnetics simulation engine with an agent scaffold that runs experiments in silico, inspects numerical outputs, and refines hypotheses against them. Also trained EM neural operators as surrogates on top of Voltaire that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
     image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
     links: [
       { label: 'VoltAI', href: 'https://www.voltai.com/' },
