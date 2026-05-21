@@ -113,7 +113,7 @@ export const MILESTONES: Milestone[] = [
     role: 'Researcher',
     short: 'Early investigation of physics-aware neural networks — the research line that became BiPDE and JAX-DIPS.',
     long: 'Started investigating physics-aware neural networks during my PhD. Explored embedding numerical PDE machinery directly into NN layers, with hybrid optimization for surrogate modeling and early neural-operator ideas. The research line that culminated in BiPDE (Blended inverse-PDE, JCP 2021) and JAX-DIPS (JCP 2022) — and that I still ride at NVIDIA Modulus and on top of Voltaire today.',
-    image: '/img/nbm.png',
+    image: '/img/nbm2.png',
   },
   {
     id: 'avicenna',
