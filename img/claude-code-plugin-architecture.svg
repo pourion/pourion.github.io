@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 820" role="img" aria-label="Architecture diagram of a Claude Code plugin for the Simulation Organism: a runtime layer (Claude Opus), a plugin layer (skills, slash commands, sub-agents, MCP servers, hooks), and a simulation infrastructure layer (atom library, solver build, HPC run, prediction, comparison harness, references, persistent corpus).">
+  <defs>
+    <marker id="p-arr-accent" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#E6A23C"/>
+    </marker>
+    <marker id="p-arr-muted" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="rgba(242,239,232,0.55)"/>
+    </marker>
+  </defs>
+
+  <!-- LAYER 1: Claude Code runtime -->
+  <g transform="translate(200, 30)">
+    <rect x="0" y="0" width="600" height="80" fill="none" stroke="#E6A23C" stroke-width="1.5"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#E6A23C" letter-spacing="0.14em">CLAUDE CODE  ·  RUNTIME</text>
+    <text x="300" y="55" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="20" font-style="italic" fill="#F2EFE8">Claude Opus 4.7</text>
+    <text x="300" y="72" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.65)" letter-spacing="0.14em">GENERAL REASONING  ·  TOOL USE  ·  PLANNING</text>
+  </g>
+
+  <!-- Connector to plugin -->
+  <line x1="500" y1="110" x2="500" y2="150" stroke="rgba(230,162,60,0.5)" stroke-width="1" stroke-dasharray="3,4"/>
+  <text x="510" y="135" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(230,162,60,0.85)" letter-spacing="0.12em">LOADS · INVOKES</text>
+
+  <!-- LAYER 2: Plugin -->
+  <g transform="translate(60, 155)">
+    <rect x="0" y="0" width="880" height="320" fill="none" stroke="rgba(242,239,232,0.55)" stroke-width="1"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="rgba(242,239,232,0.7)" letter-spacing="0.14em">PLUGIN  ·  simulation-organism</text>
+
+    <!-- Column: Skills -->
+    <g transform="translate(25, 55)">
+      <rect x="0" y="0" width="200" height="200" fill="none" stroke="rgba(242,239,232,0.4)"/>
+      <text x="15" y="25" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.12em">SKILLS</text>
+      <text x="15" y="42" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.45)" letter-spacing="0.04em">curated knowledge</text>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.78)">
+        <text x="15" y="70">→ iron-laws.md</text>
+        <text x="15" y="90">→ diagnosis.md</text>
+        <text x="15" y="110">→ missing-physics.md</text>
+        <text x="15" y="130">→ pillar-em.md</text>
+        <text x="15" y="150">→ pillar-fluids.md</text>
+        <text x="15" y="170">→ pillar-thermo.md</text>
+        <text x="15" y="190">→ pillar-structural.md</text>
+      </g>
+    </g>
+
+    <!-- Column: Slash commands -->
+    <g transform="translate(240, 55)">
+      <rect x="0" y="0" width="200" height="200" fill="none" stroke="rgba(242,239,232,0.4)"/>
+      <text x="15" y="25" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.12em">SLASH COMMANDS</text>
+      <text x="15" y="42" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.45)" letter-spacing="0.04em">user shortcuts</text>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.78)">
+        <text x="15" y="70">/run-experiment</text>
+        <text x="15" y="90">/diagnose-residual</text>
+        <text x="15" y="110">/propose-atom</text>
+        <text x="15" y="130">/persist-law</text>
+        <text x="15" y="150">/compare</text>
+        <text x="15" y="170">/transfer-skill</text>
+        <text x="15" y="190">/audit</text>
+      </g>
+    </g>
+
+    <!-- Column: Sub-agents -->
+    <g transform="translate(455, 55)">
+      <rect x="0" y="0" width="200" height="200" fill="none" stroke="rgba(242,239,232,0.4)"/>
+      <text x="15" y="25" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.12em">SUB-AGENTS</text>
+      <text x="15" y="42" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.45)" letter-spacing="0.04em">specialists</text>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.78)">
+        <text x="15" y="70">→ validator</text>
+        <text x="15" y="90">→ atom-author</text>
+        <text x="15" y="110">→ pillar-em</text>
+        <text x="15" y="130">→ pillar-fluids</text>
+        <text x="15" y="150">→ pillar-thermo</text>
+        <text x="15" y="170">→ pillar-structural</text>
+        <text x="15" y="190">→ pillar-radiation</text>
+      </g>
+    </g>
+
+    <!-- Column: MCP servers -->
+    <g transform="translate(670, 55)">
+      <rect x="0" y="0" width="200" height="200" fill="none" stroke="rgba(242,239,232,0.4)"/>
+      <text x="15" y="25" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.12em">MCP SERVERS</text>
+      <text x="15" y="42" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.45)" letter-spacing="0.04em">tools that act</text>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.78)">
+        <text x="15" y="70">→ atom-library</text>
+        <text x="15" y="90">→ harness</text>
+        <text x="15" y="110">→ hpc-runner</text>
+        <text x="15" y="130">→ data-io</text>
+        <text x="15" y="150">→ residual-analyzer</text>
+        <text x="15" y="170">→ corpus-store</text>
+        <text x="15" y="190">→ provenance-tracker</text>
+      </g>
+    </g>
+
+    <!-- Hooks band -->
+    <line x1="25" y1="275" x2="855" y2="275" stroke="rgba(242,239,232,0.2)" stroke-dasharray="1,3"/>
+    <text x="25" y="298" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.12em">HOOKS</text>
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.78)">
+      <text x="100" y="298">PreToolUse → solver-config validation</text>
+      <text x="390" y="298">PostToolUse → log residual to corpus</text>
+      <text x="660" y="298">on residual-drop → promote iron law</text>
+    </g>
+  </g>
+
+  <!-- Connector to infrastructure -->
+  <line x1="500" y1="475" x2="500" y2="515" stroke="rgba(230,162,60,0.5)" stroke-width="1" stroke-dasharray="3,4"/>
+  <text x="510" y="500" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(230,162,60,0.85)" letter-spacing="0.12em">TOOL CALLS · FILE I/O</text>
+
+  <!-- LAYER 3: Simulation infrastructure -->
+  <g transform="translate(60, 520)">
+    <rect x="0" y="0" width="880" height="240" fill="none" stroke="rgba(242,239,232,0.55)" stroke-width="1"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="rgba(242,239,232,0.7)" letter-spacing="0.14em">SIMULATION INFRASTRUCTURE</text>
+
+    <!-- Pipeline row -->
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.82)" text-anchor="middle" letter-spacing="0.04em">
+      <g transform="translate(25, 55)">
+        <rect x="0" y="0" width="130" height="44" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="65" y="20">ATOM</text>
+        <text x="65" y="34">LIBRARY</text>
+      </g>
+      <g transform="translate(180, 55)">
+        <rect x="0" y="0" width="130" height="44" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="65" y="20">SOLVER</text>
+        <text x="65" y="34">BUILD</text>
+      </g>
+      <g transform="translate(335, 55)">
+        <rect x="0" y="0" width="130" height="44" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="65" y="20">HPC RUN</text>
+      </g>
+      <g transform="translate(490, 55)">
+        <rect x="0" y="0" width="130" height="44" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="65" y="20">PREDICTION</text>
+      </g>
+      <g transform="translate(645, 55)">
+        <rect x="0" y="0" width="200" height="44" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="100" y="20">COMPARISON HARNESS</text>
+      </g>
+    </g>
+
+    <!-- Pipeline arrows -->
+    <line x1="155" y1="77" x2="180" y2="77" stroke="rgba(242,239,232,0.5)" stroke-width="1.2" marker-end="url(#p-arr-muted)"/>
+    <line x1="310" y1="77" x2="335" y2="77" stroke="rgba(242,239,232,0.5)" stroke-width="1.2" marker-end="url(#p-arr-muted)"/>
+    <line x1="465" y1="77" x2="490" y2="77" stroke="rgba(242,239,232,0.5)" stroke-width="1.2" marker-end="url(#p-arr-muted)"/>
+    <line x1="620" y1="77" x2="645" y2="77" stroke="rgba(242,239,232,0.5)" stroke-width="1.2" marker-end="url(#p-arr-muted)"/>
+
+    <!-- References feeding harness -->
+    <text x="745" y="125" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="13" font-style="italic" fill="rgba(242,239,232,0.85)">analytic · benchmark · experiment</text>
+    <text x="745" y="142" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.5)" letter-spacing="0.12em">REFERENCES</text>
+    <line x1="745" y1="115" x2="745" y2="103" stroke="rgba(242,239,232,0.5)" stroke-width="1.2" marker-end="url(#p-arr-muted)"/>
+
+    <!-- Persistent corpus band -->
+    <g transform="translate(25, 165)">
+      <rect x="0" y="0" width="820" height="55" fill="none" stroke="#E6A23C" stroke-width="1"/>
+      <text x="15" y="22" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.14em">PERSISTENT CORPUS</text>
+      <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.82)">
+        <text x="180" y="22">experiment-log.jsonl</text>
+        <text x="340" y="22">residual-history.jsonl</text>
+        <text x="510" y="22">iron-laws.jsonl</text>
+        <text x="650" y="22">missing-physics-priors</text>
+      </g>
+      <text x="15" y="44" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.55)" letter-spacing="0.08em">READ BY SKILLS  ·  WRITTEN BY HOOKS  ·  PROMOTED INTO THE ATOM LIBRARY</text>
+    </g>
+  </g>
+
+  <!-- Caption -->
+  <text x="500" y="795" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="13" font-style="italic" fill="rgba(242,239,232,0.55)">
+    A Claude Code plugin, sketched. Skills carry the curated knowledge; sub-agents specialize per pillar;
+  </text>
+  <text x="500" y="813" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="13" font-style="italic" fill="rgba(242,239,232,0.55)">
+    MCP servers act on a real simulation pipeline; hooks close the loop into a persistent corpus.
+  </text>
+</svg>

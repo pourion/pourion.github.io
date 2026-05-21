@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" role="img" aria-label="Architecture diagram of the Simulation Organism: a general-reasoning agent assembles solver atoms inside a simulation framework, runs them through a comparison harness against analytic, benchmark, and experimental references, and writes durable skills (iron laws) back into a persistent corpus.">
+  <defs>
+    <marker id="arr-accent" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#E6A23C"/>
+    </marker>
+    <marker id="arr-muted" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="rgba(242,239,232,0.55)"/>
+    </marker>
+  </defs>
+
+  <!-- Physics pillars across the top -->
+  <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="rgba(242,239,232,0.65)" letter-spacing="0.08em" text-anchor="middle">
+    <text x="180" y="40">EM</text>
+    <text x="330" y="40">THERMO</text>
+    <text x="500" y="40">FLUIDS</text>
+    <text x="670" y="40">STRUCTURAL</text>
+    <text x="820" y="40">RADIATION</text>
+  </g>
+  <text x="500" y="58" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.4)" letter-spacing="0.18em">PHYSICS PILLARS</text>
+
+  <!-- Dotted line from pillars down to the framework -->
+  <line x1="500" y1="72" x2="500" y2="132" stroke="rgba(242,239,232,0.35)" stroke-width="0.8" stroke-dasharray="2,4"/>
+
+  <!-- SOLVER chamber -->
+  <g transform="translate(80, 140)">
+    <rect x="0" y="0" width="500" height="260" fill="none" stroke="rgba(242,239,232,0.55)" stroke-width="1"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.55)" letter-spacing="0.12em">SOLVER · ASSEMBLED FROM ATOMS</text>
+
+    <!-- Atom grid 5 x 2 -->
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.78)" text-anchor="middle" letter-spacing="0.04em">
+      <g transform="translate(30,55)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">DISCRETIZE</text>
+      </g>
+      <g transform="translate(120,55)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">TIME STEP</text>
+      </g>
+      <g transform="translate(210,55)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">LINEAR SOLVE</text>
+      </g>
+      <g transform="translate(300,55)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">PRECON</text>
+      </g>
+      <g transform="translate(390,55)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">MESH AMR</text>
+      </g>
+
+      <g transform="translate(30,115)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">CLOSURE</text>
+      </g>
+      <g transform="translate(120,115)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">BOUNDARY</text>
+      </g>
+      <g transform="translate(210,115)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">COUPLING</text>
+      </g>
+      <g transform="translate(300,115)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">SPARSE LA</text>
+      </g>
+      <g transform="translate(390,115)">
+        <rect x="0" y="0" width="80" height="42" fill="none" stroke="rgba(242,239,232,0.45)"/>
+        <text x="40" y="25">PARALLEL</text>
+      </g>
+    </g>
+
+    <!-- Output band -->
+    <line x1="20" y1="195" x2="480" y2="195" stroke="rgba(242,239,232,0.25)" stroke-dasharray="1,3"/>
+    <text x="250" y="222" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="15" font-style="italic" fill="rgba(242,239,232,0.85)">prediction</text>
+    <text x="250" y="240" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.4)" letter-spacing="0.12em">QUANTITY OF INTEREST</text>
+  </g>
+
+  <!-- AGENT node (right side) -->
+  <g transform="translate(810, 260)">
+    <circle cx="0" cy="0" r="92" fill="none" stroke="rgba(230,162,60,0.35)" stroke-width="0.8" stroke-dasharray="4,5"/>
+    <circle cx="0" cy="0" r="76" fill="none" stroke="#E6A23C" stroke-width="1.5"/>
+    <text x="0" y="-6" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="22" font-style="italic" fill="#F2EFE8">Agent</text>
+    <text x="0" y="16" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.7)" letter-spacing="0.12em">GENERAL</text>
+    <text x="0" y="30" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.7)" letter-spacing="0.12em">REASONING</text>
+  </g>
+
+  <!-- COMPARISON HARNESS (bottom left) -->
+  <g transform="translate(80, 460)">
+    <rect x="0" y="0" width="500" height="120" fill="none" stroke="rgba(242,239,232,0.55)" stroke-width="1"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.55)" letter-spacing="0.12em">COMPARISON HARNESS</text>
+
+    <!-- three reference columns -->
+    <g font-family="Fraunces, Georgia, serif" font-size="15" font-style="italic" fill="#F2EFE8" text-anchor="middle">
+      <text x="85" y="68">analytic</text>
+      <text x="250" y="68">benchmark</text>
+      <text x="415" y="68">experiment</text>
+    </g>
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(242,239,232,0.45)" text-anchor="middle" letter-spacing="0.06em">
+      <text x="85" y="86">CLOSED FORM</text>
+      <text x="250" y="86">HIGH-FIDELITY</text>
+      <text x="415" y="86">MEASUREMENT</text>
+    </g>
+
+    <line x1="20" y1="100" x2="480" y2="100" stroke="rgba(242,239,232,0.18)" stroke-dasharray="1,3"/>
+    <text x="250" y="115" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(230,162,60,0.85)" letter-spacing="0.18em">RESIDUAL  =  TRUTH  −  PREDICTION</text>
+  </g>
+
+  <!-- IRON LAWS / SKILL box (right of harness, beneath agent) -->
+  <g transform="translate(660, 430)">
+    <rect x="0" y="0" width="280" height="170" fill="none" stroke="#E6A23C" stroke-width="1"/>
+    <text x="20" y="28" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.14em">SKILL · IRON LAWS</text>
+    <text x="20" y="58" font-family="Fraunces, Georgia, serif" font-size="15" font-style="italic" fill="#F2EFE8">persistent corpus</text>
+    <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.7)" letter-spacing="0.04em">
+      <text x="20" y="86">→  atom-selection rules</text>
+      <text x="20" y="106">→  diagnosis heuristics</text>
+      <text x="20" y="126">→  missing-physics priors</text>
+      <text x="20" y="146">→  cross-pillar transfer</text>
+    </g>
+  </g>
+
+  <!-- ARROWS — the closed loop -->
+
+  <!-- Agent → Solver: assemble / revise -->
+  <path d="M 728 240 C 660 215, 620 200, 590 200" fill="none" stroke="#E6A23C" stroke-width="1.6" marker-end="url(#arr-accent)"/>
+  <text x="650" y="185" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.1em" text-anchor="middle">ASSEMBLE · REVISE</text>
+
+  <!-- Solver → Harness: run -->
+  <path d="M 330 408 L 330 455" fill="none" stroke="rgba(242,239,232,0.6)" stroke-width="1.4" marker-end="url(#arr-muted)"/>
+  <text x="345" y="438" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="rgba(242,239,232,0.6)" letter-spacing="0.1em">RUN</text>
+
+  <!-- Harness → Agent: residual + diagnose (routed left of the Skill box) -->
+  <path d="M 580 480 C 580 380, 650 350, 740 290" fill="none" stroke="#E6A23C" stroke-width="1.6" marker-end="url(#arr-accent)"/>
+  <text x="615" y="400" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" fill="#E6A23C" letter-spacing="0.1em" text-anchor="middle">RESIDUAL · DIAGNOSE</text>
+
+  <!-- Agent ⇅ Iron Laws: persist / recall (dashed bidirectional) -->
+  <path d="M 800 350 L 800 420" fill="none" stroke="rgba(230,162,60,0.55)" stroke-width="1" stroke-dasharray="3,4"/>
+  <text x="815" y="390" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(230,162,60,0.85)" letter-spacing="0.1em">PERSIST · RECALL</text>
+
+  <!-- Caption -->
+  <text x="500" y="680" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="13" fill="rgba(242,239,232,0.55)" font-style="italic">
+    The closed loop: the agent assembles atoms into a solver, runs it,
+  </text>
+  <text x="500" y="700" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="13" fill="rgba(242,239,232,0.55)" font-style="italic">
+    compares to truth, revises — and writes durable skills back to the corpus.
+  </text>
+</svg>

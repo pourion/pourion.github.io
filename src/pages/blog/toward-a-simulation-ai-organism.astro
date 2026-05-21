@@ -1,0 +1,690 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = 'Toward a Simulation Organism';
+const subtitle = 'A paradigm in which the agent and the solver are one adaptive system, not two systems with an interface between them.';
+const date = '2026-05-21';
+const dateLabel = 'May 2026';
+const readTime = '12 min read';
+
+const canonicalUrl = 'https://pouriamistani.com/blog/toward-a-simulation-ai-organism/';
+const shareTextX = 'Toward a Simulation Organism — a paradigm note on co-designed AI and exascale simulation, by Pouria Mistani.';
+
+const linkedinShareHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
+const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTextX)}&url=${encodeURIComponent(canonicalUrl)}`;
+---
+
+<Base title={`${title} — Pouria Mistani`} description="A position note proposing a Simulation Organism: a self-adaptive paradigm in which a general-reasoning agent co-designs an exascale simulation from inside its building blocks.">
+  <article class="post">
+    <header class="post-hero container-narrow">
+      <p class="eyebrow">Essay · paradigm note</p>
+      <h1 class="post-title">{title}</h1>
+      <p class="post-subtitle">{subtitle}</p>
+      <p class="post-meta mono">
+        <span>{dateLabel}</span>
+        <span class="dot">·</span>
+        <span>{readTime}</span>
+        <span class="dot">·</span>
+        <span>Pouria Mistani</span>
+      </p>
+    </header>
+
+    <aside class="post-actions container-narrow">
+      <p class="actions-label mono">Share · cite</p>
+      <div class="actions-row">
+        <a class="action-btn" href={linkedinShareHref} target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.84v1.64h.05c.53-1 1.84-2.06 3.78-2.06 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.56c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94V21H9z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a class="action-btn" href={xShareHref} target="_blank" rel="noopener" aria-label="Share on X">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          X
+        </a>
+        <button id="cite-btn" type="button" class="action-btn" data-bibtex={`@misc{mistani2026simorganism,
+  author = {Mistani, Pouria},
+  title  = {Toward a Simulation Organism},
+  year   = {2026},
+  month  = {may},
+  url    = {${canonicalUrl}},
+  note   = {Blog post, pouriamistani.com}
+}`}>
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 4 L3 8 L3 20 L9 20 L9 12 L5 12 M18 4 L15 8 L15 20 L21 20 L21 12 L17 12"/>
+          </svg>
+          <span class="btn-label">Copy BibTeX</span>
+        </button>
+        <button id="link-btn" type="button" class="action-btn" data-url={canonicalUrl}>
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M10 14a3 3 0 0 0 4.2 0l3-3a3 3 0 0 0-4.2-4.2l-1 1M14 10a3 3 0 0 0-4.2 0l-3 3a3 3 0 0 0 4.2 4.2l1-1"/>
+          </svg>
+          <span class="btn-label">Copy link</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="prose container-narrow">
+
+      <h2>The premise</h2>
+
+      <p>
+        For three decades, our community has built simulations the way watchmakers build watches —
+        meticulously, by hand, one gear at a time. Numerical schemes are chosen by experts.
+        Convergence is verified case by case. Calibration to experiment is patient work,
+        performed by graduate students over years. AI has entered this picture mostly as a
+        faster surrogate: a neural network trained on solver outputs, deployed where the solver
+        itself was too slow.
+      </p>
+
+      <p>
+        This is a useful but limited posture. It treats the AI as a replacement for the inner
+        loop while leaving the architecture of the simulation — the discretization, the
+        operator splitting, the boundary treatment, the linear solver, the time integrator,
+        the whole edifice of choices that determine what the simulation <em>means</em> —
+        untouched. The AI becomes a tool inside a craftsman's workshop. Powerful, but the
+        craftsman is still us.
+      </p>
+
+      <p class="pullquote">
+        What if the craftsman is also AI?
+      </p>
+
+      <p>
+        What I would like to sketch in this note is a different posture, one I have come to
+        think of as a <strong>Simulation Organism</strong>. The metaphor is deliberate: in
+        this paradigm the agent and the solver are not two systems with an interface between
+        them, but one adaptive system — the agent embedded in the building blocks of the
+        simulation, modifying numerical schemes, selecting discretizations, formulating
+        hypotheses about missing physics, and revising the solver itself in response to every
+        disagreement between its predictions and the world.
+      </p>
+
+      <p>
+        I do not claim this paradigm is solved. I claim it is becoming possible — and that the
+        recipe is concrete enough to begin building.
+      </p>
+
+      <h2>What it is, concretely</h2>
+
+      <p>
+        A simulation, viewed strictly, is a piece of software that maps initial and boundary
+        conditions plus a set of physics assumptions to a predicted state of the world. Every
+        solver is a chain of choices: which conservation laws are enforced, which terms are
+        dropped, which mesh is laid down, which kernel is invoked, which preconditioner is
+        preferred, which time scheme is used, which stopping criterion ends the iteration.
+        Each choice exists for a reason, but most of those reasons live in the solver author's
+        head.
+      </p>
+
+      <p>
+        A Simulation Organism is a system in which a general-reasoning agent — at the time
+        of writing, a model like Claude Opus 4.7 — operates at a <em>meta-layer above these
+        choices</em>, inside a sandboxed simulation framework, with the ability to:
+      </p>
+
+      <figure class="post-figure">
+        <img src="/img/simulation-ai-organism.svg" alt="Architecture sketch: a general-reasoning agent assembles solver atoms inside a simulation framework, runs them through a comparison harness against analytic, benchmark, and experimental references, and writes durable skills — iron laws — back into a persistent corpus." />
+        <figcaption>A sketch of the closed loop. The agent assembles atoms into a solver, runs it, compares to truth, revises — and writes durable skills back to the corpus.</figcaption>
+      </figure>
+
+      <ol class="numbered">
+        <li><strong>Run</strong> simulation experiments — small ones first, then progressively larger — using the solver's existing building blocks.</li>
+        <li><strong>Compare</strong> the output against benchmarks, analytic solutions, and where available, physical measurement.</li>
+        <li><strong>Diagnose</strong> discrepancies — not as numerical errors to be silenced, but as evidence to be explained. A gap is a clue.</li>
+        <li><strong>Hypothesize</strong> the cause of the gap — a missing term, an under-resolved scale, a wrong discretization, an unmodeled coupling.</li>
+        <li><strong>Verify</strong> the hypothesis by modifying the solver, rerunning, and re-comparing.</li>
+        <li><strong>Generalize</strong> the lesson across experiments, accumulating what I will call <em>iron laws of solver design</em> — invariants that hold across a class of problems and that future versions of the agent deploy without re-deriving.</li>
+      </ol>
+
+      <p>
+        This is, structurally, the scientific method, instantiated inside the solver. The
+        novelty is not the method but the substrate. The agent does not write papers; it
+        writes solvers. Its hypotheses are tested not against the literature, but against the
+        same physical world the solver is built to describe.
+      </p>
+
+      <h2>Why simulation, specifically</h2>
+
+      <p>
+        It is fashionable to say that AI agents will accelerate "science." The phrase is too
+        vague. Different scientific tasks admit very different kinds of automation, and
+        simulation is unusually well-suited for the kind of agent I am describing — for three
+        reasons.
+      </p>
+
+      <p>
+        <strong>First, simulation is constrained.</strong> The agent cannot drift into fantasy.
+        Numerical schemes have provable convergence properties. Conservation laws are absolute.
+        Mathematical analysis bounds error. Hardware imposes wall-clock and memory ceilings.
+        These are not obstacles to the agent's creativity — they are precisely what makes the
+        agent's creativity tractable. An agent free to "discover" new physics with no
+        constraints will hallucinate. An agent constrained to obey mass conservation, the
+        second law of thermodynamics, and the CFL condition will only propose things that
+        could plausibly be right.
+      </p>
+
+      <p>
+        <strong>Second, simulation has unambiguous feedback.</strong> Compare to
+        literature-based reasoning agents, where success is judged by whether a generated
+        paper is plausible. In simulation, the loss function is the gap between prediction and
+        measurement. There is no ambiguity. When the gap closes, the agent has learned
+        something real about the world.
+      </p>
+
+      <p>
+        <strong>Third, simulation has compositional structure.</strong> A solver for Maxwell's
+        equations and a solver for the Navier–Stokes equations share kernels — sparse linear
+        algebra, mesh handling, time integration, parallel decomposition. Iron laws discovered
+        in one physics pillar transfer, with modification, to the next. The agent's accumulated
+        skill therefore compounds across pillars — electromagnetism, thermodynamics,
+        structural mechanics, fluid dynamics, radiation transport — rather than starting from
+        zero in each domain.
+      </p>
+
+      <p>
+        These three properties — constraint, unambiguous feedback, compositional structure —
+        are what make <strong>compute the engine of progress</strong> here in a way that
+        literature search alone is not.
+      </p>
+
+      <h2>The learning loop, in more detail</h2>
+
+      <p>
+        Imagine the agent equipped with a library of solver building blocks — call them
+        <em>atoms</em>: discretization schemes, time integrators, preconditioners, mesh
+        refinement strategies, model closures. The agent's job is to assemble these atoms into
+        a solver appropriate to a task, run the task, and improve the assembly.
+      </p>
+
+      <p>
+        A single iteration looks roughly like this. The agent reads the problem specification
+        — a geometry, a set of boundary conditions, a target quantity of interest. It selects
+        an initial solver architecture from its library. It runs a small problem. It compares
+        to a reference: an analytic solution where one exists, a high-fidelity benchmark where
+        one doesn't, or, in industrial settings, a measurement from a physical experiment. It
+        examines the residual. It localizes the failure: is the error concentrated near
+        boundaries (a discretization issue), at high frequencies (an under-resolution issue),
+        in transient features (a time-scheme issue), or in long-time averages (a closure
+        issue)? It revises one component of the solver, holds the others fixed, and reruns.
+      </p>
+
+      <p>
+        Over many such iterations, across many problems, the agent accumulates <em>skills</em>.
+        A skill, in this framing, is a learned heuristic: a rule for which atom to use under
+        which conditions, validated by accumulated evidence. Crucially, the agent is also
+        continuously revising its own skills. When two problems disagree about which scheme is
+        best, the agent looks for the deeper structure that explains both. The skills become
+        more general over time. This is what I mean by <em>self-adaptive</em>: the agent is
+        not adapting only the solver; it is adapting the part of itself that builds the
+        solver.
+      </p>
+
+      <p>
+        The output of this process — the durable artifact that survives across sessions — is a
+        growing corpus of these iron laws, encoded perhaps as a Claude skill or plugin, that
+        any future agent inherits.
+      </p>
+
+      <h2>The missing-physics signal</h2>
+
+      <p>
+        Every industrial simulation project I have worked on has had the same shape. The team
+        builds a model. The model gets close to the measurement. The last 10–20% of the gap is
+        attributed, vaguely, to "missing physics." The team gives up before closing it,
+        because closing it would require domain insight that no individual on the team
+        possesses.
+      </p>
+
+      <p>
+        A Simulation Organism running across many such projects would see thousands of
+        these gaps. It would notice that gaps of a certain kind tend to appear in problems of
+        a certain class — say, electromagnetic simulations near deep sub-wavelength features,
+        or fluid simulations near liquid–vapor interfaces. It would propose candidate physics
+        terms whose inclusion closes the gap. It would test these candidates across the full
+        corpus of past experiments and verify whether the new term improves agreement
+        everywhere or only locally.
+      </p>
+
+      <p>
+        This is, in effect, scientific discovery — modest, incremental, anchored in
+        measurement, with the agent doing the bookkeeping that no human team can do at scale.
+        It is not the discovery of new laws of nature in the dramatic sense. It is the
+        discovery of the terms the modeling community has been quietly dropping for years.
+      </p>
+
+      <h2>Comparison with the state of the art</h2>
+
+      <p>
+        Several groups in Silicon Valley and beyond are exploring related but distinct forms
+        of autonomous research agents. The contrast is worth drawing carefully, because the
+        boundaries between these efforts will define the next few years.
+      </p>
+
+      <p>
+        <strong>Sakana AI's "AI Scientist"</strong> generates research ideas, writes code for
+        ML experiments, runs them, and drafts papers. The substrate is machine-learning
+        research itself; the loss function is paper quality. The work is impressive but
+        constrained to a domain where "correct" is a soft judgment.
+      </p>
+
+      <p>
+        <strong>FutureHouse</strong> has built agents — Crow, Falcon, Owl, Phoenix — that
+        reason from scientific literature, mostly in biology, integrating with wet-lab
+        pipelines. The agent's grounding signal is experimental result, but the inner loop is
+        text — reading papers, proposing hypotheses, designing experiments. Powerful, but not
+        embedded in the solver of a numerical simulation.
+      </p>
+
+      <p>
+        <strong>DeepMind's GNoME</strong> screened materials at unprecedented scale,
+        identifying stable crystals; <strong>AlphaProof</strong> and
+        <strong>AlphaGeometry</strong> approach mathematical reasoning. Both impressive, both
+        constrained to a single narrow domain, both more "discovery by exhaustive search" than
+        "discovery by mechanistic revision."
+      </p>
+
+      <p>
+        <strong>Cursor, Devin (Cognition), and Claude Code</strong> are general-purpose coding
+        agents. They can edit a solver, but they have no privileged knowledge of physics, no
+        built-in comparison against measurement, no concept of an iron law. They are the
+        substrate of what I'm describing, not the thing itself.
+      </p>
+
+      <p>
+        What I am proposing is none of these in isolation. It is an agent whose substrate is
+        the solver itself, whose constraint is mathematical correctness and physical
+        conservation, whose feedback signal is the residual against experiment, and whose
+        accumulated knowledge crosses the pillars of classical physics. The right comparison
+        is not to any existing system but to a future composition: a general-reasoning model
+        on top of a domain-specific skill scaffold, sitting above a sandboxed simulation
+        framework that lets it act.
+      </p>
+
+      <h2>A recipe for builders</h2>
+
+      <p>
+        The point of this note is not to claim that the Simulation Organism exists. It is
+        to propose, as concretely as I can, a recipe. If I were building it from scratch
+        today, I would proceed roughly as follows.
+      </p>
+
+      <ol class="numbered">
+        <li>
+          <strong>Choose one physics pillar to start.</strong> Electromagnetics, fluid
+          dynamics, structural mechanics — whichever is closest to your team's expertise. The
+          agent needs to begin in a domain where its supervisors can audit its decisions.
+        </li>
+        <li>
+          <strong>Curate the atom library.</strong> Identify the 20–30 solver building blocks
+          that recur across problems in this pillar — discretization, time stepping, linear
+          solvers, mesh adaptation, coupling. Express each as a versioned, testable component.
+        </li>
+        <li>
+          <strong>Build the comparison harness.</strong> Assemble a battery of problems with
+          known answers — analytic, benchmark, and experimental. Make the comparison
+          automatic: pass/fail with error metrics, not subjective inspection.
+        </li>
+        <li>
+          <strong>Wrap a general-reasoning agent around the harness.</strong> At the time of
+          writing this means Claude Opus 4.7 or a peer. Give it tools to assemble atoms, run
+          problems, compare outputs, edit atoms.
+        </li>
+        <li>
+          <strong>Encode the meta-layer as a skill.</strong> The agent's accumulated knowledge
+          — its iron laws, its diagnosis rules, its preferred atom combinations — should be
+          persisted as a structured artifact that future agent sessions inherit. A Claude
+          skill or plugin is one obvious encoding.
+        </li>
+        <li>
+          <strong>Add the missing-physics signal.</strong> Once the agent reliably closes
+          well-posed problems, point it at problems where the gap to experiment is known to be
+          open. The hypotheses it generates about missing terms are the most scientifically
+          valuable output of the system.
+        </li>
+        <li>
+          <strong>Generalize across pillars.</strong> Identify the atoms that transfer (sparse
+          linear algebra, parallel decomposition, mesh handling) and those that do not
+          (domain-specific closures, boundary conditions). The skill scaffold should reflect
+          this split.
+        </li>
+      </ol>
+
+      <p>
+        This is a multi-year program for a small team, not a weekend project. But none of the
+        steps require unknown research breakthroughs. They require careful engineering, taste,
+        and a willingness to let the agent fail in instructive ways for a long time before it
+        begins to succeed.
+      </p>
+
+      <h2>A Claude Code plugin, sketched</h2>
+
+      <p>
+        The recipe above is platform-agnostic, but Claude Code already exposes the four
+        primitives this kind of system needs: <em>skills</em> for persistent curated knowledge,
+        <em>slash commands</em> for user-facing shortcuts into the workflow, <em>sub-agents</em>
+        for specialization, and <em>MCP servers</em> for tools that act on real infrastructure.
+        A natural way to realize the Organism is therefore as a single Claude Code plugin —
+        call it <code>simulation-organism</code> — that packages all four.
+      </p>
+
+      <p>
+        The plugin's <em>skills</em> are the durable artifact. An <code>iron-laws.md</code>
+        accumulates atom-selection rules and diagnosis heuristics; a
+        <code>missing-physics.md</code> holds the agent's growing priors on candidate physics
+        terms; a pillar file per physics domain (<code>pillar-em.md</code>,
+        <code>pillar-fluids.md</code>, <code>pillar-thermo.md</code>, …) carries the rules that
+        are specific to a pillar rather than universal. The <em>slash commands</em> —
+        <code>/run-experiment</code>, <code>/diagnose-residual</code>,
+        <code>/propose-atom</code>, <code>/persist-law</code>, <code>/transfer-skill</code> —
+        are the entry points an engineer uses to step through the loop manually when the
+        agent's autonomous progress needs to be steered. The <em>sub-agents</em> are physics
+        specialists, each loaded with the corresponding pillar skill and tuned to the kind of
+        reasoning that pillar demands — a fast validator that verifies math and convergence;
+        a pillar-EM specialist that runs on the strongest available reasoner.
+      </p>
+
+      <p>
+        The <em>MCP server</em> layer is where the plugin touches reality. Tools here are
+        deliberately narrow and composable: an <code>atom-library</code> server exposes the
+        solver building blocks as callable units; a <code>harness</code> server runs the
+        comparison against analytic, benchmark, or experimental references; an
+        <code>hpc-runner</code> server submits jobs and reports back; a
+        <code>residual-analyzer</code> server localizes failure modes by error band, frequency
+        content, and region of interest. <em>Hooks</em> close the loop:
+        a <code>PreToolUse</code> hook validates a proposed solver configuration before it
+        consumes HPC budget; a <code>PostToolUse</code> hook appends every comparison to the
+        corpus; an on-residual-drop hook promotes a successful diagnosis into a new entry in
+        <code>iron-laws.md</code>. The corpus itself — an append-only set of experiment logs,
+        residual histories, and missing-physics priors — is the persistent state that
+        survives across sessions and across model upgrades.
+      </p>
+
+      <p>
+        None of this requires a new agent framework. It is the existing Claude Code
+        primitives, arranged with intent.
+      </p>
+
+      <figure class="post-figure">
+        <img src="/img/claude-code-plugin-architecture.svg" alt="Architecture of a Claude Code plugin for the Simulation Organism: a runtime layer (Claude Opus), a plugin layer with four columns (skills, slash commands, sub-agents, MCP servers) and a hooks band, and a simulation infrastructure layer with the atom-library → solver-build → HPC-run → prediction → comparison-harness pipeline feeding a persistent corpus." />
+        <figcaption>Sketch of the plugin. Skills carry the curated knowledge; sub-agents specialize per pillar; MCP servers act on a real simulation pipeline; hooks close the loop into a persistent corpus.</figcaption>
+      </figure>
+
+      <h2>A direction</h2>
+
+      <p>
+        I am not making the claim that this paradigm is the future of scientific computing. I
+        am making the weaker claim that it is <em>a</em> future worth building toward, that it
+        is now technically tractable in a way it wasn't even last year, and that the path
+        from "AI helps simulate" to "AI co-designs the simulation, organism-style" runs
+        through the seven steps above.
+      </p>
+
+      <p>
+        The history of computational science is the history of moving authority from the
+        human to the machine — from analog computers to digital, from hand-tuned schemes to
+        adaptive ones, from single-physics to multi-physics, from single-node to exascale.
+        Each step felt premature when it began. This is, I think, the next step. Not the
+        agent that replaces the physicist, but the organism in which the physicist's craft is
+        encoded and gradually improved by the agent itself.
+      </p>
+
+      <p class="post-signoff">
+        If you are building this, I would like to hear from you —
+        <a href="mailto:p.a.mistani@gmail.com">p.a.mistani@gmail.com</a>.
+      </p>
+
+    </div>
+
+    <footer class="post-footer container-narrow">
+      <a href="/blog" class="back-link mono">← Back to all posts</a>
+    </footer>
+  </article>
+
+  <script is:inline>
+    (function () {
+      function flash(btn, label) {
+        var span = btn.querySelector('.btn-label');
+        if (!span) return;
+        var orig = span.textContent;
+        span.textContent = label;
+        btn.classList.add('is-copied');
+        setTimeout(function () {
+          span.textContent = orig;
+          btn.classList.remove('is-copied');
+        }, 1500);
+      }
+      var cite = document.getElementById('cite-btn');
+      if (cite) {
+        cite.addEventListener('click', function () {
+          var text = cite.getAttribute('data-bibtex') || '';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () { flash(cite, 'Copied'); });
+          } else {
+            window.prompt('Copy BibTeX:', text);
+          }
+        });
+      }
+      var link = document.getElementById('link-btn');
+      if (link) {
+        link.addEventListener('click', function () {
+          var text = link.getAttribute('data-url') || '';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () { flash(link, 'Copied'); });
+          } else {
+            window.prompt('Copy link:', text);
+          }
+        });
+      }
+    })();
+  </script>
+</Base>
+
+<style>
+  .post-hero {
+    padding-block: var(--s-24) var(--s-8);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .post-title {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-6);
+    max-width: 22ch;
+  }
+  .post-subtitle {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 56ch;
+    margin-bottom: var(--s-8);
+    font-style: italic;
+  }
+  .post-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    align-items: center;
+  }
+  .post-meta .dot { color: var(--ink-dim); }
+
+  .prose {
+    padding-block: var(--s-12) var(--s-12);
+    max-width: 68ch;
+  }
+  .prose h2 {
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+    line-height: 1.15;
+    margin-top: var(--s-12);
+    margin-bottom: var(--s-5);
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .prose h2:first-of-type { margin-top: 0; }
+  .prose p {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: var(--s-5);
+  }
+  .prose p em { font-style: italic; color: var(--ink); }
+  .prose p strong { color: var(--ink); font-weight: 600; }
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+    color: var(--accent);
+    background: rgba(230, 162, 60, 0.06);
+    padding: 0.05em 0.32em;
+    border-radius: 2px;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .pullquote {
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem) !important;
+    line-height: 1.35 !important;
+    font-style: italic;
+    color: var(--accent) !important;
+    padding-left: var(--s-6);
+    border-left: 2px solid var(--accent);
+    margin-block: var(--s-8) !important;
+    max-width: 40ch;
+  }
+
+  .post-figure {
+    margin: var(--s-10) 0;
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .post-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .post-figure figcaption {
+    margin-top: var(--s-4);
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+    font-style: italic;
+    text-align: center;
+    max-width: 56ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .numbered {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    margin-bottom: var(--s-6);
+  }
+  .numbered li {
+    counter-increment: step;
+    padding: var(--s-3) 0 var(--s-3) var(--s-12);
+    position: relative;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    border-top: 1px solid var(--hairline);
+  }
+  .numbered li:last-child { border-bottom: 1px solid var(--hairline); }
+  .numbered li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: var(--s-3);
+    width: 2.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .numbered li strong { color: var(--ink); }
+
+  .post-signoff {
+    margin-top: var(--s-10);
+    padding-top: var(--s-6);
+    border-top: 1px solid var(--hairline);
+    font-size: 1rem !important;
+    color: var(--ink-muted) !important;
+  }
+  .post-signoff a {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+
+  .post-actions {
+    padding: var(--s-6) 0 var(--s-2);
+  }
+  .actions-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--s-4);
+  }
+  .actions-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.95rem;
+    border: 1px solid var(--hairline-strong);
+    background: transparent;
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    background-image: none;
+    transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+  }
+  .action-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .action-btn.is-copied {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(230, 162, 60, 0.08);
+  }
+  .action-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+
+  .post-footer {
+    padding-block: var(--s-8) var(--s-24);
+    border-top: 1px solid var(--hairline);
+  }
+  .back-link {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    background-image: none;
+    transition: color 0.2s var(--ease-out);
+  }
+  .back-link:hover { color: var(--accent); }
+
+  @media (max-width: 768px) {
+    .numbered li { padding-left: var(--s-8); }
+    .numbered li::before { width: 1.8rem; }
+  }
+</style>
+</content>
+</invoke>
