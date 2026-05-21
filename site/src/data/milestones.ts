@@ -214,8 +214,8 @@ export const MILESTONES: Milestone[] = [
     title: 'Multi-objective DPO for protein design',
     org: 'Aikium',
     role: 'Principal Deep Learning Scientist',
-    short: 'Invented and shipped the algorithm that now powers Aikium\'s live drug-design platform.',
-    long: 'Founding member of Aikium\'s computational team. Invented a multi-objective Direct Preference Optimization (DPO) algorithm for protein and molecule language models — shipped end-to-end (research → 3 provisional patents → live production platform) in four months. The algorithm now powers Aikium\'s production drug-design platform. Published an ICLR 2024 GEM workshop paper on the method; also built a RAG pipeline for protein-design knowledge retrieval.',
+    short: 'Invented the algorithm that now powers Aikium\'s production drug-design platform.',
+    long: 'Founding member of Aikium\'s computational team. In four months I invented a multi-objective Direct Preference Optimization (DPO) algorithm for protein and molecule language models and filed three provisional patents on it. After I left, additional team members extended the work, and roughly two years later the algorithm became the foundation of Aikium\'s production drug-design platform. Published an ICLR 2024 GEM workshop paper on the method; also built a RAG pipeline for protein-design knowledge retrieval.',
     image: '/img/dpo_aikium.png',
     founding: true,
     links: [
