@@ -97,7 +97,7 @@ export const MILESTONES: Milestone[] = [
     role: 'Lead author',
     short: 'Parallel HPC simulation of epitaxial thin-film growth — the level-set machinery that maps onto semiconductor manufacturing.',
     long: 'Lead-author paper "The island dynamics model on parallel quadtree grids" (Journal of Computational Physics, 2018). A state-of-the-art parallel C++/MPI simulator for epitaxial thin-film growth using the island-dynamics model, second-order level-set on non-graded adaptive Cartesian grids, with Robin boundary conditions for asymmetric Ehrlich–Schwoebel barriers. The mathematical machinery is canonical to semiconductor manufacturing — epitaxy, etching, lithography — and is the direct lineage to the chip-design work I do today.',
-    image: '/img/Dirichlet_L1000_proc_zoom.png',
+    image: '/img/epitaxy.png',
     links: [
       { label: 'JCP paper', href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999118300767' },
     ],
