@@ -11,25 +11,44 @@ const posts: { title: string; href: string; date: string; blurb: string }[] = [
 ];
 ---
 
-<Base title="Blog — Pouria Mistani" description="Writing on physics simulation, scientific ML, and the engineering of large-scale platforms.">
+<Base title="Stencil — Pouria Mistani" description="Stencil is an open journal of paradigm notes on physics simulation, scientific computing, and the architectures worth disseminating across industries — published by Pouria Mistani.">
   <section class="blog-hero">
     <div class="container-wide">
-      <p class="eyebrow">Blog</p>
+      <p class="eyebrow">Stencil · an open journal</p>
       <h1 class="blog-hero-title">
-        Notes on physics simulation, <em>scientific ML</em>, and the engineering of large-scale platforms.
+        Paradigm notes on <em>physics simulation</em>.
       </h1>
     </div>
   </section>
 
+  <section class="journal-about container-narrow">
+    <p class="journal-lede">
+      <strong>Stencil</strong> is an open journal — a place for paradigm notes, design
+      proposals, and contrarian takes on the architectures, numerical methods, and operating
+      models I think are worth exploring or disseminating across scientific computing, AI,
+      and the chip-design industry.
+    </p>
+    <p class="journal-body">
+      It is a personal platform, not a publication of record. Some essays speculate; some
+      respond directly to what I'm building. All are anchored in physics simulation. Source
+      files, diagrams, and data are open by default and tracked in the
+      <a href="https://github.com/pourion/pourion.github.io" target="_blank" rel="noopener">site's public repository</a>.
+    </p>
+    <p class="journal-body">
+      <em>In numerical methods, a stencil is the small, deliberate pattern of grid points a
+      solver uses to approximate a derivative — local, geometric, with the whole continuum
+      hanging from a handful of decisions. Every essay here is an attempt at one.</em>
+    </p>
+  </section>
+
   <section class="blog-list container-wide">
+    <p class="eyebrow list-eyebrow">Essays</p>
     {posts.length === 0 ? (
       <div class="empty-state">
         <p class="eyebrow">Coming soon</p>
-        <h2>The first post is on the way.</h2>
+        <h2>The first issue is on the way.</h2>
         <p class="muted empty-body">
-          I'm preparing a sequence on domain decomposition for PDE solvers, the geometry of
-          neural operators, and the engineering reality of running exascale simulations on
-          GPU clusters. In the meantime, see my
+          In the meantime, see my
           <a href="/publications">papers</a> or
           reach out by <a href="mailto:p.a.mistani@gmail.com">email</a>.
         </p>
@@ -67,8 +86,41 @@ const posts: { title: string; href: string; date: string; blurb: string }[] = [
     font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
   }
 
+  .journal-about {
+    padding-block: var(--s-12) var(--s-4);
+  }
+  .journal-lede {
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: var(--s-6);
+    max-width: 64ch;
+  }
+  .journal-lede strong { color: var(--accent); font-weight: 500; }
+  .journal-body {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    margin-bottom: var(--s-5);
+    max-width: 64ch;
+  }
+  .journal-body a {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+  .journal-body em {
+    font-style: italic;
+    color: var(--ink-muted);
+  }
+
   .blog-list {
-    padding-block: var(--s-16) var(--s-24);
+    padding-block: var(--s-8) var(--s-24);
+  }
+  .list-eyebrow {
+    margin-bottom: var(--s-6);
   }
   .empty-state {
     padding: var(--s-12) 0;
