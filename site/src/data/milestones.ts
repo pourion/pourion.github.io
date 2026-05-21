@@ -95,6 +95,23 @@ export const MILESTONES: Milestone[] = [
     image: '/img/2_EP.jpg',
   },
   {
+    id: 'bipde',
+    year: 2020,
+    yearLabel: '2020',
+    lanes: ['ai', 'hpc'],
+    primaryLane: 'ai',
+    title: 'BiPDE · physics-aware neural networks',
+    org: 'arXiv 2020 · JCP 2021',
+    role: 'Co-author',
+    short: 'A hard-coded PDE solver as a layer inside a neural network — early physics-aware inverse-PDE solver.',
+    long: 'Co-authored BiPDE (Blended inverse-PDE) — a framework that places a hard-coded PDE solver as a custom layer inside a semantic-autoencoder neural network, in contrast to standard PINNs that only add the PDE to the loss. Demonstrated recovery of variable diffusion coefficients in Poisson problems (1D, 2D) and the time-dependent nonlinear Burgers\' equation, robust to noise. arXiv January 2020; published in the Journal of Computational Physics, 2021.',
+    image: '/img/ElectroFluct.png',
+    links: [
+      { label: 'arXiv (2020)', href: 'https://arxiv.org/abs/2001.03608' },
+      { label: 'JCP paper', href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999121003090' },
+    ],
+  },
+  {
     id: 'jax-dips',
     year: 2020,
     yearLabel: '2020 – 2023',
