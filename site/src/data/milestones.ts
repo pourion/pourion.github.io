@@ -202,8 +202,8 @@ export const MILESTONES: Milestone[] = [
     title: 'Prescient Design · protein design',
     org: 'Genentech',
     role: 'ML Scientist',
-    short: 'ML for therapeutic protein design with the Prescient Design group.',
-    long: 'Joined Genentech\'s Prescient Design group as an ML Scientist, contributing to research on therapeutic protein design. Short, focused residency that helped sharpen the question of where AI-for-biology was — and was not — ready to drive commercial outcomes.',
+    short: 'Brief residency on therapeutic protein design.',
+    long: 'Short residency with the Prescient Design group on therapeutic protein design. The experience clarified where AI-for-drug-design was ready — and where it wasn\'t — and started me thinking about which domain to bring large-scale physics simulation and AI to next. That domain turned out to be chip design.',
   },
   {
     id: 'aikium',
