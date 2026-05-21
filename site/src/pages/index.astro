@@ -1,0 +1,446 @@
+---
+import Base from '../layouts/Base.astro';
+import Constellation from '../components/Constellation.astro';
+
+const featuredProjects = [
+  {
+    title: 'Voltaire · exascale EM platform',
+    role: 'VoltAI · 2025',
+    blurb: 'Multi-GPU physics-simulation platform built from scratch in 5 months. 32× speedup on 3D-IC signal-integrity at 200M mesh elements; customer tape-out validated. Contributed to a 2× Series B raise.',
+    image: '/img/1_electro_3D.png',
+    href: '#trajectory',
+  },
+  {
+    title: 'Multi-objective DPO',
+    role: 'Aikium · 2024',
+    blurb: 'Invented preference optimization for protein and molecule language models. Research → 3 patents → live production drug-design platform in four months. ICLR 2024 GEM paper.',
+    image: '/img/ElectroFluct.png',
+    href: '#trajectory',
+  },
+  {
+    title: 'JAX-DIPS',
+    role: 'Open source · lead',
+    blurb: 'Differentiable 3D interfacial PDE solver in JAX, GPU/TPU/CPU. Neural bootstrapping of finite discretization methods for elliptic PDEs with jump conditions. JCP 2023.',
+    image: '/img/0_dragons.png',
+    href: 'https://github.com/JAX-DIPS/JAX-DIPS',
+    external: true,
+  },
+  {
+    title: 'Multi-agent EDA framework',
+    role: 'Synopsys · 2024 – 2025',
+    blurb: 'Founding engineer of the GenAI Solutions team. Lead author on Synopsys\' patent for its multi-agent EDA framework. Engineering Excellence award, selected among ~2,000 engineers.',
+    image: '/img/4_clusters.png',
+    href: '#trajectory',
+  },
+  {
+    title: 'Clara Discovery × DiffDock',
+    role: 'NVIDIA · 2021 – 2023',
+    blurb: 'Founding member of Clara Discovery Simulation. Implemented DiffDock (score-based diffusion + 3D-equivariant GNNs) in BioNeMo. 5× speedup, 10× memory efficiency on ML-driven MD.',
+    image: '/img/nbm.png',
+    href: '#trajectory',
+  },
+  {
+    title: 'AVICENNA',
+    role: 'UCSB · CASL Lab',
+    blurb: 'First parallel multi-scale 3D tissue simulation engine. Tissue-scale cell-aggregate electroporation on national supercomputers. Featured by U.S. Army Research Lab, TACC, XSEDE.',
+    image: '/img/2_EP.jpg',
+    href: '#trajectory',
+  },
+];
+
+const talks = [
+  {
+    title: 'ICIAM 2023 — invited talk',
+    href: 'https://www.youtube.com/embed/ACjiRyOh-E0',
+    blurb: 'Differentiable PDE solvers and AI-for-simulation.',
+  },
+  {
+    title: '2020 — Research overview',
+    href: 'https://www.youtube.com/embed/NrMaIaaXlM4',
+    blurb: 'Level-set methods, AVICENNA, and large-scale biophysical simulation.',
+  },
+];
+---
+
+<Base
+  title="Pouria Mistani — Large-scale simulation of physical systems"
+  description="Pouria Mistani builds high-fidelity large-scale simulations at the intersection of physics, AI, and supercomputing — from cosmology to biophysics to chip design."
+>
+  {/* Hero */}
+  <section class="hero">
+    <div class="container-wide hero-inner">
+      <p class="eyebrow hero-eyebrow">
+        <span class="dot"></span>
+        Pouria Mistani, PhD · Physical AI
+      </p>
+      <h1 class="hero-title">
+        GPU-accelerated physics simulation, <em>scientific ML</em>, and the platforms that ship them.
+      </h1>
+      <p class="hero-lede">
+        Research engineer at the convergence of large-scale physics simulation and AI — a scientific-startup
+        builder who invents algorithms and ships industrial platforms from scratch. From cosmological data
+        on national supercomputers, to tissue-scale electroporation, to GPU-accelerated molecular dynamics,
+        to exascale electromagnetics for chip tape-out. 9+ publications. 4 patents.
+      </p>
+      <div class="hero-actions">
+        <a href="#trajectory" class="button button-accent">See the trajectory ↓</a>
+        <a href="/about" class="hero-link mono">About →</a>
+      </div>
+    </div>
+    <div class="hero-grid" aria-hidden="true"></div>
+  </section>
+
+  {/* Constellation — centerpiece */}
+  <Constellation />
+
+  {/* Current focus */}
+  <section class="focus container-narrow">
+    <p class="eyebrow">Current focus</p>
+    <h2 class="focus-title">
+      Revolutionize chip design at the intersection of <em>AI</em> and
+      <em>large-scale simulation</em> — agents that operate, build, and run experiments in silico.
+    </h2>
+    <p class="focus-body">
+      Chip design is the right problem at the right time. The physical models are well-posed and
+      exhaustive — Maxwell, transport, level-set evolution of free boundaries in epitaxy, etching,
+      lithography. The scale is commercially significant. The compute is real. It is the right mix
+      for the methods I've spent a career building, and the natural place to reproduce, in
+      commercial technology, what Illustris achieved for cosmology.
+    </p>
+  </section>
+
+  {/* Featured projects */}
+  <section class="projects container-wide">
+    <div class="projects-head">
+      <p class="eyebrow">Selected work</p>
+      <h2>Six projects worth knowing about.</h2>
+    </div>
+    <ul class="project-grid">
+      {featuredProjects.map((p, i) => (
+        <li class="project-card" style={`--i: ${i}`}>
+          <a
+            href={p.href}
+            class="project-link"
+            target={p.external ? '_blank' : '_self'}
+            rel={p.external ? 'noopener' : undefined}
+          >
+            <div class="project-image">
+              <img src={p.image} alt={p.title} loading="lazy" />
+            </div>
+            <div class="project-body">
+              <p class="project-role mono">{p.role}</p>
+              <h3 class="project-title">{p.title}</h3>
+              <p class="project-blurb">{p.blurb}</p>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* Talks */}
+  <section class="talks container-wide">
+    <p class="eyebrow">Talks</p>
+    <h2>Selected talks.</h2>
+    <ul class="talks-grid">
+      {talks.map((t) => (
+        <li class="talk-card">
+          <div class="talk-frame">
+            <iframe
+              src={t.href}
+              title={t.title}
+              loading="lazy"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
+          <h3 class="talk-title">{t.title}</h3>
+          <p class="talk-blurb muted">{t.blurb}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  {/* Contact CTA */}
+  <section class="contact container-narrow">
+    <p class="eyebrow">Get in touch</p>
+    <h2 class="contact-title">
+      Working on chip design, AI for physics, or large-scale simulation? <em>Let's talk.</em>
+    </h2>
+    <div class="contact-actions">
+      <a href="mailto:p.a.mistani@gmail.com" class="button button-accent">
+        p.a.mistani@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/pouria-mistani/" target="_blank" rel="noopener" class="hero-link mono">
+        LinkedIn →
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    padding-block: clamp(5rem, 14vw, 11rem) clamp(3rem, 8vw, 7rem);
+    overflow: hidden;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
+    opacity: 0.4;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: var(--s-12);
+  }
+  .hero-eyebrow .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--accent); }
+    50%      { opacity: 0.55; box-shadow: 0 0 22px var(--accent); }
+  }
+  .hero-title {
+    font-size: clamp(2.8rem, 8vw, 7rem);
+    line-height: 1;
+    font-weight: 320;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+    margin-bottom: var(--s-8);
+  }
+  .hero-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .hero-lede {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.5;
+    color: var(--ink-muted);
+    max-width: 56ch;
+    margin-bottom: var(--s-12);
+  }
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+  }
+  .hero-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    background: none;
+    transition: color 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+  .hero-link:hover {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  /* Focus */
+  .focus {
+    padding-block: var(--s-24);
+    text-align: left;
+  }
+  .focus-title {
+    font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+    line-height: 1.1;
+    margin-bottom: var(--s-8);
+    letter-spacing: -0.02em;
+  }
+  .focus-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .focus-body {
+    color: var(--ink-muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+
+  /* Projects */
+  .projects {
+    padding-block: var(--s-16) var(--s-24);
+  }
+  .projects-head {
+    margin-bottom: var(--s-12);
+  }
+  .projects-head h2 {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+  .project-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--s-6);
+    padding: 0;
+  }
+  /* Asymmetric editorial grid */
+  .project-card:nth-child(1) { grid-column: span 8; }
+  .project-card:nth-child(2) { grid-column: span 4; }
+  .project-card:nth-child(3) { grid-column: span 4; }
+  .project-card:nth-child(4) { grid-column: span 8; }
+  .project-card:nth-child(5) { grid-column: span 5; }
+  .project-card:nth-child(6) { grid-column: span 7; }
+
+  .project-link {
+    display: block;
+    background: var(--bg-elevated);
+    border: 1px solid var(--hairline);
+    height: 100%;
+    text-decoration: none;
+    background-image: none;
+    color: var(--ink);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+  }
+  .project-link:hover {
+    border-color: var(--accent);
+    color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .project-link:hover .project-arrow {
+    transform: translate(4px, -4px);
+    color: var(--accent);
+  }
+  .project-link:hover .project-image img {
+    transform: scale(1.04);
+  }
+
+  .project-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8) contrast(1.05);
+    transition: transform 0.6s var(--ease-out);
+  }
+  .project-body {
+    padding: var(--s-6);
+    position: relative;
+  }
+  .project-role {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--s-3);
+  }
+  .project-title {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    margin-bottom: var(--s-3);
+    line-height: 1.15;
+  }
+  .project-blurb {
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    max-width: 50ch;
+  }
+  .project-arrow {
+    position: absolute;
+    top: var(--s-6);
+    right: var(--s-6);
+    font-size: 1.1rem;
+    color: var(--ink-dim);
+    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+  }
+
+  /* Talks */
+  .talks {
+    padding-block: var(--s-16) var(--s-24);
+  }
+  .talks h2 {
+    margin-bottom: var(--s-12);
+  }
+  .talks-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-8);
+    padding: 0;
+  }
+  .talk-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .talk-frame {
+    aspect-ratio: 16 / 9;
+    background: var(--bg-elevated);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+    margin-bottom: var(--s-4);
+  }
+  .talk-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .talk-title {
+    font-size: 1.2rem;
+    margin-bottom: var(--s-2);
+  }
+  .talk-blurb {
+    font-size: 0.95rem;
+  }
+
+  /* Contact */
+  .contact {
+    padding-block: var(--s-16) var(--s-24);
+  }
+  .contact-title {
+    font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+    line-height: 1.1;
+    margin-bottom: var(--s-8);
+    letter-spacing: -0.02em;
+  }
+  .contact-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .contact-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--s-6);
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    .project-card { grid-column: span 12 !important; }
+    .talks-grid { grid-template-columns: 1fr; }
+  }
+</style>

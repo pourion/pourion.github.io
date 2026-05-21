@@ -1,0 +1,789 @@
+---
+import { MILESTONES, LANE_ORDER, LANES, type Lane } from '../data/milestones';
+
+const minYear = Math.min(...MILESTONES.map((m) => m.year));
+const maxYear = Math.max(...MILESTONES.map((m) => m.year));
+const yearSpan = maxYear - minYear;
+
+// SVG geometry
+const W = 1280;
+const H = 600;
+const padTop = 80;
+const padBottom = 90;
+const padLeft = 60;
+const padRight = 80;
+const plotW = W - padLeft - padRight;
+const plotH = H - padTop - padBottom;
+const laneCount = LANE_ORDER.length;
+const laneGap = plotH / (laneCount - 1);
+
+function laneY(lane: Lane): number {
+  return padTop + LANE_ORDER.indexOf(lane) * laneGap;
+}
+function yearX(year: number): number {
+  return padLeft + ((year - minYear) / yearSpan) * plotW;
+}
+
+const lanePaths = LANE_ORDER.map((lane) => {
+  const pts = MILESTONES.filter((m) => m.lanes.includes(lane))
+    .sort((a, b) => a.year - b.year)
+    .map((m) => ({ x: yearX(m.year), y: laneY(lane) }));
+  if (pts.length < 2) return { lane, d: '' };
+  let d = `M ${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1];
+    const b = pts[i];
+    const dx = b.x - a.x;
+    d += ` C ${(a.x + dx * 0.5).toFixed(1)} ${a.y.toFixed(1)}, ${(b.x - dx * 0.5).toFixed(1)} ${b.y.toFixed(1)}, ${b.x.toFixed(1)} ${b.y.toFixed(1)}`;
+  }
+  return { lane, d };
+});
+
+// X-axis years to label (show every year that has a milestone, plus endpoints)
+const yearsWithMilestones = Array.from(new Set(MILESTONES.map((m) => m.year))).sort((a, b) => a - b);
+
+// Background stars (deterministic pseudo-random)
+function mulberry32(seed: number) {
+  return () => {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+const rng = mulberry32(42);
+const stars = Array.from({ length: 80 }, () => ({
+  x: rng() * W,
+  y: rng() * H,
+  r: rng() * 0.9 + 0.2,
+  o: rng() * 0.6 + 0.1,
+}));
+---
+
+<section class="constellation-section" id="trajectory">
+  <div class="container-wide constellation-narrative">
+    <p class="eyebrow">Trajectory · 2013 → now</p>
+    <h2>
+      One pursuit — <em>high-fidelity, large-scale simulation</em> of physical systems.
+      <span class="muted-headline">Five threads, weaving into a single constellation.</span>
+    </h2>
+  </div>
+
+  <div class="constellation-wrap container-wide" data-constellation>
+    <ul class="lane-legend">
+      {LANE_ORDER.map((lane) => (
+        <li class="lane-legend-item">
+          <span class="lane-swatch" style={`--c: ${LANES[lane].color}`}></span>
+          <span class="lane-legend-label">{LANES[lane].label}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="constellation-viewport">
+      <svg
+        class="constellation-svg"
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-labelledby="constellation-title"
+      >
+        <title id="constellation-title">
+          Career trajectory of Pouria Mistani — milestones plotted across five thematic threads from 2013 to present.
+        </title>
+
+        <defs>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Background stars */}
+        <g class="stars" aria-hidden="true">
+          {stars.map((s) => (
+            <circle cx={s.x} cy={s.y} r={s.r} fill="#F2EFE8" opacity={s.o} />
+          ))}
+        </g>
+
+        {/* Year vertical grid */}
+        <g class="year-grid" aria-hidden="true">
+          {yearsWithMilestones.map((y) => (
+            <line
+              x1={yearX(y)}
+              x2={yearX(y)}
+              y1={padTop - 24}
+              y2={H - padBottom + 12}
+              class="year-line"
+            />
+          ))}
+        </g>
+
+        {/* Lane reference lines (very faint) */}
+        <g class="lane-rules" aria-hidden="true">
+          {LANE_ORDER.map((lane) => (
+            <line x1={padLeft} x2={W - padRight} y1={laneY(lane)} y2={laneY(lane)} class="lane-rule" />
+          ))}
+        </g>
+
+        {/* Lane connector paths */}
+        <g class="lane-paths">
+          {lanePaths.map(({ lane, d }) =>
+            d ? (
+              <path
+                d={d}
+                class={`lane-path lane-path-${lane}`}
+                style={`stroke: ${LANES[lane].color}`}
+                fill="none"
+                stroke-linecap="round"
+              />
+            ) : null
+          )}
+        </g>
+
+        {/* Cross-lane bars for multi-lane milestones */}
+        <g class="cross-lanes">
+          {MILESTONES.filter((m) => m.lanes.length > 1).map((m) => {
+            const x = yearX(m.year);
+            const ys = m.lanes.map((l) => laneY(l));
+            const yMin = Math.min(...ys);
+            const yMax = Math.max(...ys);
+            return (
+              <line
+                x1={x}
+                x2={x}
+                y1={yMin}
+                y2={yMax}
+                class="cross-lane"
+                style={`stroke: ${LANES[m.primaryLane].color}`}
+              />
+            );
+          })}
+        </g>
+
+        {/* Year labels (bottom axis) */}
+        <g class="year-axis">
+          {yearsWithMilestones.map((y) => (
+            <text x={yearX(y)} y={H - padBottom + 36} class="year-label">{y}</text>
+          ))}
+        </g>
+
+        {/* Milestone nodes */}
+        <g class="nodes">
+          {MILESTONES.map((m, i) => {
+            const x = yearX(m.year);
+            const y = laneY(m.primaryLane);
+            const labelAbove = LANE_ORDER.indexOf(m.primaryLane) >= 3;
+            return (
+              <g
+                class={`node node-${m.primaryLane}`}
+                transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`}
+                style={`--node-color: ${LANES[m.primaryLane].color}; --node-delay: ${i * 70}ms;`}
+                data-milestone-id={m.id}
+                tabindex="0"
+                role="button"
+                aria-label={`${m.yearLabel} — ${m.title} at ${m.org}`}
+              >
+                {/* secondary lane minor markers */}
+                {m.lanes
+                  .filter((l) => l !== m.primaryLane)
+                  .map((l) => (
+                    <circle
+                      cy={laneY(l) - y}
+                      r="2.5"
+                      class="secondary-marker"
+                      style={`fill: ${LANES[l].color}`}
+                    />
+                  ))}
+                <circle r="14" class="node-halo" />
+                <circle r="6" class="node-dot" />
+                <circle r="2.5" class="node-core" />
+                <text
+                  x={0}
+                  y={labelAbove ? -22 : 28}
+                  text-anchor="middle"
+                  class="node-label"
+                >
+                  {m.title}
+                </text>
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+    </div>
+
+    <p class="constellation-hint mono">
+      <span class="hint-key">▸</span> Click any node to read more · Press <kbd>Esc</kbd> to close
+    </p>
+  </div>
+
+  {/* Detail drawer (desktop) */}
+  <aside class="milestone-drawer" data-drawer aria-hidden="true" aria-label="Milestone detail">
+    <button class="drawer-close" data-drawer-close aria-label="Close detail">
+      <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.5" fill="none">
+        <line x1="4" y1="4" x2="16" y2="16" />
+        <line x1="16" y1="4" x2="4" y2="16" />
+      </svg>
+    </button>
+    <div class="drawer-content">
+      {MILESTONES.map((m) => (
+        <article class="milestone-detail" data-detail-id={m.id} hidden>
+          <p class="eyebrow drawer-eyebrow">
+            <span class="lane-swatch" style={`--c: ${LANES[m.primaryLane].color}`}></span>
+            {m.yearLabel} · {LANES[m.primaryLane].label}
+          </p>
+          <h3>{m.title}</h3>
+          <p class="drawer-org mono">{m.org}{m.role && <span class="muted"> · {m.role}</span>}</p>
+          {m.image && (
+            <div class="drawer-image">
+              <img src={m.image} alt={m.title} loading="lazy" />
+            </div>
+          )}
+          <p class="drawer-body">{m.long}</p>
+          {m.links && m.links.length > 0 && (
+            <ul class="drawer-links">
+              {m.links.map((l) => (
+                <li>
+                  <a href={l.href} target={l.href.startsWith('http') ? '_blank' : '_self'} rel="noopener">
+                    {l.label}
+                    <span class="arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+          <ul class="drawer-lanes">
+            {m.lanes.map((l) => (
+              <li class="lane-chip">
+                <span class="lane-swatch" style={`--c: ${LANES[l].color}`}></span>
+                {LANES[l].label}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </aside>
+
+  {/* Mobile fallback — vertical timeline */}
+  <div class="constellation-fallback container" aria-hidden="true">
+    <ol class="timeline-list">
+      {MILESTONES.map((m) => (
+        <li class="timeline-item" style={`--c: ${LANES[m.primaryLane].color}`}>
+          <div class="timeline-marker">
+            <span class="timeline-dot"></span>
+          </div>
+          <div class="timeline-body">
+            <p class="timeline-year mono">{m.yearLabel}</p>
+            <h3 class="timeline-title">{m.title}</h3>
+            <p class="timeline-org mono">{m.org}{m.role && <span class="muted"> · {m.role}</span>}</p>
+            {m.image && (
+              <div class="timeline-image">
+                <img src={m.image} alt={m.title} loading="lazy" />
+              </div>
+            )}
+            <p class="timeline-long">{m.long}</p>
+            <ul class="timeline-lanes">
+              {m.lanes.map((l) => (
+                <li class="lane-chip">
+                  <span class="lane-swatch" style={`--c: ${LANES[l].color}`}></span>
+                  {LANES[l].label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .constellation-section {
+    padding-block: var(--s-32) var(--s-16);
+    position: relative;
+  }
+  .constellation-narrative {
+    margin-bottom: var(--s-12);
+    max-width: 920px;
+  }
+  .constellation-narrative h2 {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  .muted-headline {
+    color: var(--ink-muted);
+    display: block;
+    margin-top: 0.4em;
+  }
+
+  .lane-legend {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-6) var(--s-8);
+    margin-bottom: var(--s-6);
+    padding: 0;
+  }
+  .lane-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .lane-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 8px var(--c);
+    flex-shrink: 0;
+  }
+
+  .constellation-viewport {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+  }
+  .constellation-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* SVG element styling */
+  :global(.year-line) {
+    stroke: var(--hairline);
+    stroke-width: 1;
+  }
+  :global(.year-label) {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    fill: var(--ink-dim);
+    letter-spacing: 0.06em;
+    text-anchor: middle;
+  }
+  :global(.lane-rule) {
+    stroke: rgba(242, 239, 232, 0.05);
+    stroke-width: 1;
+    stroke-dasharray: 2 4;
+  }
+  :global(.lane-path) {
+    stroke-width: 1.5;
+    opacity: 0.5;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  :global([data-constellation].is-visible .lane-path) {
+    animation: draw 1500ms var(--ease-out) forwards;
+  }
+  :global([data-constellation].is-visible .lane-path-astro) { animation-delay: 0ms; }
+  :global([data-constellation].is-visible .lane-path-hpc)   { animation-delay: 200ms; }
+  :global([data-constellation].is-visible .lane-path-ai)    { animation-delay: 400ms; }
+  :global([data-constellation].is-visible .lane-path-bio)   { animation-delay: 600ms; }
+  :global([data-constellation].is-visible .lane-path-chip)  { animation-delay: 800ms; }
+
+  @keyframes draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  :global(.cross-lane) {
+    stroke-width: 1;
+    opacity: 0.25;
+    stroke-dasharray: 2 3;
+  }
+
+  :global(.node) {
+    cursor: pointer;
+    outline: none;
+    opacity: 0;
+    transform-box: fill-box;
+    transition: opacity 0.5s var(--ease-out);
+  }
+  :global([data-constellation].is-visible .node) {
+    opacity: 1;
+    animation: pop 0.6s var(--ease-out) backwards;
+    animation-delay: var(--node-delay);
+  }
+  @keyframes pop {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  :global(.node-dot) {
+    fill: var(--node-color);
+    transition: r 0.25s var(--ease-out);
+  }
+  :global(.node-core) {
+    fill: var(--bg);
+    pointer-events: none;
+  }
+  :global(.node-halo) {
+    fill: var(--node-color);
+    opacity: 0;
+    transition: opacity 0.25s var(--ease-out), r 0.25s var(--ease-out);
+    filter: url(#glow);
+  }
+  :global(.node:hover .node-halo),
+  :global(.node:focus-visible .node-halo),
+  :global(.node.is-active .node-halo) {
+    opacity: 0.35;
+  }
+  :global(.node:hover .node-dot),
+  :global(.node:focus-visible .node-dot),
+  :global(.node.is-active .node-dot) {
+    r: 8;
+  }
+  :global(.node.is-active .node-halo) {
+    opacity: 0.55;
+    filter: url(#strongGlow);
+  }
+
+  :global(.node-label) {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 420;
+    fill: var(--ink);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-out);
+    letter-spacing: -0.005em;
+  }
+  :global(.node:hover .node-label),
+  :global(.node:focus-visible .node-label),
+  :global(.node.is-active .node-label) {
+    opacity: 1;
+  }
+
+  :global(.stars circle) {
+    transform-origin: center;
+  }
+
+  .constellation-hint {
+    text-align: center;
+    margin-top: var(--s-8);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .hint-key { color: var(--accent); }
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 3px;
+    color: var(--ink-muted);
+  }
+
+  /* Drawer */
+  .milestone-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(540px, 92vw);
+    background: var(--bg-elevated);
+    border-left: 1px solid var(--hairline-strong);
+    transform: translateX(100%);
+    transition: transform 0.45s var(--ease-out);
+    z-index: 60;
+    overflow-y: auto;
+    box-shadow: -30px 0 60px rgba(0,0,0,0.5);
+  }
+  .milestone-drawer.is-open {
+    transform: translateX(0);
+  }
+  .drawer-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid var(--hairline-strong);
+    background: transparent;
+    color: var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    border-radius: 50%;
+  }
+  .drawer-close:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .drawer-content {
+    padding: var(--s-12) var(--s-8) var(--s-12);
+  }
+  .milestone-detail h3 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.05;
+    margin-bottom: var(--s-3);
+  }
+  .drawer-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--s-3);
+  }
+  .drawer-org {
+    color: var(--ink-muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--s-6);
+  }
+  .drawer-image {
+    margin-bottom: var(--s-6);
+    border: 1px solid var(--hairline);
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: var(--bg);
+  }
+  .drawer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) contrast(1.05);
+  }
+  .drawer-body {
+    color: var(--ink);
+    margin-bottom: var(--s-6);
+  }
+  .drawer-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-bottom: var(--s-6);
+    padding: 0;
+  }
+  .drawer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.6rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
+  }
+  .drawer-links a:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .drawer-lanes {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    padding: 0;
+  }
+  .lane-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* Mobile fallback */
+  .constellation-fallback {
+    display: none;
+  }
+  .timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: var(--s-4);
+    padding-bottom: var(--s-12);
+    position: relative;
+  }
+  .timeline-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 24px;
+    bottom: 0;
+    width: 1px;
+    background: var(--hairline);
+  }
+  .timeline-marker {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--c);
+    box-shadow: 0 0 12px var(--c);
+  }
+  .timeline-year {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--s-2);
+  }
+  .timeline-title {
+    font-size: 1.4rem;
+    margin-bottom: var(--s-1);
+  }
+  .timeline-org {
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    margin-bottom: var(--s-4);
+  }
+  .timeline-image {
+    margin: var(--s-4) 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+  }
+  .timeline-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85);
+  }
+  .timeline-long {
+    margin-bottom: var(--s-4);
+  }
+  .timeline-lanes {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+    padding: 0;
+  }
+
+  /* Breakpoints */
+  @media (max-width: 880px) {
+    .constellation-viewport,
+    .lane-legend,
+    .constellation-hint {
+      display: none;
+    }
+    .constellation-fallback {
+      display: block;
+      aria-hidden: false;
+    }
+    .milestone-drawer {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Drawer open/close + node activation
+  const root = document.querySelector('[data-constellation]');
+  const drawer = document.querySelector('[data-drawer]') as HTMLElement | null;
+  const details = document.querySelectorAll<HTMLElement>('[data-detail-id]');
+  const nodes = document.querySelectorAll<SVGGElement>('[data-milestone-id]');
+  const closeBtn = document.querySelector('[data-drawer-close]');
+
+  function openMilestone(id: string) {
+    if (!drawer) return;
+    details.forEach((d) => {
+      d.hidden = d.getAttribute('data-detail-id') !== id;
+    });
+    nodes.forEach((n) => {
+      n.classList.toggle('is-active', n.getAttribute('data-milestone-id') === id);
+    });
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMilestone() {
+    if (!drawer) return;
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    nodes.forEach((n) => n.classList.remove('is-active'));
+    document.body.style.overflow = '';
+  }
+
+  nodes.forEach((n) => {
+    const id = n.getAttribute('data-milestone-id');
+    if (!id) return;
+    n.addEventListener('click', () => openMilestone(id));
+    n.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openMilestone(id);
+      }
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeMilestone);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMilestone();
+  });
+
+  // Click outside drawer to close
+  document.addEventListener('click', (e) => {
+    if (!drawer || !drawer.classList.contains('is-open')) return;
+    const target = e.target as Node;
+    if (drawer.contains(target)) return;
+    // Don't close if click was on a node (which already triggered open)
+    const node = (e.target as Element).closest('[data-milestone-id]');
+    if (node) return;
+    closeMilestone();
+  });
+
+  // Reveal on scroll-in
+  if (root && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            root.classList.add('is-visible');
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(root);
+  } else {
+    root?.classList.add('is-visible');
+  }
+</script>

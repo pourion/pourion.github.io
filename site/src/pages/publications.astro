@@ -1,0 +1,386 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface Pub {
+  year: number;
+  authors: string;
+  title: string;
+  venue: string;
+  href?: string;
+  highlight?: boolean;
+}
+
+const papers: Pub[] = [
+  {
+    year: 2024,
+    authors: 'P. Mistani, V. Mysore',
+    title: 'Preference optimization of protein language models as a multi-objective binder design paradigm',
+    venue: 'ICLR 2024 Workshop on Generative and Experimental Perspectives for Biomolecular Design (GEM)',
+    href: 'https://openreview.net/forum?id=qHIcWfgvIH',
+    highlight: true,
+  },
+  {
+    year: 2023,
+    authors: 'P. Mistani, S. Pakravan, R. Ilango, F. Gibou',
+    title: 'JAX-DIPS: Neural bootstrapping of finite discretization methods and application to elliptic problems with discontinuities',
+    venue: 'Journal of Computational Physics',
+    href: 'https://www.sciencedirect.com/science/article/pii/S0021999123005569',
+    highlight: true,
+  },
+  {
+    year: 2022,
+    authors: 'P. Mistani, S. Pakravan, R. Ilango, S. Choudhry, F. Gibou',
+    title: 'Neuro-symbolic partial differential equation solver',
+    venue: 'NeurIPS 2022 Workshop on Machine Learning for the Physical Sciences (ML4PS)',
+  },
+  {
+    year: 2021,
+    authors: 'S. Pakravan, P. Mistani, M. A. Aragon-Calvo, F. Gibou',
+    title: 'Solving inverse-PDE problems with physics-aware neural networks',
+    venue: 'Journal of Computational Physics',
+  },
+  {
+    year: 2021,
+    authors: 'P. Mistani',
+    title: 'Massively parallel simulations of cellular electroporation at tissue scale',
+    venue: 'PhD Dissertation, UC Santa Barbara',
+  },
+  {
+    year: 2018,
+    authors: 'P. Mistani, A. Guittet, D. Bochkov, J. Schneider, D. Margetis, C. Ratsch, F. Gibou',
+    title: 'The island dynamics model on parallel quadtree grids',
+    venue: 'Journal of Computational Physics',
+  },
+  {
+    year: 2018,
+    authors: 'P. Mistani, A. Guittet, C. Poignard, F. Gibou',
+    title: 'A parallel Voronoi-based approach for mesoscale simulations of cell aggregate electropermeabilization',
+    venue: 'Journal of Computational Physics',
+  },
+  {
+    year: 2016,
+    authors: 'P. Mistani, L. Sales, A. Pillepich, et al.',
+    title: 'On the assembly of dwarf galaxies in clusters and their efficient formation of globular clusters',
+    venue: 'Monthly Notices of the Royal Astronomical Society (MNRAS)',
+    href: 'https://academic.oup.com/mnras/article/455/3/2323/991525',
+  },
+];
+
+const patents = [
+  {
+    year: 2025,
+    title: 'Multi-Agent Electronic Design Automation Framework',
+    inventors: 'P. Mistani (lead inventor), L. Francisco, M. Kahoush, S. Gupta, J. Walston',
+    id: 'US Patent App. 63/831,018',
+    affiliation: 'Synopsys',
+  },
+  {
+    year: 2024,
+    title: 'Multi-Objective Designed Molecules and Generation Thereof',
+    inventors: 'P. Mistani, V. Mysore',
+    id: 'US Patent App. 63/560,686; 63/688,791',
+    affiliation: 'Aikium',
+  },
+  {
+    year: 2024,
+    title: 'Multi-Objective Designed Protein Binders and Generation Thereof',
+    inventors: 'P. Mistani, V. Mysore',
+    id: 'US Patent App. 63/550,587',
+    affiliation: 'Aikium',
+  },
+];
+
+const openSource = [
+  {
+    name: 'JAX-DIPS',
+    role: 'Lead developer',
+    blurb: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU.',
+    href: 'https://github.com/JAX-DIPS/JAX-DIPS',
+  },
+  {
+    name: 'VERL — Volcano Engine for RL',
+    role: 'Contributor',
+    blurb: 'Multi-turn agentic tool-use RL (PR #3712).',
+    href: 'https://github.com/volcengine/verl',
+  },
+];
+
+const talks = [
+  {
+    year: 2023,
+    title: 'Neural operators for PDEs with interfacial jump conditions',
+    venue: 'ICIAM 2023 · Tokyo · invited talk',
+    href: 'https://www.youtube.com/watch?v=ACjiRyOh-E0',
+  },
+  {
+    year: 2019,
+    title: 'A realistic tissue simulation engine',
+    venue: 'SIAM CSE 2019 · Spokane · invited talk',
+  },
+];
+---
+
+<Base title="Publications — Pouria Mistani" description="Selected publications, patents, open source, and talks by Pouria Mistani — physical AI and large-scale simulation.">
+  <section class="pubs-hero">
+    <div class="container-wide">
+      <p class="eyebrow">Publications &amp; patents</p>
+      <h1 class="pubs-hero-title">9+ peer-reviewed papers. 4 patents. <em>One thesis</em> on cell-aggregate electroporation at tissue scale.</h1>
+      <p class="muted pubs-hero-note">
+        Full list on
+        <a href="https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Selected papers</p>
+      <h2>Papers.</h2>
+    </header>
+    <ol class="pubs-list">
+      {papers.map((p) => (
+        <li class={`pub-row${p.highlight ? ' is-highlight' : ''}`}>
+          <span class="pub-year mono">{p.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">
+              {p.href
+                ? <a href={p.href} target="_blank" rel="noopener">{p.title}<span class="arrow" aria-hidden="true">↗</span></a>
+                : p.title}
+            </p>
+            <p class="pub-meta mono">
+              <span class="pub-authors">{p.authors}</span>
+              <span class="pub-sep">·</span>
+              <span class="pub-venue">{p.venue}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Patents</p>
+      <h2>Patents.</h2>
+    </header>
+    <ol class="pubs-list">
+      {patents.map((p) => (
+        <li class="pub-row">
+          <span class="pub-year mono">{p.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">{p.title}</p>
+            <p class="pub-meta mono">
+              <span>{p.inventors}</span>
+              <span class="pub-sep">·</span>
+              <span>{p.id}</span>
+              <span class="pub-sep">·</span>
+              <span class="pub-affil">{p.affiliation}</span>
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Open source</p>
+      <h2>Code in the wild.</h2>
+    </header>
+    <ul class="os-grid">
+      {openSource.map((o) => (
+        <li class="os-card">
+          <a href={o.href} target="_blank" rel="noopener" class="os-link">
+            <p class="os-role mono">{o.role}</p>
+            <h3 class="os-name">{o.name}<span class="arrow" aria-hidden="true">↗</span></h3>
+            <p class="os-blurb">{o.blurb}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="pubs-section container-wide">
+    <header class="pubs-section-head">
+      <p class="eyebrow">Invited talks</p>
+      <h2>Selected talks.</h2>
+    </header>
+    <ol class="pubs-list">
+      {talks.map((t) => (
+        <li class="pub-row">
+          <span class="pub-year mono">{t.year}</span>
+          <div class="pub-body">
+            <p class="pub-title">
+              {t.href
+                ? <a href={t.href} target="_blank" rel="noopener">{t.title}<span class="arrow" aria-hidden="true">↗</span></a>
+                : t.title}
+            </p>
+            <p class="pub-meta mono">{t.venue}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .pubs-hero {
+    padding-block: var(--s-24) var(--s-12);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .pubs-hero-title {
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    line-height: 1.05;
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-4);
+    max-width: 22ch;
+  }
+  .pubs-hero-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .pubs-hero-note {
+    font-size: 0.95rem;
+  }
+  .pubs-hero-note a {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+
+  .pubs-section {
+    padding-block: var(--s-12);
+  }
+  .pubs-section-head {
+    margin-bottom: var(--s-8);
+  }
+  .pubs-section-head h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+  }
+
+  .pubs-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: pub;
+  }
+  .pub-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .pub-row:last-child { border-bottom: 1px solid var(--hairline); }
+  .pub-row.is-highlight {
+    background: linear-gradient(to right, rgba(230, 162, 60, 0.04), transparent 70%);
+  }
+  .pub-row.is-highlight .pub-year::before {
+    content: '★ ';
+    color: var(--accent);
+  }
+  .pub-year {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .pub-title {
+    font-size: 1.1rem;
+    line-height: 1.35;
+    margin-bottom: var(--s-2);
+    max-width: 65ch;
+  }
+  .pub-title a {
+    color: var(--ink);
+    background-image: none;
+    display: inline;
+    transition: color 0.2s var(--ease-out);
+  }
+  .pub-title a:hover { color: var(--accent); }
+  .pub-title .arrow {
+    display: inline-block;
+    margin-left: 0.35rem;
+    color: var(--ink-dim);
+    font-size: 0.85em;
+    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+  }
+  .pub-title a:hover .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+  .pub-meta {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-muted);
+    line-height: 1.45;
+  }
+  .pub-sep {
+    margin: 0 0.5rem;
+    color: var(--ink-dim);
+  }
+  .pub-authors strong { color: var(--ink); }
+  .pub-affil {
+    color: var(--accent);
+  }
+
+  .os-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-6);
+    padding: 0;
+  }
+  .os-card {
+    border: 1px solid var(--hairline);
+    background: var(--bg-elevated);
+    transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+  }
+  .os-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .os-link {
+    display: block;
+    padding: var(--s-6);
+    color: var(--ink);
+    background-image: none;
+  }
+  .os-link:hover { color: var(--ink); }
+  .os-role {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--s-3);
+  }
+  .os-name {
+    font-size: 1.5rem;
+    margin-bottom: var(--s-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .os-name .arrow {
+    font-size: 0.6em;
+    color: var(--ink-dim);
+    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
+  }
+  .os-link:hover .os-name .arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+  .os-blurb {
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 768px) {
+    .pub-row { grid-template-columns: 1fr; gap: var(--s-2); }
+    .os-grid { grid-template-columns: 1fr; }
+  }
+</style>

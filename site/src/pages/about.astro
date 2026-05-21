@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro';
+
+const education = [
+  { years: '2016 – 2020', degree: 'PhD · Mechanical Engineering (CSE)', org: 'UC Santa Barbara', note: 'Level-set methods for irregular free-boundary elliptic PDEs; reduced-order stochastic theory for interfacial polarization of cell aggregates.' },
+  { years: '2013 – 2016', degree: 'MS · Physics (Computational Astrophysics)', org: 'UC Riverside', note: 'Dwarf-galaxy formation theory; analysis of Illustris Simulation Suite data.' },
+  { years: '2008 – 2013', degree: 'BS · Physics  ·  BS · Aerospace Engineering', org: 'Sharif University of Technology', note: 'Dual undergraduate degrees.' },
+];
+
+const awards = [
+  { year: 2025, label: 'Engineering Excellence Group — Individual Award for Outstanding AI Contributions, Synopsys (selected among ~2,000 engineers)' },
+  { year: 2021, label: '$75,000 seed grant for HPC modeling of protein aggregation, Merck Research Laboratories' },
+  { year: 2020, label: 'Graduate Division Dissertation Fellowship, UC Santa Barbara' },
+  { year: 2016, label: '740,082 SU supercomputing allocation on TACC Stampede (Co-PI), XSEDE' },
+  { year: 2015, label: 'Michael Devirian Award for Outstanding Research in Physics, UC Riverside' },
+  { year: 2007, label: '4-year National Elite Foundation Undergraduate Fellowship, Iran' },
+];
+
+const teaching = [
+  { role: 'Teaching Associate (instructor of record)', course: 'Engineering Dynamics (ME16)', org: 'UC Santa Barbara · Spring 2018' },
+  { role: 'Teaching Assistant', course: 'Intermediate Mechanics, Engineering Vibrations, Fluid Mechanics I/II, Statics', org: 'UC Santa Barbara' },
+  { role: 'Teaching Assistant', course: 'Physics General Labs (6 classes), General Physics Discussions (12 classes)', org: 'UC Riverside' },
+  { role: 'Teaching Assistant', course: 'Orbital Mechanics (5 semesters), Aircraft Design II', org: 'Sharif University of Technology' },
+];
+---
+
+<Base title="About — Pouria Mistani" description="Pouria Mistani's path through cosmology, computational science, AI for simulation, and semiconductor design.">
+  <section class="about-hero">
+    <div class="container-wide">
+      <p class="eyebrow">About</p>
+      <div class="about-hero-grid">
+        <div class="about-portrait">
+          <img src="/img/Pouria_Mistani.jpg" alt="Pouria Mistani" />
+        </div>
+        <div class="about-intro">
+          <h1>I build large-scale simulations of <em>physical systems</em>.</h1>
+          <p class="about-lede">
+            Trained as a physicist, retrained as a computational scientist. I'm drawn to the
+            same problem in every domain I've worked: how do you build a simulation that's
+            both faithful to physics and large enough to be useful — and then how do you ride
+            modern AI on top of it without losing the physics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-manifesto container-narrow">
+    <p class="eyebrow">Operating philosophy</p>
+    <h2>Five sentences.</h2>
+    <ol class="manifesto-list">
+      <li>
+        <p>Pick problems where the physics is exhaustive and the scale is commercially meaningful.</p>
+      </li>
+      <li>
+        <p>Build the simulation engine first; bolt AI on second, where it earns its keep.</p>
+      </li>
+      <li>
+        <p>Numerical methods, supercomputing, and AI are one stack — not three.</p>
+      </li>
+      <li>
+        <p>If the demo doesn't run on hardware that matters, it isn't real yet.</p>
+      </li>
+      <li>
+        <p>Search for purpose, build technology, find the business.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="about-section container-wide">
+    <p class="eyebrow">Education</p>
+    <h2>Where the training came from.</h2>
+    <ul class="cv-list">
+      {education.map((e) => (
+        <li class="cv-row">
+          <span class="cv-when mono">{e.years}</span>
+          <div class="cv-what">
+            <p class="cv-headline">{e.degree}</p>
+            <p class="cv-sub mono">{e.org}</p>
+            {e.note && <p class="cv-note muted">{e.note}</p>}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-section container-wide">
+    <p class="eyebrow">Awards & honors</p>
+    <h2>Selected recognitions.</h2>
+    <ul class="cv-list">
+      {awards.map((a) => (
+        <li class="cv-row">
+          <span class="cv-when mono">{a.year}</span>
+          <div class="cv-what">
+            <p class="cv-headline cv-headline--small">{a.label}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-section container-wide">
+    <p class="eyebrow">Teaching</p>
+    <h2>Courses taught.</h2>
+    <ul class="cv-list">
+      {teaching.map((t) => (
+        <li class="cv-row">
+          <span class="cv-when mono">{t.org.split(' · ')[1] || ''}</span>
+          <div class="cv-what">
+            <p class="cv-headline">{t.course}</p>
+            <p class="cv-sub mono">{t.role} · {t.org.split(' · ')[0]}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-cta container-narrow">
+    <p class="eyebrow">Contact</p>
+    <h2 class="about-cta-title">
+      The fastest way to reach me is <a href="mailto:p.a.mistani@gmail.com">email</a>.
+    </h2>
+  </section>
+</Base>
+
+<style>
+  .about-hero {
+    padding-block: var(--s-24) var(--s-16);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .about-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--s-12);
+    align-items: start;
+    margin-top: var(--s-8);
+  }
+  .about-portrait {
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--hairline-strong);
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+  .about-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.02) saturate(0.92);
+  }
+  .about-intro h1 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: var(--s-6);
+  }
+  .about-intro h1 em {
+    color: var(--accent);
+    font-style: italic;
+  }
+  .about-lede {
+    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+    color: var(--ink-muted);
+    line-height: 1.7;
+    max-width: 56ch;
+  }
+
+  .about-manifesto {
+    padding-block: var(--s-16) var(--s-16);
+  }
+  .about-manifesto h2 {
+    margin-bottom: var(--s-8);
+  }
+  .manifesto-list {
+    list-style: none;
+    counter-reset: m;
+    padding: 0;
+  }
+  .manifesto-list li {
+    counter-increment: m;
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--s-6);
+    align-items: baseline;
+  }
+  .manifesto-list li:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .manifesto-list li::before {
+    content: counter(m, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .manifesto-list p {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+    line-height: 1.4;
+    color: var(--ink);
+    max-width: none;
+  }
+
+  .about-section {
+    padding-block: var(--s-12);
+  }
+  .about-section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: var(--s-8);
+  }
+  .cv-list {
+    list-style: none;
+    padding: 0;
+  }
+  .cv-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-4) 0;
+    border-top: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .cv-row:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .cv-when {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .cv-headline {
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .cv-headline--small {
+    font-size: 0.95rem;
+  }
+  .cv-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+  }
+  .cv-note {
+    font-size: 0.92rem;
+    margin-top: 0.35rem;
+  }
+
+  .about-cta {
+    padding-block: var(--s-16) var(--s-24);
+  }
+  .about-cta-title {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.15;
+  }
+  .about-cta-title a {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+
+  @media (max-width: 768px) {
+    .about-hero-grid { grid-template-columns: 1fr; }
+    .about-portrait { max-width: 280px; }
+    .cv-row { grid-template-columns: 1fr; gap: var(--s-2); }
+    .cv-when { margin-bottom: var(--s-1); }
+    .manifesto-list li { grid-template-columns: 1fr; gap: var(--s-2); }
+  }
+</style>
