@@ -9,6 +9,8 @@ const readTime = '12 min read';
 
 const canonicalUrl = 'https://pouriamistani.com/blog/toward-a-simulation-ai-organism/';
 const shareTextX = 'Toward a Simulation Organism — a paradigm note on co-designed AI and exascale simulation, by Pouria Mistani.';
+const doi = '10.5281/zenodo.20331251';
+const doiUrl = `https://doi.org/${doi}`;
 
 const linkedinShareHref = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`;
 const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTextX)}&url=${encodeURIComponent(canonicalUrl)}`;
@@ -33,7 +35,11 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
         <span class="dot">·</span>
         <span>Pouria Mistani</span>
       </p>
-      <p class="print-only print-source-line">An open journal of physics simulation &nbsp;·&nbsp; pouriamistani.com/blog/toward-a-simulation-ai-organism</p>
+      <p class="post-doi mono">
+        <span class="doi-label">DOI</span>
+        <a href={doiUrl} target="_blank" rel="noopener">{doi}</a>
+      </p>
+      <p class="print-only print-source-line">An open journal of physics simulation &nbsp;·&nbsp; pouriamistani.com/blog/toward-a-simulation-ai-organism &nbsp;·&nbsp; doi.org/{doi}</p>
     </header>
 
     <aside class="post-actions container-narrow">
@@ -59,6 +65,7 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
   number  = {1},
   year    = {2026},
   month   = {may},
+  doi     = {${doi}},
   url     = {${canonicalUrl}}
 }`}>
           <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -534,6 +541,27 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
     align-items: center;
   }
   .post-meta .dot { color: var(--ink-dim); }
+  .post-doi {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-top: var(--s-3);
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+  .post-doi .doi-label {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    color: var(--ink-dim);
+  }
+  .post-doi a {
+    color: var(--accent);
+    background-image: none;
+    transition: color 0.2s var(--ease-out);
+  }
+  .post-doi a:hover { color: var(--ink); }
 
   .prose {
     padding-block: var(--s-12) var(--s-12);
@@ -781,6 +809,18 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
       letter-spacing: 0.1em !important;
     }
     .post-meta .dot { color: #b8b6b0 !important; }
+    .post-doi {
+      font-size: 9pt !important;
+      letter-spacing: 0.08em !important;
+      color: #4a4a4a !important;
+      margin-top: 0.08in !important;
+    }
+    .post-doi .doi-label { color: #6a6a6a !important; }
+    .post-doi a {
+      color: #8a4a00 !important;
+      text-decoration: none !important;
+      background: none !important;
+    }
 
     /* prose body */
     .prose {

@@ -41,6 +41,64 @@ const posts: { title: string; href: string; date: string; blurb: string }[] = [
     </p>
   </section>
 
+  <section class="manifesto container-narrow">
+    <p class="eyebrow">Manifesto</p>
+    <h2 class="manifesto-headline">
+      Walking around <em>the middleman.</em>
+    </h2>
+
+    <div class="manifesto-body">
+      <p>
+        Stencil is free. It has no paywall, no editorial board, no submission queue, no
+        impact-factor anxiety, and no advertisement. It will stay that way.
+      </p>
+
+      <p>
+        The institutions that mediate scientific discourse have done good work in their day.
+        They have also drifted somewhere that no longer serves the writer or the reader.
+        Commercial publishers extract billions in subscription fees from publicly funded
+        science. "Open access" routes charge authors thousands of dollars per paper for the
+        privilege of being read. Editorial boards decide which ideas are worth circulating;
+        the safe, the consensus-friendly, and the easy-to-cite win, and contrarian work is
+        filtered out before it reaches the people who would build on it. Labs use journal
+        venues as marketing for themselves and their cohorts. The middleman has become the
+        bottleneck.
+      </p>
+
+      <p>
+        I don't think this calls for overthrowing anything. I think it calls for
+        <em>walking around it</em>.
+      </p>
+
+      <p>
+        Stencil is the smallest possible version of that walk-around. One person, one
+        website, one essay at a time — source files open, diagrams open, data open, and a
+        permanent DOI for citation. No editor approved it. No board of insiders endorsed it.
+        It exists because I wrote it and put it on the internet under my own name. That is
+        the entire infrastructure required.
+      </p>
+
+      <p>
+        In a free market of ideas, the right correction for a bad essay is a better essay.
+        The right response to a flawed paradigm is an alternative paradigm — published openly,
+        named openly, and tested in the open. No gatekeeper required.
+      </p>
+
+      <p class="manifesto-invite">
+        <strong>So Stencil is also a blueprint.</strong> If you have an opinion you can
+        defend, a paradigm you want to test, a contrarian read of your field — register a
+        domain, write the essay, mint a DOI on
+        <a href="https://zenodo.org" target="_blank" rel="noopener">Zenodo</a>, and publish.
+        Send me the link. Let's build a network of personal journals — a thousand Stencils —
+        and let ideas compete on merit, not on which committee they passed.
+      </p>
+
+      <p class="manifesto-coda">
+        The middleman has had a long run. Time for the rest of us to write.
+      </p>
+    </div>
+  </section>
+
   <section class="blog-list container-wide">
     <p class="eyebrow list-eyebrow">Essays</p>
     {posts.length === 0 ? (
@@ -116,8 +174,57 @@ const posts: { title: string; href: string; date: string; blurb: string }[] = [
     color: var(--ink-muted);
   }
 
+  .manifesto {
+    padding-block: var(--s-12) var(--s-12);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    margin-top: var(--s-8);
+  }
+  .manifesto-headline {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.08;
+    margin-top: var(--s-4);
+    margin-bottom: var(--s-8);
+    max-width: 22ch;
+  }
+  .manifesto-headline em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .manifesto-body p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: var(--s-5);
+    max-width: 64ch;
+  }
+  .manifesto-body p em { color: var(--accent); font-style: italic; }
+  .manifesto-body a {
+    color: var(--accent);
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+  .manifesto-invite {
+    padding: var(--s-5) 0 var(--s-4) !important;
+    border-top: 1px solid var(--hairline);
+    margin-top: var(--s-6) !important;
+    font-size: 1.08rem !important;
+  }
+  .manifesto-invite strong { color: var(--accent); font-weight: 500; }
+  .manifesto-coda {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--ink-muted) !important;
+    font-size: 1.15rem !important;
+    margin-top: var(--s-6) !important;
+    max-width: 50ch !important;
+  }
+
   .blog-list {
-    padding-block: var(--s-8) var(--s-24);
+    padding-block: var(--s-12) var(--s-24);
   }
   .list-eyebrow {
     margin-bottom: var(--s-6);
