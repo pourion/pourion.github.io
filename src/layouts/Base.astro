@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  hideNav?: boolean;
+}
+
+const {
+  title = 'Pouria Mistani — Large-scale simulation of physical systems',
+  description = 'Pouria Mistani builds high-fidelity large-scale simulations at the intersection of physics, AI, and supercomputing — from cosmology to biophysics to chip design.',
+  hideNav = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Pouria Mistani" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/img/Pouria_Mistani.jpg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+
+    <!-- Google Analytics (legacy UA — preserved from old site) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-113698782-1"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-113698782-1');
+    </script>
+  </head>
+  <body>
+    {!hideNav && <Nav />}
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
