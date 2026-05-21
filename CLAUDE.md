@@ -1,3 +1,9 @@
+---
+noteId: "f0c1ca20555111f1848bc726d9dbe469"
+tags: []
+
+---
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -64,3 +70,11 @@ To add or edit a milestone: edit `src/data/milestones.ts` only — the component
 ## Notes on content accuracy
 
 The publications page must mirror Pouria's [Google Scholar profile](https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en) — when adding new papers, check Scholar first. The career trajectory in `milestones.ts` should match his current resume; canonical PDF lives at `/home/pmistani/Documents/Pouria_Mistani_Resume_2026.pdf` (not in the repo).
+
+## Stencil — the open journal at `/blog/`
+
+The blog is published as **Stencil**, a self-published open journal. Every essay is a citable journal article with a Zenodo DOI, indexed by Google Scholar via `<meta name="citation_*">` tags emitted by `Base.astro`'s `citation` prop. License is CC-BY 4.0; everything is open source.
+
+**When publishing a new issue, follow [`docs/STENCIL.md`](docs/STENCIL.md) end to end.** That doc captures the full workflow: writing the essay, generating a custom 1200×630 OG image, exporting the PDF, minting the DOI on Zenodo (resource type = `Preprint`, journal title = `Stencil`, one volume per year), wiring the DOI into the page + BibTeX + print source line + `citation` prop on `Base`, adding to Google Scholar, and sharing. Don't invent a new procedure each time — that's the whole point of the doc.
+
+Convention: one volume per calendar year. Vol. 1 = 2026, sequential issue numbers within the year. Vol. 1 No. 1 is `toward-a-simulation-ai-organism` (DOI `10.5281/zenodo.20331251`).

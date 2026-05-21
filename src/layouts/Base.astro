@@ -3,12 +3,28 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+interface Citation {
+  title: string;
+  authors: string[];
+  publicationDate: string;
+  journalTitle: string;
+  volume: string | number;
+  issue: string | number;
+  firstPage?: string | number;
+  lastPage?: string | number;
+  doi?: string;
+  abstractHtmlUrl?: string;
+  pdfUrl?: string;
+  publisher?: string;
+}
+
 interface Props {
   title?: string;
   description?: string;
   hideNav?: boolean;
   image?: string;
   ogType?: 'website' | 'article';
+  citation?: Citation;
 }
 
 const {
@@ -17,6 +33,7 @@ const {
   hideNav = false,
   image = '/img/Pouria_Mistani.jpg',
   ogType = 'website',
+  citation,
 } = Astro.props;
 
 const siteOrigin = Astro.site ? Astro.site.origin : 'https://pouriamistani.com';
@@ -44,6 +61,30 @@ const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
+    {citation && (
+      <>
+        <meta name="citation_title" content={citation.title} />
+        {citation.authors.map((a) => (
+          <meta name="citation_author" content={a} />
+        ))}
+        <meta name="citation_publication_date" content={citation.publicationDate} />
+        <meta name="citation_journal_title" content={citation.journalTitle} />
+        <meta name="citation_volume" content={String(citation.volume)} />
+        <meta name="citation_issue" content={String(citation.issue)} />
+        {citation.firstPage !== undefined && (
+          <meta name="citation_firstpage" content={String(citation.firstPage)} />
+        )}
+        {citation.lastPage !== undefined && (
+          <meta name="citation_lastpage" content={String(citation.lastPage)} />
+        )}
+        {citation.doi && <meta name="citation_doi" content={citation.doi} />}
+        {citation.abstractHtmlUrl && (
+          <meta name="citation_abstract_html_url" content={citation.abstractHtmlUrl} />
+        )}
+        {citation.pdfUrl && <meta name="citation_pdf_url" content={citation.pdfUrl} />}
+        {citation.publisher && <meta name="citation_publisher" content={citation.publisher} />}
+      </>
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
