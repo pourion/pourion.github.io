@@ -112,7 +112,7 @@ export const MILESTONES: Milestone[] = [
     org: 'UCSB · CASL Lab',
     role: 'Researcher',
     short: 'Early investigation of physics-aware neural networks — the research line that became BiPDE and JAX-DIPS.',
-    long: 'Started investigating physics-aware neural networks during my PhD. Explored embedding numerical PDE machinery directly into NN layers, with hybrid optimization for surrogate modeling and early neural-operator ideas. The research line that culminated in BiPDE (Blended inverse-PDE, JCP 2021) and JAX-DIPS (JCP 2022) — and that I still ride at NVIDIA Modulus and on top of Voltaire today.',
+    long: 'Started investigating physics-aware neural networks during my PhD. Explored embedding numerical PDE machinery directly into NN layers, with hybrid optimization for surrogate modeling and early neural-operator ideas. The research line that culminated in BiPDE (Blended inverse-PDE, JCP 2021) and JAX-DIPS (JCP 2022) — and that I still ride at NVIDIA Modulus and on top of the agentic EM simulation platform I build today.',
     image: '/img/nbm2.png',
   },
   {
@@ -245,15 +245,12 @@ export const MILESTONES: Milestone[] = [
     yearLabel: '2025 – now',
     lanes: ['chip', 'hpc', 'ai'],
     primaryLane: 'chip',
-    title: 'VoltAI · designed & built Voltaire',
-    org: 'VoltAI',
+    title: 'Stealth · agentic physics intelligence',
+    org: 'Sequoia-backed chip-design startup (stealth)',
     role: 'Machine Learning Researcher',
     short: 'Agentic physics-intelligence platform — reasons about physical design and debugs hypotheses from signal-integrity metrics.',
-    long: 'Founding engineer of the physical-design and verification team at VoltAI. Defined, architected, and built Voltaire — an agentic physics-intelligence platform capable of reasoning about physical design and debugging / hypothesizing from calculated signal-integrity metrics. Pairs a multi-GPU electromagnetics simulation engine with an agent scaffold that runs experiments in silico, inspects numerical outputs, and refines hypotheses against them. Also trained EM neural operators as surrogates on top of Voltaire that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
+    long: 'Founding engineer of the physical-design and verification team at a Sequoia-backed chip-design startup (in stealth). Defined, architected, and built an agentic physics-intelligence platform capable of reasoning about physical design and debugging / hypothesizing from calculated signal-integrity metrics. Pairs a multi-GPU electromagnetics simulation engine with an agent scaffold that runs experiments in silico, inspects numerical outputs, and refines hypotheses against them. Also trained EM neural operators as surrogates on top of the platform that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
     image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
-    links: [
-      { label: 'VoltAI', href: 'https://www.voltai.com/' },
-    ],
     founding: true,
   },
 ];
