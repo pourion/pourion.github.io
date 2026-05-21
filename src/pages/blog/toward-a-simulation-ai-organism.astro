@@ -22,7 +22,8 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
 >
   <article class="post">
     <header class="post-hero container-narrow">
-      <p class="eyebrow">Essay · paradigm note</p>
+      <p class="print-only print-journal-line">Stencil &nbsp;·&nbsp; Vol. 1 &nbsp;·&nbsp; No. 1 &nbsp;·&nbsp; May 2026</p>
+      <p class="eyebrow no-print">Essay · paradigm note</p>
       <h1 class="post-title">{title}</h1>
       <p class="post-subtitle">{subtitle}</p>
       <p class="post-meta mono">
@@ -32,10 +33,11 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
         <span class="dot">·</span>
         <span>Pouria Mistani</span>
       </p>
+      <p class="print-only print-source-line">An open journal of physics simulation &nbsp;·&nbsp; pouriamistani.com/blog/toward-a-simulation-ai-organism</p>
     </header>
 
     <aside class="post-actions container-narrow">
-      <p class="actions-label mono">Share · cite</p>
+      <p class="actions-label mono">Share · cite · export</p>
       <div class="actions-row">
         <a class="action-btn" href={linkedinShareHref} target="_blank" rel="noopener" aria-label="Share on LinkedIn">
           <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -49,18 +51,26 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
           </svg>
           X
         </a>
-        <button id="cite-btn" type="button" class="action-btn" data-bibtex={`@misc{mistani2026simorganism,
-  author = {Mistani, Pouria},
-  title  = {Toward a Simulation Organism},
-  year   = {2026},
-  month  = {may},
-  url    = {${canonicalUrl}},
-  note   = {Blog post, pouriamistani.com}
+        <button id="cite-btn" type="button" class="action-btn" data-bibtex={`@article{mistani2026simorganism,
+  author  = {Mistani, Pouria},
+  title   = {Toward a Simulation Organism},
+  journal = {Stencil},
+  volume  = {1},
+  number  = {1},
+  year    = {2026},
+  month   = {may},
+  url     = {${canonicalUrl}}
 }`}>
           <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M6 4 L3 8 L3 20 L9 20 L9 12 L5 12 M18 4 L15 8 L15 20 L21 20 L21 12 L17 12"/>
           </svg>
           <span class="btn-label">Copy BibTeX</span>
+        </button>
+        <button id="pdf-btn" type="button" class="action-btn" aria-label="Export this essay as a PDF (uses your browser's print dialog)">
+          <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 3 L12 15 M7 10 L12 15 L17 10 M4 20 L20 20"/>
+          </svg>
+          <span class="btn-label">Export PDF</span>
         </button>
         <button id="link-btn" type="button" class="action-btn" data-url={canonicalUrl}>
           <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -483,6 +493,12 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
           }
         });
       }
+      var pdf = document.getElementById('pdf-btn');
+      if (pdf) {
+        pdf.addEventListener('click', function () {
+          window.print();
+        });
+      }
     })();
   </script>
 </Base>
@@ -689,6 +705,171 @@ const xShareHref = `https://x.com/intent/post?text=${encodeURIComponent(shareTex
   @media (max-width: 768px) {
     .numbered li { padding-left: var(--s-8); }
     .numbered li::before { width: 1.8rem; }
+  }
+
+  /* ───────────────────────────── Print / PDF ───────────────────────────── */
+
+  .print-only { display: none; }
+
+  @media print {
+    @page {
+      size: letter;
+      margin: 0.9in 0.95in;
+    }
+
+    /* hide site chrome and interactive elements */
+    :global(header.nav),
+    :global(footer.footer),
+    .post-actions,
+    .post-footer,
+    .no-print {
+      display: none !important;
+    }
+
+    /* show print-only elements */
+    .print-only { display: block !important; }
+
+    /* white paper, dark ink */
+    :global(html), :global(body) {
+      background: #ffffff !important;
+      color: #15171c !important;
+    }
+    :global(body)::before,
+    :global(body)::after { display: none !important; }
+    :global(main) { padding: 0 !important; }
+
+    /* hero block becomes an academic title block */
+    .post-hero {
+      padding: 0 !important;
+      border-bottom: 1px solid #c8c5be !important;
+      margin-bottom: 0.32in !important;
+      padding-bottom: 0.22in !important;
+      max-width: 100% !important;
+    }
+    .print-journal-line {
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #6a6a6a !important;
+      margin: 0 0 0.22in 0 !important;
+    }
+    .print-source-line {
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      letter-spacing: 0.08em;
+      color: #6a6a6a !important;
+      margin-top: 0.15in !important;
+    }
+    .post-title {
+      color: #15171c !important;
+      font-size: 26pt !important;
+      line-height: 1.08 !important;
+      margin: 0 0 0.14in 0 !important;
+      max-width: 100% !important;
+    }
+    .post-subtitle {
+      color: #3a3a3a !important;
+      font-size: 13pt !important;
+      line-height: 1.4 !important;
+      margin: 0 0 0.18in 0 !important;
+      max-width: 100% !important;
+    }
+    .post-meta {
+      color: #4a4a4a !important;
+      font-size: 9pt !important;
+      letter-spacing: 0.1em !important;
+    }
+    .post-meta .dot { color: #b8b6b0 !important; }
+
+    /* prose body */
+    .prose {
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .prose h2 {
+      color: #15171c !important;
+      font-size: 14pt !important;
+      line-height: 1.2 !important;
+      margin-top: 0.28in !important;
+      margin-bottom: 0.12in !important;
+      page-break-after: avoid;
+    }
+    .prose h2:first-of-type { margin-top: 0.04in !important; }
+    .prose p {
+      color: #15171c !important;
+      font-size: 10.5pt !important;
+      line-height: 1.55 !important;
+      margin-bottom: 0.11in !important;
+      orphans: 3;
+      widows: 3;
+    }
+    .prose code {
+      color: #8a4a00 !important;
+      background: #f3efe6 !important;
+      border-radius: 2px;
+      padding: 0.02em 0.3em;
+      font-size: 0.86em;
+    }
+
+    /* pullquote */
+    .pullquote {
+      color: #8a4a00 !important;
+      border-left: 2px solid #c79a3a !important;
+      background: none !important;
+      font-size: 13pt !important;
+      max-width: 38ch !important;
+      margin: 0.2in 0 !important;
+    }
+
+    /* figures: white-paper appropriate, no page break in the middle */
+    .post-figure {
+      page-break-inside: avoid;
+      border-top: 1px solid #c8c5be !important;
+      border-bottom: 1px solid #c8c5be !important;
+      margin: 0.22in 0 !important;
+      padding: 0.16in 0 !important;
+    }
+    .post-figure img {
+      /* invert dark-mode SVG diagrams so they read on white paper */
+      filter: invert(0.92) hue-rotate(180deg) saturate(1.4);
+    }
+    .post-figure figcaption {
+      color: #4a4a4a !important;
+      font-size: 9pt !important;
+    }
+
+    /* numbered lists */
+    .numbered li {
+      border-color: #c8c5be !important;
+      color: #15171c !important;
+      page-break-inside: avoid;
+    }
+    .numbered li::before {
+      color: #8a4a00 !important;
+    }
+    .numbered li strong { color: #15171c !important; }
+
+    /* sign-off block */
+    .post-signoff {
+      color: #4a4a4a !important;
+      border-color: #c8c5be !important;
+      font-size: 9.5pt !important;
+    }
+    .post-signoff a {
+      color: #8a4a00 !important;
+      text-decoration: none !important;
+      background: none !important;
+    }
+
+    /* generic anchor: no underline, no background pattern */
+    .prose a {
+      color: #15171c !important;
+      text-decoration: none !important;
+      background: none !important;
+    }
+    .prose em { color: inherit !important; font-style: italic; }
+    .prose strong { color: #15171c !important; font-weight: 600; }
   }
 </style>
 </content>
