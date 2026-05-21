@@ -48,7 +48,7 @@ export const MILESTONES: Milestone[] = [
     role: 'Graduate Research Assistant',
     short: 'Theory of dwarf-galaxy formation; terabytes of Illustris cosmological data; the entry point into large-scale numerical simulation.',
     long: 'Entry into large-scale numerical simulation. Developed a theory for the formation of dwarf galaxies and analyzed terabytes of cosmological data from the Illustris Simulation Suite — one of the largest cosmological N-body + hydrodynamics simulations ever run. The numerical-methods and HPC training that defined the rest of my career started here. First peer-reviewed publication in MNRAS. The experience set the lifelong question: how do you reproduce, in other domains, what Illustris achieved for the universe?',
-    image: '/img/newCluster.png',
+    image: '/img/illustris.png',
     links: [
       { label: 'Illustris project', href: 'https://www.illustris-project.org/' },
       { label: 'MNRAS paper', href: 'https://academic.oup.com/mnras/article/455/3/2323/991525' },
