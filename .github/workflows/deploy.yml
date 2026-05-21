@@ -17,9 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./site
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +25,6 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-          cache-dependency-path: site/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -38,14 +34,14 @@ jobs:
 
       - name: Copy CNAME into build output
         run: |
-          if [ -f ../CNAME ]; then
-            cp ../CNAME dist/CNAME
+          if [ -f CNAME ]; then
+            cp CNAME dist/CNAME
           fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site/dist
+          path: dist
 
   deploy:
     needs: build
