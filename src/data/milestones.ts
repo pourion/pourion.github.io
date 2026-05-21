@@ -249,7 +249,7 @@ export const MILESTONES: Milestone[] = [
     org: 'Sequoia-backed chip-design startup (stealth)',
     role: 'Machine Learning Researcher',
     short: 'Agentic physics-intelligence platform — reasons about physical design.',
-    long: 'Founding engineer of the physical-design and verification team at a Sequoia-backed chip-design startup (in stealth). Defined, architected, and built an agentic physics-intelligence platform capable of reasoning about physical design. Pairs a multi-GPU electromagnetics simulation engine with an agent scaffold that runs experiments in silico, inspects numerical outputs, and refines hypotheses against them. Also trained EM neural operators as surrogates on top of the platform that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
+    long: 'Founding engineer of the physical-design and verification team at a Sequoia-backed chip-design startup (in stealth). Defined, architected, and built an agentic physics-intelligence platform capable of reasoning about physical design. Pairs a multi-GPU electromagnetics simulation engine with an agent scaffold that runs experiments in silico, inspects numerical outputs, and refines hypotheses against them. Also designed a neural operator architecture suited to this class of simulations, and built an RL-with-verifiable-rewards framework as a tool for LLM post-training.',
     image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
     founding: true,
   },
