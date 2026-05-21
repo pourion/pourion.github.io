@@ -55,6 +55,22 @@ export const MILESTONES: Milestone[] = [
     ],
   },
   {
+    id: 'mnras-2016',
+    year: 2016,
+    yearLabel: '2016',
+    lanes: ['astro'],
+    primaryLane: 'astro',
+    title: 'MNRAS · dwarf galaxies & globular clusters',
+    org: 'Monthly Notices of the Royal Astronomical Society',
+    role: 'Lead author',
+    short: 'Predicted excess globular-cluster formation in active starburst environments — observationally confirmed many times since.',
+    long: 'Lead-author MNRAS paper on the assembly of dwarf galaxies in clusters and the efficiency of their globular-cluster formation. The work predicted an excess of globular cluster formation in active, starburst-driven environments. That prediction has since been observationally confirmed multiple times by NASA and other observatories. The paper closed the astrophysics chapter of my career and pointed the way to the methods-driven simulation work that followed at UCSB.',
+    image: '/img/mnras.png',
+    links: [
+      { label: 'MNRAS paper', href: 'https://academic.oup.com/mnras/article/455/3/2323/991525' },
+    ],
+  },
+  {
     id: 'ucsb-phd',
     year: 2016,
     endYear: 2020,
