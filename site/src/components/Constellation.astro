@@ -242,13 +242,13 @@ const stars = Array.from({ length: 80 }, () => ({
             const labelAbove = LANE_ORDER.indexOf(m.primaryLane) >= 3;
             return (
               <g
-                class={`node node-${m.primaryLane}`}
+                class={`node node-${m.primaryLane}${m.founding ? ' is-founding' : ''}`}
                 transform={`translate(${x.toFixed(1)}, ${y.toFixed(1)})`}
                 style={`--node-color: ${LANES[m.primaryLane].color}; --node-delay: ${i * 70}ms;`}
                 data-milestone-id={m.id}
                 tabindex="0"
                 role="button"
-                aria-label={`${m.yearLabel} — ${m.title} at ${m.org}`}
+                aria-label={`${m.yearLabel} — ${m.title} at ${m.org}${m.founding ? ' (founding role)' : ''}`}
               >
                 {/* secondary lane minor markers */}
                 {m.lanes
@@ -262,6 +262,7 @@ const stars = Array.from({ length: 80 }, () => ({
                     />
                   ))}
                 <circle r="14" class="node-halo" />
+                {m.founding && <circle r="12" class="founding-ring" />}
                 <circle r="6" class="node-dot" />
                 <circle r="2.5" class="node-core" />
                 <text
@@ -531,6 +532,29 @@ const stars = Array.from({ length: 80 }, () => ({
   :global(.node.is-active .node-halo) {
     opacity: 0.55;
     filter: url(#strongGlow);
+  }
+
+  :global(.founding-ring) {
+    fill: none;
+    stroke: var(--node-color);
+    stroke-width: 1;
+    stroke-dasharray: 1.5 2.5;
+    opacity: 0.65;
+    transform-origin: center;
+    animation: founding-rotate 24s linear infinite;
+  }
+  :global(.node:hover .founding-ring),
+  :global(.node:focus-visible .founding-ring),
+  :global(.node.is-active .founding-ring) {
+    opacity: 1;
+    stroke-width: 1.25;
+  }
+  @keyframes founding-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(.founding-ring) { animation: none; }
   }
 
   :global(.node-label) {

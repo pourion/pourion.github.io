@@ -33,6 +33,8 @@ export interface Milestone {
   long: string;
   image?: string;
   links?: { label: string; href: string }[];
+  /** Marks milestones where Pouria was a founding engineer / built a team from zero. */
+  founding?: boolean;
 }
 
 export const MILESTONES: Milestone[] = [
@@ -94,7 +96,7 @@ export const MILESTONES: Milestone[] = [
     org: 'UCSB · CASL Lab',
     role: 'Research lead',
     short: 'First hybrid AI / numerical method for surrogate modeling — the start of the AI-for-simulation thread.',
-    long: 'Built one of my first AI-for-simulation algorithms — neural bootstrapping of finite discretization methods, with hybrid optimization techniques for surrogate modeling and early neural-operator ideas. The seed of the long arc that runs through JAX-DIPS (JCP 2023), Neuro-symbolic PDE solver (NeurIPS 2022), NVIDIA Modulus, and the EM surrogates I train on top of Voltaire today.',
+    long: 'Built one of my first AI-for-simulation algorithms — neural bootstrapping of finite discretization methods, with hybrid optimization techniques for surrogate modeling and early neural-operator ideas. The work began in 2017 during my PhD; it was later published in 2022 as part of the JAX-DIPS paper (Journal of Computational Physics) and the Neuro-symbolic PDE solver (NeurIPS 2022 ML4PS). The seed of the long arc that runs through NVIDIA Modulus and the EM neural-operator surrogates I train on top of Voltaire today.',
     image: '/img/nbm.png',
   },
   {
@@ -112,15 +114,15 @@ export const MILESTONES: Milestone[] = [
   },
   {
     id: 'bipde',
-    year: 2020,
-    yearLabel: '2020',
+    year: 2021,
+    yearLabel: '2021',
     lanes: ['ai', 'hpc'],
     primaryLane: 'ai',
     title: 'BiPDE · physics-aware neural networks',
-    org: 'arXiv 2020 · JCP 2021',
+    org: 'Journal of Computational Physics',
     role: 'Co-author',
     short: 'A hard-coded PDE solver as a layer inside a neural network — early physics-aware inverse-PDE solver.',
-    long: 'Co-authored BiPDE (Blended inverse-PDE) — a framework that places a hard-coded PDE solver as a custom layer inside a semantic-autoencoder neural network, in contrast to standard PINNs that only add the PDE to the loss. Demonstrated recovery of variable diffusion coefficients in Poisson problems (1D, 2D) and the time-dependent nonlinear Burgers\' equation, robust to noise. arXiv January 2020; published in the Journal of Computational Physics, 2021.',
+    long: 'Co-authored BiPDE (Blended inverse-PDE) — a framework that places a hard-coded PDE solver as a custom layer inside a semantic-autoencoder neural network, in contrast to standard PINNs that only add the PDE to the loss. Demonstrated recovery of variable diffusion coefficients in Poisson problems (1D, 2D) and the time-dependent nonlinear Burgers\' equation, robust to noise. Published in the Journal of Computational Physics, 2021 (arXiv preprint, January 2020).',
     image: '/img/ElectroFluct.png',
     links: [
       { label: 'arXiv (2020)', href: 'https://arxiv.org/abs/2001.03608' },
@@ -129,15 +131,15 @@ export const MILESTONES: Milestone[] = [
   },
   {
     id: 'jax-dips',
-    year: 2020,
-    yearLabel: '2020 – 2023',
+    year: 2022,
+    yearLabel: '2022',
     lanes: ['hpc', 'ai'],
     primaryLane: 'hpc',
-    title: 'JAX-DIPS',
+    title: 'JAX-DIPS · differentiable PDE solver',
     org: 'Open source · lead developer',
     role: 'Creator',
     short: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU.',
-    long: 'Built and open-sourced JAX-DIPS — a differentiable 3D interfacial PDE solver in JAX that runs on GPU/TPU/CPU. Trains compact neural networks to solve elliptic PDEs with jump conditions, ubiquitous in life sciences and materials. The Neural Bootstrapping Method (NBM) for finite discretization is at the core. Published in Journal of Computational Physics, 2023.',
+    long: 'Built and open-sourced JAX-DIPS — a differentiable 3D interfacial PDE solver in JAX that runs on GPU/TPU/CPU. Trains compact neural networks to solve elliptic PDEs with jump conditions, ubiquitous in life sciences and materials. The Neural Bootstrapping Method (NBM) for finite discretization is at the core of the method. Published in 2022 (Journal of Computational Physics, with the related Neuro-symbolic PDE solver appearing at NeurIPS 2022 ML4PS).',
     image: '/img/0_dragons.png',
     links: [
       { label: 'GitHub', href: 'https://github.com/JAX-DIPS/JAX-DIPS' },
@@ -170,6 +172,7 @@ export const MILESTONES: Milestone[] = [
     short: 'Founding member of Clara Discovery Simulation; cross-functional across Modulus, Warp, and Clara.',
     long: 'Founding member of the Clara Discovery Simulation engineering team for AI-driven drug discovery. Implemented DiffDock — score-based diffusion with 3D-equivariant GNNs — inside the BioNeMo LLM framework. Developed GPU-optimized frameworks for ML-driven molecular dynamics, achieving 5× speed-up and 10× memory efficiency. Conceptualized and led AI-accelerated biophysical simulations for macromolecule stability and solvation free energy. Worked cross-functionally across NVIDIA Modulus (physics-informed ML), Warp (GPU simulation library), and Clara — operating directly at the simulation × AI convergence.',
     image: '/img/nbm.png',
+    founding: true,
   },
   {
     id: 'genentech',
@@ -193,8 +196,9 @@ export const MILESTONES: Milestone[] = [
     org: 'Aikium',
     role: 'Principal Deep Learning Scientist',
     short: 'Invented and shipped the algorithm that now powers Aikium\'s live drug-design platform.',
-    long: 'Invented a multi-objective Direct Preference Optimization (DPO) algorithm for protein and molecule language models — shipped end-to-end (research → 3 provisional patents → live production platform) in four months. The algorithm now powers Aikium\'s production drug-design platform. Published an ICLR 2024 GEM workshop paper on the method; also built a RAG pipeline for protein-design knowledge retrieval.',
+    long: 'Founding member of Aikium\'s computational team. Invented a multi-objective Direct Preference Optimization (DPO) algorithm for protein and molecule language models — shipped end-to-end (research → 3 provisional patents → live production platform) in four months. The algorithm now powers Aikium\'s production drug-design platform. Published an ICLR 2024 GEM workshop paper on the method; also built a RAG pipeline for protein-design knowledge retrieval.',
     image: '/img/dpo_aikium.png',
+    founding: true,
     links: [
       { label: 'ICLR 2024 GEM paper', href: 'https://openreview.net/forum?id=qHIcWfgvIH' },
       { label: 'Aikium platform', href: 'https://www.aikium.com/' },
@@ -212,6 +216,8 @@ export const MILESTONES: Milestone[] = [
     role: 'Senior Staff AI Engineer',
     short: 'GenAI SDK, multi-agent EDA framework, circuit foundation models. Lead patent author; Engineering Excellence award.',
     long: 'Founding engineer of the GenAI Solutions team at Synopsys. Architected and shipped an internal GenAI SDK (RAG + Agents) used across multiple business units; pioneered a novel multi-agent framework for EDA workflows. Technical lead for a cross-functional initiative building physical-design circuit foundation models — invented a circuit tokenization scheme inspired by SMILES representation of molecules. Developed an AI recommender system for EDA simulator parameter tuning, combining reinforcement learning, transformers, and hyper-graph neural networks. Lead author of Synopsys\' patent on its multi-agent EDA framework. Recipient of the Engineering Excellence Group Individual Award — selected among ~2,000 engineers — for advancing corporate-wide GenAI strategy.',
+    image: '/img/synopsys-agents.svg',
+    founding: true,
   },
   {
     id: 'voltai',
@@ -224,10 +230,11 @@ export const MILESTONES: Milestone[] = [
     org: 'VoltAI',
     role: 'Machine Learning Researcher',
     short: 'Exascale physics-simulation platform · 32× speedup · 200M mesh elements · customer tape-out · contributed to $100M+ Series B.',
-    long: 'Architected and built Voltaire — VoltAI\'s exascale physics-simulation platform — single-handedly from scratch in five months. The multi-GPU codebase I designed delivered a 32× speedup over the multi-CPU production baseline on 3D-IC signal-integrity extraction at 200M mesh elements, validated on a real TSV channel design taped out by a customer. Drove a 2× Series B raise: presented and defended Voltaire\'s architecture and exascale roadmap directly to top-tier Silicon Valley investors. Contributed to $100M+ in additional capital and a 2× lift in company valuation. Also trained EM neural operators as surrogates on top of Voltaire that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
+    long: 'Founding engineer of the physical-design and verification team at VoltAI. Architected and built Voltaire — VoltAI\'s exascale physics-simulation platform — single-handedly from scratch in five months. The multi-GPU codebase I designed delivered a 32× speedup over the multi-CPU production baseline on 3D-IC signal-integrity extraction at 200M mesh elements, validated on a real TSV channel design taped out by a customer. Drove a 2× Series B raise: presented and defended Voltaire\'s architecture and exascale roadmap directly to top-tier Silicon Valley investors. Contributed to $100M+ in additional capital and a 2× lift in company valuation. Also trained EM neural operators as surrogates on top of Voltaire that learn discretization-aware solutions; built multi-turn agentic RL infrastructure and an RL-with-verifiable-rewards framework (formal verification compiler in the loop) for LLM post-training, plus an AI agent that automates parallel-simulation-software development.',
     image: '/img/1_electro_3D.png',
     links: [
       { label: 'VoltAI', href: 'https://www.voltai.com/' },
     ],
+    founding: true,
   },
 ];

@@ -2,6 +2,33 @@
 import Base from '../layouts/Base.astro';
 import Constellation from '../components/Constellation.astro';
 
+const foundings = [
+  {
+    year: '2021',
+    org: 'NVIDIA',
+    team: 'Clara Discovery Simulation',
+    blurb: 'Founding member. AI-driven drug-discovery simulation team — DiffDock in BioNeMo, GPU-optimized ML-driven MD.',
+  },
+  {
+    year: '2023',
+    org: 'Synopsys',
+    team: 'GenAI Solutions',
+    blurb: 'Founding engineer. GenAI SDK and multi-agent EDA framework adopted across business units; patent lead author.',
+  },
+  {
+    year: '2024',
+    org: 'Aikium',
+    team: 'Computational platform',
+    blurb: 'Founding scientist. Multi-objective DPO; research → 3 patents → live drug-design platform in four months.',
+  },
+  {
+    year: '2025',
+    org: 'VoltAI',
+    team: 'Physical design & verification',
+    blurb: 'Founding engineer. Built Voltaire — exascale EM simulation platform, single-handedly from scratch — 32× speedup at 200M mesh elements.',
+  },
+];
+
 const featuredProjects = [
   {
     title: 'Voltaire · exascale EM platform',
@@ -92,6 +119,36 @@ const talks = [
 
   {/* Constellation — centerpiece */}
   <Constellation />
+
+  {/* Founding-team pattern */}
+  <section class="foundings container-wide" id="foundings">
+    <div class="foundings-head">
+      <p class="eyebrow">Pattern</p>
+      <h2 class="foundings-title">
+        Four <em>founding-engineer</em> roles in five years.
+      </h2>
+      <p class="foundings-lede muted">
+        I show up early, build the first thing that ships, and grow what works.
+        Each ring on the constellation marks a team I founded from zero.
+      </p>
+    </div>
+    <ol class="foundings-list">
+      {foundings.map((f, i) => (
+        <li class="founding-row">
+          <span class="founding-index mono">{String(i + 1).padStart(2, '0')}</span>
+          <span class="founding-year mono">{f.year}</span>
+          <div class="founding-body">
+            <p class="founding-org">
+              <span class="founding-org-name">{f.org}</span>
+              <span class="founding-sep" aria-hidden="true">·</span>
+              <span class="founding-team">{f.team}</span>
+            </p>
+            <p class="founding-blurb">{f.blurb}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
 
   {/* Current focus */}
   <section class="focus container-narrow">
@@ -258,6 +315,100 @@ const talks = [
   .hero-link:hover {
     color: var(--accent);
     transform: translateX(3px);
+  }
+
+  /* Foundings */
+  .foundings {
+    padding-block: var(--s-16) var(--s-12);
+    border-top: 1px solid var(--hairline);
+  }
+  .foundings-head {
+    margin-bottom: var(--s-12);
+    max-width: 60ch;
+  }
+  .foundings-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.05;
+    margin-bottom: var(--s-4);
+  }
+  .foundings-title em {
+    color: var(--accent);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+  }
+  .foundings-lede {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 56ch;
+  }
+  .foundings-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: founding;
+  }
+  .founding-row {
+    display: grid;
+    grid-template-columns: 50px 120px 1fr;
+    gap: var(--s-6);
+    padding: var(--s-6) 0;
+    border-top: 1px solid var(--hairline);
+    align-items: baseline;
+    transition: background 0.25s var(--ease-out);
+  }
+  .founding-row:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .founding-row:hover {
+    background: linear-gradient(to right, rgba(230, 162, 60, 0.04), transparent 60%);
+  }
+  .founding-index {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+  .founding-year {
+    font-size: 0.86rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .founding-org {
+    font-size: 1.15rem;
+    line-height: 1.3;
+    margin-bottom: var(--s-2);
+    max-width: none;
+    color: var(--ink-strong);
+  }
+  .founding-org-name {
+    font-weight: 420;
+  }
+  .founding-team {
+    color: var(--ink-muted);
+    font-style: italic;
+    font-variation-settings: 'opsz' 144, 'SOFT' 100;
+  }
+  .founding-sep {
+    margin: 0 0.5em;
+    color: var(--ink-dim);
+  }
+  .founding-blurb {
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    max-width: 65ch;
+  }
+
+  @media (max-width: 768px) {
+    .founding-row {
+      grid-template-columns: 40px 1fr;
+      grid-template-areas:
+        "idx year"
+        "idx body";
+      row-gap: var(--s-2);
+    }
+    .founding-index { grid-area: idx; }
+    .founding-year  { grid-area: year; }
+    .founding-body  { grid-area: body; }
   }
 
   /* Focus */
