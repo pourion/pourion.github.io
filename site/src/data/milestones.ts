@@ -190,7 +190,7 @@ export const MILESTONES: Milestone[] = [
     role: 'Senior Software Engineer',
     short: 'Founding member of Clara Discovery Simulation; cross-functional across Modulus, Warp, and Clara.',
     long: 'Founding member of the Clara Discovery Simulation engineering team for AI-driven drug discovery. Implemented DiffDock — score-based diffusion with 3D-equivariant GNNs — inside the BioNeMo LLM framework. Developed GPU-optimized frameworks for ML-driven molecular dynamics, achieving 5× speed-up and 10× memory efficiency. Conceptualized and led AI-accelerated biophysical simulations for macromolecule stability and solvation free energy. Worked cross-functionally across NVIDIA Modulus (physics-informed ML), Warp (GPU simulation library), and Clara — operating directly at the simulation × AI convergence.',
-    image: '/img/nbm.png',
+    image: '/img/nvidia-clara.png',
     founding: true,
   },
   {
