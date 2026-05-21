@@ -109,8 +109,11 @@ export const MILESTONES: Milestone[] = [
     org: 'UCSB · CASL Lab',
     role: 'Co-investigator',
     short: 'First parallel multi-scale 3D tissue simulation engine — cell-aggregate electroporation at supercomputer scale.',
-    long: 'Architected AVICENNA — the first parallel, multi-scale, multi-physics 3D tissue simulation engine. Solved tissue-scale electroporation on national supercomputers, modeling ion concentrations, electro-permeabilization, and cell-aggregate dynamics. Featured by the U.S. Army Research Lab, TACC, and XSEDE; press coverage in HPCwire, EurekAlert, Phys.org, Science Daily, and Futurity.',
+    long: 'Architected AVICENNA — the first parallel, multi-scale, multi-physics 3D tissue simulation engine. Solved tissue-scale electroporation on national supercomputers, modeling ion concentrations, electro-permeabilization, and cell-aggregate dynamics. Published in the Journal of Computational Physics, 2018 (parallel Voronoi-based mesoscale simulation of cell-aggregate electropermeabilization). Featured by the U.S. Army Research Lab, TACC, and XSEDE; press coverage in HPCwire, EurekAlert, Phys.org, Science Daily, and Futurity.',
     image: '/img/2_EP.jpg',
+    links: [
+      { label: 'JCP paper (2018)', href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999118308052' },
+    ],
   },
   {
     id: 'bipde',
