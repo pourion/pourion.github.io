@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="stencil.pub">
+  <defs>
+    <radialGradient id="warmGlow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#E6A23C" stop-opacity="0.10" />
+      <stop offset="100%" stop-color="#E6A23C" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="400" height="300" fill="#0B0C0F" />
+  <rect width="400" height="300" fill="url(#warmGlow)" />
+  <g transform="translate(200, 140)">
+    <g stroke="rgba(242, 239, 232, 0.22)" stroke-width="1.2" fill="none">
+      <line x1="0" y1="-62" x2="0" y2="62" />
+      <line x1="-62" y1="0" x2="62" y2="0" />
+    </g>
+    <circle cx="0" cy="-62" r="8.5" fill="#F2EFE8" />
+    <circle cx="62" cy="0" r="8.5" fill="#F2EFE8" />
+    <circle cx="0" cy="62" r="8.5" fill="#F2EFE8" />
+    <circle cx="-62" cy="0" r="8.5" fill="#F2EFE8" />
+    <circle cx="0" cy="0" r="12" fill="#E6A23C" />
+  </g>
+  <text x="200" y="248" text-anchor="middle"
+    font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace"
+    font-size="13" letter-spacing="3.5" fill="rgba(242,239,232,0.7)">STENCIL.PUB</text>
+  <text x="200" y="270" text-anchor="middle"
+    font-family="ui-monospace, 'JetBrains Mono', SFMono-Regular, monospace"
+    font-size="10" letter-spacing="2" fill="rgba(242,239,232,0.4)">an open journal of physics simulation</text>
+</svg>

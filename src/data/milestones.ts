@@ -253,4 +253,22 @@ export const MILESTONES: Milestone[] = [
     image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
     founding: true,
   },
+  {
+    id: 'stencil-pub',
+    year: 2026,
+    yearLabel: '2026',
+    lanes: ['ai', 'hpc'],
+    primaryLane: 'ai',
+    title: 'Stencil · community journal + agent plugin',
+    org: 'stencil.pub',
+    role: 'Founder & editor',
+    short: 'A community-led open journal of physics simulation with a companion plugin that compounds each essay\'s skills into Claude Code, Codex, and other coding agents.',
+    long: 'Founded stencil.pub — a community-owned open journal of physics simulation with a companion agent plugin for Claude Code and Codex. The premise: agents are now responsible for most of what gets built, and they should be able to run physical simulations too. Publications are only worthwhile to the extent that they raise the capability of LLM models and coding agents — every essay published carries the skills, atoms, and verifiable reports its author chose to share, and those accumulate into one community-owned, versioned, attributed plugin. One of my central beliefs is that scientific publishing has to be re-grounded around this, and I want to lead the way in shifting publishing practice to match the real needs of our time.',
+    image: '/img/stencil-pub-logo.svg',
+    founding: true,
+    links: [
+      { label: 'stencil.pub', href: 'https://stencil.pub' },
+      { label: 'Plugin (GitHub)', href: 'https://github.com/stencil-pub/stencil' },
+    ],
+  },
 ];
