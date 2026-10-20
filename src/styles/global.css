@@ -1,4 +1,5 @@
-@import '@fontsource-variable/fraunces/index.css';
+@import '@fontsource-variable/source-serif-4/opsz.css';
+@import '@fontsource-variable/source-serif-4/opsz-italic.css';
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 
@@ -28,7 +29,7 @@
   --lane-chip:  #B388EB;
 
   /* Typography */
-  --font-display: 'Fraunces Variable', Fraunces, 'Iowan Old Style', Georgia, serif;
+  --font-display: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
   /* Spacing */
@@ -68,8 +69,7 @@ html {
 
 body {
   font-family: var(--font-display);
-  font-variation-settings: 'opsz' 14, 'SOFT' 30;
-  font-weight: 380;
+  font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
   letter-spacing: 0.005em;
@@ -98,19 +98,18 @@ body::before {
 /* Typography scale */
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
-  font-variation-settings: 'opsz' 144, 'SOFT' 60, 'WONK' 1;
-  font-weight: 380;
-  letter-spacing: -0.025em;
-  line-height: 1.02;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
   color: var(--ink-strong);
 }
 
-h1 { font-size: clamp(3rem, 7.5vw, 6.5rem); font-weight: 350; }
-h2 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 380; }
-h3 { font-size: clamp(1.4rem, 2vw, 1.85rem); font-weight: 420; }
+h1 { font-size: clamp(3rem, 7.5vw, 6.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.25rem); }
+h3 { font-size: clamp(1.4rem, 2vw, 1.85rem); font-weight: 400; }
 h4 { font-size: 1.15rem; font-weight: 500; letter-spacing: 0; }
 
-em, i { font-style: italic; font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1; }
+em, i { font-style: italic; }
 
 p { max-width: 62ch; }
 
