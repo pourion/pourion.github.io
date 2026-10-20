@@ -58,7 +58,7 @@ fall back to Pouria's portrait.
 
 1. Draft the design as an HTML file in `/tmp/og-<slug>.html`. Use:
    - Background: `#0B0C0F` with a subtle warm radial gradient
-   - Typography: Fraunces (display serif, italic accent in `#E6A23C`) +
+   - Typography: Source Serif 4 (display serif, italic accent in `#E6A23C`) +
      JetBrains Mono (eyebrow/meta) via Google Fonts `@import`
    - Layout: left text column (eyebrow → title → subtitle → byline);
      right column with a thematic schematic SVG tied to the essay's

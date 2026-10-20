@@ -40,11 +40,11 @@ src/
     Constellation.astro  # SVG trajectory viz — 5 lanes × time × 14 milestones (centerpiece)
     SimHero.astro        # home hero: Allen–Cahn simulation + adaptive mesh
     MeshLayer.astro      # fixed canvas with the page's adaptive mesh
+    Nav.astro
+    Footer.astro
   scripts/
     sim/allenCahn.js     # Allen–Cahn solver (DOM-free, unit-tested)
     mesh/                # sat.js, quadtree.js (unit-tested), textMask.js, meshLayer.js
-    Nav.astro
-    Footer.astro
   layouts/
     Base.astro           # shared head/nav/footer, GA tag
   data/
