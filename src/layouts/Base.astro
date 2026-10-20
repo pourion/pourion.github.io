@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import MeshLayer from '../components/MeshLayer.astro';
 
 interface Citation {
   title: string;
@@ -98,6 +99,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
     </script>
   </head>
   <body>
+    <MeshLayer />
     {!hideNav && <Nav />}
     <main>
       <slot />
