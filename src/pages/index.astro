@@ -7,69 +7,79 @@ const foundings = [
     year: '2021',
     org: 'NVIDIA',
     team: 'Clara Discovery Simulation',
-    blurb: 'Founding member. AI-driven drug-discovery simulation team — DiffDock in BioNeMo, GPU-optimized ML-driven MD.',
-  },
-  {
-    year: '2024',
-    org: 'Synopsys',
-    team: 'GenAI Solutions',
-    blurb: 'Founding engineer. GenAI SDK and multi-agent EDA framework adopted across business units; patent lead author.',
+    blurb: 'First technical hire. I helped establish AI-driven simulation for drug discovery and grow the team to 14 engineers and researchers. The work included DiffDock in BioNeMo and GPU molecular dynamics with machine-learned interaction potentials.',
   },
   {
     year: '2024',
     org: 'Aikium',
     team: 'Computational platform',
-    blurb: 'Founding scientist. Invented multi-objective DPO; 3 provisional patents in four months. The algorithm later became the foundation of Aikium\'s production drug-design platform.',
+    blurb: 'Founding scientist. I developed multi-objective DPO for protein language models and filed three provisional patents within four months. The algorithm later became the basis of Aikium\'s production drug-design platform.',
+  },
+  {
+    year: '2024',
+    org: 'Synopsys',
+    team: 'GenAI Solutions',
+    blurb: 'Founding engineer. I built a GenAI SDK and a multi-agent EDA framework that were adopted by several business units. I am the lead inventor on the patent application for the framework.',
   },
   {
     year: '2025',
-    org: 'Stealth Startup',
-    team: 'Physical design & verification · Sequoia-backed chip design',
-    blurb: 'Founding engineer. Designed and built an agentic physics-intelligence platform that reasons about physical design.',
+    org: 'Voltai',
+    team: 'Voltaire · Platform Lead',
+    blurb: 'I conceived Voltaire, built the initial platform and defined its architecture. I also assembled the team, which has expertise in AI, computational science and semiconductor engineering.',
   },
 ];
 
+const announcement = {
+  date: 'Oct 2026',
+  text: 'NVIDIA described Voltaire in its SEMICON West announcement. Voltaire is the agentic multiphysics platform for 3D-IC design that I conceived and lead at Voltai.',
+  links: [
+    { label: 'Voltai announcement', href: 'https://voltai.com/blog/voltai-nvidia-voltaire-3d-ic-design' },
+    { label: 'NVIDIA release', href: 'https://nvidianews.nvidia.com/news/nvidia-and-semiconductor-leaders-advance-ai-across-chip-design-and-manufacturing-for-ai-defined-labs' },
+  ],
+};
+
 const featuredProjects = [
+  {
+    title: 'Voltaire',
+    role: 'Voltai · 2025 – now',
+    blurb: 'An agentic multiphysics platform for 3D-IC design. GPU-accelerated first-principles solvers compute the electrical, thermal and mechanical behavior, and AI agents coordinate the workflow. Electromagnetic extraction runs 32 times faster on eight H100 GPUs than on a 64-CPU baseline at the same accuracy.',
+    image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
+    href: 'https://voltai.com/blog/voltai-nvidia-voltaire-3d-ic-design',
+    external: true,
+  },
   {
     title: 'Multi-objective DPO',
     role: 'Aikium · 2024',
-    blurb: 'Invented preference optimization for protein and molecule language models; 3 patents in four months. The algorithm later became the foundation of Aikium\'s production drug-design platform. ICLR 2024 GEM paper.',
+    blurb: 'Multi-objective preference optimization for protein and molecule language models. Three provisional patents were filed within four months, and the algorithm later became the basis of Aikium\'s production drug-design platform. Published at the ICLR 2024 GEM workshop.',
     image: '/img/dpo_aikium.png',
-    href: '#trajectory',
-  },
-  {
-    title: 'Agentic EM simulation platform',
-    role: 'Stealth Startup · 2025',
-    blurb: 'Agentic physics-intelligence platform — reasons about physical design. Multi-GPU electromagnetics simulation paired with an in-silico experiment agent.',
-    image: '/img/sky130_fd_sc_hd__sedfxbp_2-transparent.png',
     href: '#trajectory',
   },
   {
     title: 'Multi-agent EDA framework',
     role: 'Synopsys · 2024 – 2025',
-    blurb: 'Founding engineer of the GenAI Solutions team. Lead author on Synopsys\' patent for its multi-agent EDA framework. Engineering Excellence award, selected among ~2,000 engineers.',
+    blurb: 'As a founding engineer of the GenAI Solutions team, I designed a multi-agent framework for EDA workflows. I am the lead inventor on the Synopsys patent application. Engineering Excellence award, selected from approximately 2,000 engineers.',
     image: '/img/synopsys-agents.svg',
     href: '#trajectory',
   },
   {
     title: 'JAX-DIPS',
     role: 'Open source · lead',
-    blurb: 'Differentiable 3D interfacial PDE solver in JAX, GPU/TPU/CPU. Neural bootstrapping of finite discretization methods for elliptic PDEs with jump conditions. JCP 2023.',
+    blurb: 'A differentiable 3D solver for interfacial PDEs, written in JAX for GPUs, TPUs and CPUs. It uses neural bootstrapping of finite discretization methods to solve elliptic problems with jump conditions. Journal of Computational Physics, 2023.',
     image: '/img/jaxdips.png',
     href: 'https://github.com/JAX-DIPS/JAX-DIPS',
     external: true,
   },
   {
-    title: 'Clara Discovery — MLIP-driven MD',
+    title: 'Clara Discovery · MLIP-driven MD',
     role: 'NVIDIA · 2021 – 2023',
-    blurb: 'Founding member of Clara Discovery Simulation. Built machine-learned interaction potential (MLIP) driven molecular dynamics — replacing classical forcefields with learned potentials. 5× speedup, 10× memory efficiency.',
+    blurb: 'GPU molecular dynamics driven by machine-learned interaction potentials (MLIPs) in place of classical force fields. The implementation achieved a 5-fold speed-up and a 10-fold improvement in memory efficiency.',
     image: '/img/nvidia-clara.png',
     href: '#trajectory',
   },
   {
     title: 'AVICENNA',
     role: 'UCSB · CASL Lab',
-    blurb: 'First parallel multi-scale 3D tissue simulation engine. Tissue-scale cell-aggregate electroporation on national supercomputers. Featured by U.S. Army Research Lab, TACC, XSEDE.',
+    blurb: 'The first parallel, multiscale 3D simulation code for tissue-scale electroporation of cell aggregates. Simulations were run on national supercomputers. The work was featured by the U.S. Army Research Laboratory, TACC and XSEDE.',
     image: '/img/2_EP.jpg',
     href: '#trajectory',
   },
@@ -77,21 +87,21 @@ const featuredProjects = [
 
 const talks = [
   {
-    title: 'ICIAM 2023 — invited talk',
+    title: 'ICIAM 2023 · invited talk',
     href: 'https://www.youtube.com/embed/ACjiRyOh-E0',
-    blurb: 'Differentiable PDE solvers and AI-for-simulation.',
+    blurb: 'Differentiable PDE solvers and AI for simulation.',
   },
   {
-    title: '2020 — Research overview',
+    title: '2020 · research overview',
     href: 'https://www.youtube.com/embed/NrMaIaaXlM4',
-    blurb: 'Level-set methods, AVICENNA, and large-scale biophysical simulation.',
+    blurb: 'Level-set methods, AVICENNA and large-scale biophysical simulation.',
   },
 ];
 ---
 
 <Base
-  title="Pouria Mistani — Large-scale simulation of physical systems"
-  description="Pouria Mistani builds high-fidelity large-scale simulations at the intersection of physics, AI, and supercomputing — from cosmology to biophysics to chip design."
+  title="Pouria Mistani — AI for Science & Engineering"
+  description="Pouria Mistani is a computational physicist who leads teams building AI for physics-based engineering design. His work covers physics simulation, high-performance computing and scientific machine learning, with applications in cosmology, biophysics and 3D-IC design."
   image="/img/og-home.png"
 >
   {/* Hero */}
@@ -99,23 +109,35 @@ const talks = [
     <div class="container-wide hero-inner">
       <p class="eyebrow hero-eyebrow">
         <span class="dot"></span>
-        Pouria Mistani, PhD · Physical AI
+        Pouria Mistani, PhD · AI for Science &amp; Engineering
       </p>
       <h1 class="hero-title">
-        GPU-accelerated physics simulation, <em>scientific ML</em>, and the platforms that ship them.
+        Computational physicist. I lead teams building <em>AI for physics-based engineering design</em>.
       </h1>
       <p class="hero-lede">
-        Research engineer at the convergence of large-scale physics simulation and AI — a scientific-startup
-        builder who invents algorithms and ships industrial platforms from scratch. From cosmological simulations
-        on national supercomputers, to tissue-scale bioelectric simulations, to GPU-accelerated ML-potential driven molecular dynamics,
-        to exascale electromagnetics for chip tape-out. 9+ publications. 4 patents.
+        I trained in cosmology and in numerical methods for partial differential equations. For
+        more than a decade I have built large-scale simulations and the machine-learning methods
+        coupled to them, at UC Santa Barbara, Merck, NVIDIA and Synopsys. I currently lead Voltaire,
+        Voltai's agentic multiphysics platform for 3D-IC design.
       </p>
       <div class="hero-actions">
         <a href="#trajectory" class="button button-accent">See the trajectory ↓</a>
+        <a href="/publications" class="hero-link mono">Publications →</a>
         <a href="/about" class="hero-link mono">About →</a>
       </div>
     </div>
     <div class="hero-grid" aria-hidden="true"></div>
+  </section>
+
+  {/* Latest — public announcement */}
+  <section class="announce container-wide" aria-label="Latest">
+    <p class="announce-date mono">{announcement.date}</p>
+    <p class="announce-text">{announcement.text}</p>
+    <p class="announce-links mono">
+      {announcement.links.map((l) => (
+        <a href={l.href} target="_blank" rel="noopener">{l.label}<span aria-hidden="true"> ↗</span></a>
+      ))}
+    </p>
   </section>
 
   {/* Constellation — centerpiece */}
@@ -124,13 +146,13 @@ const talks = [
   {/* Founding-team pattern */}
   <section class="foundings container-wide" id="foundings">
     <div class="foundings-head">
-      <p class="eyebrow">Pattern</p>
+      <p class="eyebrow">Teams and platforms</p>
       <h2 class="foundings-title">
-        Four <em>founding-engineer</em> roles in five years.
+        Four teams joined at the <em>founding stage</em>.
       </h2>
       <p class="foundings-lede muted">
-        I show up early, build the first thing that ships, and grow what works —
-        in both startups and big tech.
+        In each of these positions I was the first technical hire, a founding engineer or the
+        platform lead. I built the first working system and helped grow the team.
       </p>
     </div>
     <ol class="foundings-list">
@@ -155,15 +177,18 @@ const talks = [
   <section class="focus container-narrow">
     <p class="eyebrow">Current focus</p>
     <h2 class="focus-title">
-      Revolutionize chip design at the intersection of <em>AI</em> and
-      <em>large-scale simulation</em> — agents that operate, build, and run experiments in silico.
+      Semiconductor design based on <em>first-principles simulation</em>, with
+      <em>AI agents</em> coordinating the design workflow.
     </h2>
     <p class="focus-body">
-      Chip design is the right problem at the right time. The physical models are well-posed and
-      exhaustive — Maxwell, transport, level-set evolution of free boundaries in epitaxy, etching,
-      lithography. The scale is commercially significant. The compute is real. It is the right mix
-      for the methods I've spent a career building, and the natural place to reproduce, in
-      commercial technology, what Illustris achieved for cosmology.
+      The physics of an integrated circuit is well posed and well characterized. It is described by
+      Maxwell's equations, heat and charge transport, and elasticity. Manufacturing processes such as
+      epitaxy, etching and lithography are modeled by the level-set evolution of free boundaries. The
+      problems are large enough to require accelerated numerical methods, and design decisions depend
+      on accurate results. The engineering workflow around these simulations is complex. AI agents can
+      automate this workflow, verify results and explore design alternatives in parallel. My aim is to
+      build simulations for industrial design with the scale and fidelity that the Illustris
+      simulations achieved in cosmology.
     </p>
   </section>
 
@@ -171,7 +196,7 @@ const talks = [
   <section class="projects container-wide">
     <div class="projects-head">
       <p class="eyebrow">Selected work</p>
-      <h2>Six projects worth knowing about.</h2>
+      <h2>Selected projects, 2018 – 2026.</h2>
     </div>
     <ul class="project-grid">
       {featuredProjects.map((p, i) => (
@@ -224,7 +249,7 @@ const talks = [
   <section class="contact container-narrow">
     <p class="eyebrow">Get in touch</p>
     <h2 class="contact-title">
-      Working on chip design, AI for physics, or large-scale simulation? <em>Let's talk.</em>
+      For collaboration on AI for science, engineering design or large-scale simulation, <em>please write</em>.
     </h2>
     <div class="contact-actions">
       <a href="mailto:p.a.mistani@gmail.com" class="button button-accent">
@@ -262,6 +287,7 @@ const talks = [
     z-index: 2;
   }
   .hero-eyebrow {
+    max-width: none;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
@@ -280,11 +306,11 @@ const talks = [
     50%      { opacity: 0.55; box-shadow: 0 0 22px var(--accent); }
   }
   .hero-title {
-    font-size: clamp(2.8rem, 8vw, 7rem);
-    line-height: 1;
+    font-size: clamp(2.5rem, 6.4vw, 5.6rem);
+    line-height: 1.02;
     font-weight: 320;
     letter-spacing: -0.03em;
-    max-width: 18ch;
+    max-width: 19ch;
     margin-bottom: var(--s-8);
   }
   .hero-title em {
@@ -317,6 +343,53 @@ const talks = [
     color: var(--accent);
     transform: translateX(3px);
   }
+
+  /* Latest announcement */
+  .announce {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: var(--s-6);
+    align-items: baseline;
+    padding-block: var(--s-8);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .announce-date {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .announce-text {
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.45;
+    color: var(--ink-strong);
+    max-width: 60ch;
+  }
+  .announce-links {
+    display: flex;
+    gap: var(--s-6);
+    font-size: 0.74rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .announce-links a {
+    color: var(--ink-muted);
+  }
+  .announce-links a:hover {
+    color: var(--accent);
+  }
+  @media (max-width: 900px) {
+    .announce {
+      grid-template-columns: 1fr;
+      gap: var(--s-3);
+    }
+    .announce-links {
+      flex-wrap: wrap;
+      white-space: normal;
+    }
+  }
+
 
   /* Foundings */
   .foundings {

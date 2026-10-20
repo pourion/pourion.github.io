@@ -27,7 +27,7 @@ const papers: Pub[] = [
     authors: 'P. A. Mistani, S. Pakravan, R. Ilango, F. Gibou',
     title: 'JAX-DIPS: Neural bootstrapping of finite discretization methods and application to elliptic problems with discontinuities',
     venue: 'Journal of Computational Physics',
-    href: 'https://www.sciencedirect.com/science/article/abs/pii/S0021999123005752',
+    href: 'https://doi.org/10.1016/j.jcp.2023.112480',
     highlight: true,
   },
   {
@@ -69,6 +69,21 @@ const papers: Pub[] = [
 ];
 
 const preprintsAndThesis: Pub[] = [
+  {
+    year: 2026,
+    authors: 'P. A. Mistani',
+    title: 'Spatially resolved nucleated polymerization: A free-boundary model of protein aggregation in concentrated solutions',
+    venue: 'arXiv:2609.27185 · submitted to The Journal of Physical Chemistry B',
+    href: 'https://arxiv.org/abs/2609.27185',
+    highlight: true,
+  },
+  {
+    year: 2026,
+    authors: 'P. Mistani',
+    title: 'Toward a Simulation Organism',
+    venue: 'Stencil 1(1), 1–10 · doi:10.5281/zenodo.20331251',
+    href: '/blog/toward-a-simulation-ai-organism/',
+  },
   {
     year: 2020,
     authors: 'P. Akbari Mistani',
@@ -147,28 +162,6 @@ const patents = [
   },
 ];
 
-const openSource = [
-  {
-    name: 'JAX-DIPS',
-    role: 'Lead developer',
-    blurb: 'Differentiable 3D interfacial PDE solver in JAX — runs on GPU/TPU/CPU. Implements neural bootstrapping of finite discretization methods.',
-    href: 'https://github.com/JAX-DIPS/JAX-DIPS',
-  },
-];
-
-const contributions = [
-  {
-    project: 'VERL — Volcano Engine for RL',
-    href: 'https://github.com/volcengine/verl/pull/3712',
-    note: 'Merged PR #3712 — multi-turn agentic tool-use RL.',
-  },
-  {
-    project: 'SGLang',
-    href: 'https://github.com/sgl-project/sglang',
-    note: 'Merged contribution to the LLM inference framework.',
-  },
-];
-
 const talks = [
   {
     year: 2023,
@@ -184,15 +177,16 @@ const talks = [
 ];
 ---
 
-<Base title="Publications — Pouria Mistani" description="Papers, patents, thesis, preprints, book chapters, conferences, and open source by Pouria Mistani.">
+<Base title="Publications — Pouria Mistani" description="Papers, patents, thesis, preprints, book chapters, conference presentations and talks by Pouria Mistani.">
   <section class="pubs-hero">
     <div class="container-wide">
       <p class="eyebrow">Publications &amp; patents</p>
-      <h1 class="pubs-hero-title">Peer-reviewed papers, <em>patents</em>, preprints, and talks.</h1>
+      <h1 class="pubs-hero-title">Papers, <em>patents</em>, preprints and talks.</h1>
       <p class="muted pubs-hero-note">
-        Mirrors my
+        The list follows my
         <a href="https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar profile</a>.
       </p>
+
     </div>
   </section>
 
@@ -253,7 +247,7 @@ const talks = [
     </header>
     <ol class="pubs-list">
       {preprintsAndThesis.map((p) => (
-        <li class="pub-row">
+        <li class={`pub-row${p.highlight ? ' is-highlight' : ''}`}>
           <span class="pub-year mono">{p.year}</span>
           <div class="pub-body">
             <p class="pub-title">
@@ -327,34 +321,11 @@ const talks = [
   <section class="pubs-section container-wide">
     <header class="pubs-section-head">
       <p class="eyebrow">Open source</p>
-      <h2>Code in the wild.</h2>
+      <h2>Open-source software.</h2>
     </header>
-    <ul class="os-grid">
-      {openSource.map((o) => (
-        <li class="os-card">
-          <a href={o.href} target="_blank" rel="noopener" class="os-link">
-            <p class="os-role mono">{o.role}</p>
-            <h3 class="os-name">{o.name}<span class="arrow" aria-hidden="true">↗</span></h3>
-            <p class="os-blurb">{o.blurb}</p>
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <div class="contributions">
-      <p class="eyebrow contributions-label">Merged contributions to upstream projects</p>
-      <ul class="contributions-list">
-        {contributions.map((c) => (
-          <li class="contribution-row">
-            <a href={c.href} target="_blank" rel="noopener" class="contribution-link mono">
-              {c.project}
-              <span class="arrow" aria-hidden="true">↗</span>
-            </a>
-            <span class="contribution-note">{c.note}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <p class="pubs-pointer">
+      Libraries and contributions to upstream projects are listed on the <a href="/open-source">open-source page</a>.
+    </p>
   </section>
 
   <section class="pubs-section container-wide">
@@ -484,110 +455,14 @@ const talks = [
     color: var(--accent);
   }
 
-  .os-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--s-6);
-    padding: 0;
-  }
-  .os-card {
-    border: 1px solid var(--hairline);
-    background: var(--bg-elevated);
-    transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out);
-  }
-  .os-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-  }
-  .os-link {
-    display: block;
-    padding: var(--s-6);
-    color: var(--ink);
-    background-image: none;
-  }
-  .os-link:hover { color: var(--ink); }
-  .os-role {
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: var(--s-3);
-  }
-  .os-name {
-    font-size: 1.5rem;
-    margin-bottom: var(--s-3);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-  .os-name .arrow {
-    font-size: 0.6em;
-    color: var(--ink-dim);
-    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
-  }
-  .os-link:hover .os-name .arrow {
-    color: var(--accent);
-    transform: translate(2px, -2px);
-  }
-  .os-blurb {
+  .pubs-pointer {
     color: var(--ink-muted);
-    font-size: 0.95rem;
-    line-height: 1.55;
   }
-
-  .contributions {
-    margin-top: var(--s-8);
-    padding-top: var(--s-6);
-    border-top: 1px solid var(--hairline);
-  }
-  .contributions-label {
-    margin-bottom: var(--s-4);
-  }
-  .contributions-list {
-    list-style: none;
-    padding: 0;
-  }
-  .contribution-row {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: var(--s-6);
-    padding: var(--s-3) 0;
-    align-items: baseline;
-  }
-  .contribution-link {
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    color: var(--ink);
-    background-image: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: color 0.2s var(--ease-out);
-  }
-  .contribution-link:hover {
+  .pubs-pointer a {
     color: var(--accent);
-  }
-  .contribution-link .arrow {
-    color: var(--ink-dim);
-    font-size: 0.85em;
-    transition: transform 0.25s var(--ease-out), color 0.25s var(--ease-out);
-  }
-  .contribution-link:hover .arrow {
-    color: var(--accent);
-    transform: translate(2px, -2px);
-  }
-  .contribution-note {
-    font-size: 0.9rem;
-    color: var(--ink-muted);
-    line-height: 1.5;
-  }
-  @media (max-width: 768px) {
-    .contribution-row { grid-template-columns: 1fr; gap: var(--s-1); }
   }
 
   @media (max-width: 768px) {
     .pub-row { grid-template-columns: 1fr; gap: var(--s-2); }
-    .os-grid { grid-template-columns: 1fr; }
   }
 </style>

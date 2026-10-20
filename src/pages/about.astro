@@ -1,14 +1,69 @@
 ---
 import Base from '../layouts/Base.astro';
 
+const experience = [
+  {
+    years: '2025 – now',
+    role: 'Platform Lead, Voltaire · Member of Technical Staff',
+    org: 'Voltai',
+    note: 'Conceived and lead Voltaire, an agentic multiphysics platform for 3D-IC design. GPU-accelerated first-principles solvers form its core, and AI agents coordinate the workflow. Electromagnetic extraction runs 32 times faster on eight NVIDIA H100 GPUs than on a 64-CPU baseline at the same accuracy. NVIDIA described the platform in its SEMICON West 2026 announcement.',
+    links: [
+      { label: 'Announcement', href: 'https://voltai.com/blog/voltai-nvidia-voltaire-3d-ic-design' },
+      { label: 'NVIDIA release', href: 'https://nvidianews.nvidia.com/news/nvidia-and-semiconductor-leaders-advance-ai-across-chip-design-and-manufacturing-for-ai-defined-labs' },
+    ],
+  },
+  {
+    years: '2024 – 2025',
+    role: 'Senior Staff AI Engineer',
+    org: 'Synopsys',
+    note: 'Founding engineer of the GenAI Solutions team. Built an internal GenAI SDK that was adopted across business units. Designed a multi-agent EDA framework and am the lead inventor on its patent application. Technical lead for foundation models for physical circuit design. Engineering Excellence award.',
+  },
+  {
+    years: '2024',
+    role: 'Principal Deep Learning Scientist',
+    org: 'Aikium',
+    note: 'Developed multi-objective DPO for protein and molecule language models. The work resulted in three provisional patents and an ICLR 2024 GEM workshop paper.',
+  },
+  {
+    years: '2023',
+    role: 'Machine Learning Scientist',
+    org: 'Genentech · Prescient Design',
+    note: 'Therapeutic protein design.',
+  },
+  {
+    years: '2021 – 2023',
+    role: 'Senior Software Engineer, AI & HPC',
+    org: 'NVIDIA',
+    note: 'First technical hire on the Clara Discovery simulation team, which grew to 14 engineers and researchers. Implemented DiffDock in BioNeMo. Developed GPU molecular dynamics with machine-learned interaction potentials, which achieved a 5-fold speed-up and a 10-fold improvement in memory efficiency. Collaborated with the Clara, Modulus and Warp teams.',
+  },
+  {
+    years: '2020 – 2021',
+    role: 'Postdoctoral Research Fellow',
+    org: 'Merck Research Laboratories',
+    note: 'Developed a CUDA/C++ Monte Carlo code for the second virial coefficient of biologics. Received a $75,000 seed grant to build an HPC platform for protein aggregation.',
+  },
+];
+
+const researchAreas = [
+  'Multiphysics simulation',
+  'Numerical PDEs & level-set methods',
+  'GPU & multi-node HPC',
+  'Differentiable simulation',
+  'Scientific machine learning',
+  'Neural operators',
+  'Agentic AI systems',
+  'Reinforcement learning',
+  'LLM post-training',
+];
+
 const education = [
-  { years: '2016 – 2020', degree: 'PhD · Mechanical Engineering (CSE)', org: 'UC Santa Barbara', note: 'Level-set methods for irregular free-boundary elliptic PDEs; reduced-order stochastic theory for interfacial polarization of cell aggregates.' },
-  { years: '2013 – 2016', degree: 'MS · Physics (Computational Astrophysics)', org: 'UC Riverside', note: 'Dwarf-galaxy formation theory; analysis of Illustris Simulation Suite data.' },
+  { years: '2016 – 2020', degree: 'PhD · Mechanical Engineering (CSE)', org: 'UC Santa Barbara', note: 'Level-set methods for elliptic PDEs with irregular free boundaries. Reduced-order stochastic theory for the interfacial polarization of cell aggregates.' },
+  { years: '2013 – 2016', degree: 'MS · Physics (Computational Astrophysics)', org: 'UC Riverside', note: 'Theory of dwarf-galaxy formation and analysis of data from the Illustris Simulation Suite.' },
   { years: '2008 – 2013', degree: 'BS · Physics  ·  BS · Aerospace Engineering', org: 'Sharif University of Technology', note: 'Dual undergraduate degrees.' },
 ];
 
 const awards = [
-  { year: 2025, label: 'Engineering Excellence Group — Individual Award for Outstanding AI Contributions, Synopsys (selected among ~2,000 engineers)' },
+  { year: 2025, label: 'Engineering Excellence Group Individual Award for Outstanding AI Contributions, Synopsys, selected from approximately 2,000 engineers' },
   { year: 2021, label: '$75,000 seed grant for HPC modeling of protein aggregation, Merck Research Laboratories' },
   { year: 2020, label: 'Graduate Division Dissertation Fellowship, UC Santa Barbara' },
   { year: 2016, label: '740,082 SU supercomputing allocation on TACC Stampede (Co-PI), XSEDE' },
@@ -24,7 +79,7 @@ const teaching = [
 ];
 ---
 
-<Base title="About — Pouria Mistani" description="Pouria Mistani's path through cosmology, computational science, AI for simulation, and semiconductor design.">
+<Base title="About — Pouria Mistani" description="Experience, research areas, education and awards of Pouria Mistani, a computational physicist who leads work on AI for science and engineering.">
   <section class="about-hero">
     <div class="container-wide">
       <p class="eyebrow">About</p>
@@ -33,12 +88,26 @@ const teaching = [
           <img src="/img/Pouria_random.jpg" alt="Pouria Mistani" />
         </div>
         <div class="about-intro">
-          <h1>I build large-scale simulations of <em>physical systems</em>.</h1>
+          <h1>Computational physicist leading <em>AI for science and engineering</em>.</h1>
           <p class="about-lede">
-            Trained as a physicist, retrained as a computational scientist. I'm drawn to the
-            same problem in every domain I've worked: how do you build a simulation that's
-            both faithful to physics and large enough to be useful — and how do you co-design
-            AI inside it so the physics stays exact and the compute stays the engine of progress.
+            I trained first as a physicist and then as a computational scientist. My work combines
+            machine learning, applied mathematics, physics-based modeling and scalable software. I use
+            these methods to build production systems for scientific and engineering problems.
+          </p>
+          <p class="about-lede">
+            I have taken several research ideas through to deployed platforms. They include
+            GPU-accelerated simulation, differentiable physics, agentic AI and scientific applications
+            of large language models. At NVIDIA I was the first technical hire on the Clara Discovery
+            simulation team, which grew to 14 engineers and researchers. At Voltai I conceived Voltaire,
+            an agentic multiphysics platform for 3D-IC design. GPU-accelerated first-principles solvers
+            form its core, and AI agents coordinate the workflow around them. I built the initial
+            platform, defined its architecture and assembled a team with expertise in AI, computational
+            science and semiconductor engineering. I continue to contribute to the core code.
+          </p>
+          <p class="about-lede">
+            In each domain I have worked on how to build simulations that are faithful to the physics
+            and large enough to be useful. I have also worked on how to couple AI methods to these
+            simulations while preserving the accuracy of the physical model.
           </p>
         </div>
       </div>
@@ -46,30 +115,65 @@ const teaching = [
   </section>
 
   <section class="about-manifesto container-narrow">
-    <p class="eyebrow">Operating philosophy</p>
-    <h2>Five sentences.</h2>
+    <p class="eyebrow">Principles</p>
+    <h2>How I choose and conduct research.</h2>
     <ol class="manifesto-list">
       <li>
-        <p>Pick problems where the physics is exhaustive and the scale is commercially meaningful.</p>
+        <p>I choose problems in which the governing physics is well posed and the scale is industrially relevant.</p>
       </li>
       <li>
-        <p>Compute is the engine of progress in science and technology — and simulation and AI are co-designed as one organism, each loop of the solver shaping the model and each model call sharpening the solver.</p>
+        <p>In the systems I build, first-principles solvers determine the accuracy of the results. AI methods handle orchestration and reasoning, and the two parts are designed together.</p>
       </li>
       <li>
-        <p>Numerical methods, supercomputing, and AI are one stack — not three.</p>
+        <p>I treat numerical methods, high-performance computing and AI as parts of one technical stack.</p>
       </li>
       <li>
-        <p>If the demo doesn't run on hardware that matters, it isn't real yet.</p>
+        <p>I evaluate a method on the hardware and at the problem sizes for which it is intended.</p>
       </li>
       <li>
-        <p>Search for purpose, build technology, find the business.</p>
+        <p>I look for problems that are scientifically meaningful and that can support a technology and a business.</p>
       </li>
     </ol>
   </section>
 
   <section class="about-section container-wide">
+    <p class="eyebrow">Experience</p>
+    <h2>Experience.</h2>
+    <ul class="cv-list">
+      {experience.map((e) => (
+        <li class="cv-row">
+          <span class="cv-when mono">{e.years}</span>
+          <div class="cv-what">
+            <p class="cv-headline">{e.role}</p>
+            <p class="cv-sub mono">{e.org}</p>
+            <p class="cv-note muted">{e.note}</p>
+            {e.links && (
+              <p class="cv-links mono">
+                {e.links.map((l) => (
+                  <a href={l.href} target="_blank" rel="noopener">{l.label}<span aria-hidden="true"> ↗</span></a>
+                ))}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="about-section container-wide">
+    <p class="eyebrow">Research areas</p>
+    <h2>Research areas.</h2>
+    <ul class="areas-list">
+      {researchAreas.map((a) => <li class="area mono">{a}</li>)}
+    </ul>
+    <p class="areas-note muted">
+      Applied across semiconductor technology, computational engineering, biophysics, and drug discovery.
+    </p>
+  </section>
+
+  <section class="about-section container-wide">
     <p class="eyebrow">Education</p>
-    <h2>Where the training came from.</h2>
+    <h2>Education.</h2>
     <ul class="cv-list">
       {education.map((e) => (
         <li class="cv-row">
@@ -86,7 +190,7 @@ const teaching = [
 
   <section class="about-section container-wide">
     <p class="eyebrow">Awards & honors</p>
-    <h2>Selected recognitions.</h2>
+    <h2>Awards and honors.</h2>
     <ul class="cv-list">
       {awards.map((a) => (
         <li class="cv-row">
@@ -101,7 +205,7 @@ const teaching = [
 
   <section class="about-section container-wide">
     <p class="eyebrow">Teaching</p>
-    <h2>Courses taught.</h2>
+    <h2>Teaching.</h2>
     <ul class="cv-list">
       {teaching.map((t) => (
         <li class="cv-row">
@@ -118,7 +222,7 @@ const teaching = [
   <section class="about-cta container-narrow">
     <p class="eyebrow">Contact</p>
     <h2 class="about-cta-title">
-      The fastest way to reach me is <a href="mailto:p.a.mistani@gmail.com">email</a>.
+      I can be reached by <a href="mailto:p.a.mistani@gmail.com">email</a>.
     </h2>
   </section>
 </Base>
@@ -160,7 +264,10 @@ const teaching = [
     font-size: clamp(1.05rem, 1.5vw, 1.2rem);
     color: var(--ink-muted);
     line-height: 1.7;
-    max-width: 56ch;
+    max-width: 60ch;
+  }
+  .about-lede + .about-lede {
+    margin-top: var(--s-4);
   }
 
   .about-manifesto {
@@ -244,6 +351,34 @@ const teaching = [
   .cv-note {
     font-size: 0.92rem;
     margin-top: 0.35rem;
+  }
+  .cv-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-6);
+    margin-top: var(--s-2);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .areas-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+  .area {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--hairline-strong);
+    color: var(--ink);
+  }
+  .areas-note {
+    margin-top: var(--s-6);
+    font-size: 0.95rem;
   }
 
   .about-cta {

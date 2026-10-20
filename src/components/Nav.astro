@@ -3,6 +3,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
 const links: { href: string; label: string; external?: boolean }[] = [
   { href: '/about', label: 'About' },
   { href: '/publications', label: 'Publications' },
+  { href: '/open-source', label: 'Open source' },
   { href: 'https://stencil.pub', label: 'Stencil', external: true },
 ];
 ---
@@ -131,8 +132,9 @@ const links: { href: string; label: string; external?: boolean }[] = [
   }
 
   @media (max-width: 640px) {
-    .nav-links { gap: 1.25rem; }
-    .nav-link { font-size: 0.68rem; }
+    .nav-inner { flex-wrap: wrap; row-gap: 0.7rem; padding-block: 0.9rem; }
+    .nav-links { gap: 1rem; }
+    .nav-link { font-size: 0.68rem; letter-spacing: 0.12em; white-space: nowrap; }
   }
 </style>
 

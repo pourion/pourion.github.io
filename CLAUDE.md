@@ -69,7 +69,7 @@ To add or edit a milestone: edit `src/data/milestones.ts` only — the component
 
 ## Notes on content accuracy
 
-The publications page must mirror Pouria's [Google Scholar profile](https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en) — when adding new papers, check Scholar first. The career trajectory in `milestones.ts` should match his current resume; canonical PDF lives at `/home/pmistani/Documents/Pouria_Mistani_Resume_2026.pdf` (not in the repo).
+The publications page must mirror Pouria's [Google Scholar profile](https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en) — when adding new papers, check Scholar first. The career trajectory in `milestones.ts` should match his current resume; canonical PDF lives at `/home/pmistani/Documents/Pouria_Mistani_Resume.pdf` (not in the repo). Positioning (tagline, About narrative) follows his LinkedIn profile: computational physicist leading AI for science & engineering — keep copy in a sober scientist-leader register, not marketing.
 
 ## Stencil — the open journal at `/blog/`
 
