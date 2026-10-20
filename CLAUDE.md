@@ -35,7 +35,7 @@ src/
     index.astro          # home: hero + constellation + foundings + projects + talks + contact
     about.astro          # narrative, education, awards, teaching
     publications.astro   # papers, patents, preprints, book chapters, conferences, OSS, talks
-    blog/index.astro     # blog index (placeholder)
+    blog/index.astro     # legacy Stencil index (not linked; essays live on stencil.pub)
   components/
     Constellation.astro  # SVG trajectory viz — 5 lanes × time × 14 milestones (centerpiece)
     SimHero.astro        # home hero: Allen–Cahn simulation + adaptive mesh
@@ -78,6 +78,12 @@ To add or edit a milestone: edit `src/data/milestones.ts` only — the component
 The publications page must mirror Pouria's [Google Scholar profile](https://scholar.google.com/citations?user=2Uos2_gAAAAJ&hl=en) — when adding new papers, check Scholar first. The career trajectory in `milestones.ts` should match his current resume; canonical PDF lives at `/home/pmistani/Documents/Pouria_Mistani_Resume.pdf` (not in the repo). Positioning (tagline, About narrative) follows his LinkedIn profile: computational physicist leading AI for science & engineering — keep copy in a sober scientist-leader register, not marketing.
 
 ## Stencil — the open journal at `/blog/`
+
+> **Status (2026-10): the `/blog/` pages on this site are legacy.** Essays are now published on [stencil.pub](https://stencil.pub), Pouria's journal site, and the nav's "Stencil" link points there. The `/blog/` pages still build but are not linked from the site, so they get no maintenance. Do not publish new issues here. The workflow below records how Vol. 1 No. 1 was published on this site.
+>
+> Known issues on the legacy essay page (`src/pages/blog/toward-a-simulation-ai-organism.astro`), deliberately not fixed:
+> - At phone width (390 px) the "Share · Cite · Export" label and buttons start at the left screen edge, outside the text gutter, and the buttons wrap onto two rows. This predates the 2026-10 redesign.
+> - The browser's PDF export leaves page 2 half blank, because a figure that no longer fits is pushed to page 3. The Source Serif 4 font change in the 2026-10 redesign moved the page breaks. The PDF archived on Zenodo (DOI `10.5281/zenodo.20331251`) was made earlier and is unaffected.
 
 The blog is published as **Stencil**, a self-published open journal. Every essay is a citable journal article with a Zenodo DOI, indexed by Google Scholar via `<meta name="citation_*">` tags emitted by `Base.astro`'s `citation` prop. License is CC-BY 4.0; everything is open source.
 
