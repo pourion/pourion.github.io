@@ -3,7 +3,7 @@
 import { summedArea, rectFraction } from './sat.js';
 
 const CAP_NONE = 255;
-const SKIP = '[data-mesh-skip], [aria-hidden="true"], script, style, noscript, template, canvas, svg';
+const SKIP = '[data-mesh-skip], script, style, noscript, template, canvas, svg';
 
 /** Smallest mesh cell, in CSS px, for text of a given font size. */
 export function capForFont(px) {
