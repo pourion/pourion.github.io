@@ -38,6 +38,11 @@ src/
     blog/index.astro     # blog index (placeholder)
   components/
     Constellation.astro  # SVG trajectory viz — 5 lanes × time × 14 milestones (centerpiece)
+    SimHero.astro        # home hero: Allen–Cahn simulation + adaptive mesh
+    MeshLayer.astro      # fixed canvas with the page's adaptive mesh
+  scripts/
+    sim/allenCahn.js     # Allen–Cahn solver (DOM-free, unit-tested)
+    mesh/                # sat.js, quadtree.js (unit-tested), textMask.js, meshLayer.js
     Nav.astro
     Footer.astro
   layouts/
@@ -60,7 +65,8 @@ To add or edit a milestone: edit `src/data/milestones.ts` only — the component
 
 ## Editing conventions
 
-- **Typography**: Fraunces Variable (display serif) + JetBrains Mono (technical labels). No Inter, no Roboto, no system sans. Body text and headlines both use Fraunces; mono is reserved for years, eyebrows, code, and labels.
+- **Typography**: Source Serif 4 Variable (all text; display weight 300, body 400; only the `opsz` axis) + JetBrains Mono (technical labels). No Inter, no Roboto, no system sans. Mono is reserved for years, eyebrows, code, captions and labels.
+- **Simulation and mesh**: the home hero (`src/components/SimHero.astro`) runs an Allen–Cahn simulation (`src/scripts/sim/allenCahn.js`) in the browser. Every page draws an adaptive quadtree mesh refined on its text (`src/components/MeshLayer.astro`, `src/scripts/mesh/`). Elements with `data-mesh-skip` are left out of the mesh. Unit tests: `npm test`. The no-JS and reduced-motion frame is `img/allen-cahn-frame.jpg`, rendered by `scripts/render_allen_cahn_frame.py`.
 - **Color**: deep near-black background (`#0B0C0F`) with warm off-white text (`#F2EFE8`). Single warm-amber accent (`#E6A23C`) — never reintroduce the legacy purple. Constellation lane colors are reserved for the constellation only.
 - **Atmosphere**: subtle SVG-noise grain overlay + soft radial gradients on the body — don't replace with flat colors.
 - **External links**: always `target="_blank"` with `rel="noopener"`.
