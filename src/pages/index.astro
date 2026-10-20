@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Constellation from '../components/Constellation.astro';
+import SimHero from '../components/SimHero.astro';
 
 const foundings = [
   {
@@ -105,8 +106,7 @@ const talks = [
   image="/img/og-home.png"
 >
   {/* Hero */}
-  <section class="hero">
-    <div class="container-wide hero-inner">
+  <SimHero>
       <p class="eyebrow hero-eyebrow">
         <span class="dot"></span>
         Pouria Mistani, PhD · AI for Science &amp; Engineering
@@ -125,9 +125,7 @@ const talks = [
         <a href="/publications" class="hero-link mono">Publications →</a>
         <a href="/about" class="hero-link mono">About →</a>
       </div>
-    </div>
-    <div class="hero-grid" aria-hidden="true"></div>
-  </section>
+  </SimHero>
 
   {/* Latest — public announcement */}
   <section class="announce container-wide" aria-label="Latest">
@@ -263,35 +261,13 @@ const talks = [
 </Base>
 
 <style>
-  /* Hero */
-  .hero {
-    position: relative;
-    padding-block: clamp(5rem, 14vw, 11rem) clamp(3rem, 8vw, 7rem);
-    overflow: hidden;
-    border-bottom: 1px solid var(--hairline);
-  }
-  .hero-grid {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(to right, var(--hairline) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
-    background-size: 80px 80px;
-    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 75%);
-    opacity: 0.4;
-  }
-  .hero-inner {
-    position: relative;
-    z-index: 2;
-  }
+  /* Hero content (inside SimHero) */
   .hero-eyebrow {
     max-width: none;
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    margin-bottom: var(--s-12);
+    margin-bottom: var(--s-6);
   }
   .hero-eyebrow .dot {
     width: 7px;
@@ -306,12 +282,12 @@ const talks = [
     50%      { opacity: 0.55; box-shadow: 0 0 22px var(--accent); }
   }
   .hero-title {
-    font-size: clamp(2.5rem, 6.4vw, 5.6rem);
-    line-height: 1.02;
-    font-weight: 320;
-    letter-spacing: -0.03em;
-    max-width: 19ch;
-    margin-bottom: var(--s-8);
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    line-height: 1.05;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+    margin-bottom: var(--s-6);
   }
   .hero-title em {
     color: var(--accent);
@@ -322,7 +298,7 @@ const talks = [
     line-height: 1.5;
     color: var(--ink-muted);
     max-width: 56ch;
-    margin-bottom: var(--s-12);
+    margin-bottom: var(--s-8);
   }
   .hero-actions {
     display: flex;

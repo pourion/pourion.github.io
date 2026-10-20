@@ -1,0 +1,195 @@
+---
+// Home hero: an Allen–Cahn simulation computed in the browser, with the adaptive mesh
+// refined on its interface and on the hero text.
+---
+
+<section class="sim-hero" data-sim-hero>
+  <canvas class="sim-canvas" aria-hidden="true"></canvas>
+  <canvas class="sim-mesh" aria-hidden="true"></canvas>
+  <div class="sim-shade" aria-hidden="true"></div>
+  <div class="container-wide sim-inner">
+    <slot />
+  </div>
+  <p class="sim-caption mono">
+    Allen–Cahn phase separation, <span data-sim-grid>640 × 328</span> grid<br />
+    explicit finite differences, computed in this browser<br />
+    quadtree refined on the interface u = 0 and on the text
+  </p>
+</section>
+
+<script>
+  import { createAllenCahn, gridFor } from '../scripts/sim/allenCahn.js';
+  import { summedArea, rectSum } from '../scripts/mesh/sat.js';
+  import { getMeshLayer } from '../scripts/mesh/meshLayer.js';
+
+  const hero = document.querySelector('[data-sim-hero]');
+  if (hero) start(hero);
+
+  function start(hero) {
+    const simCanvas = hero.querySelector('.sim-canvas');
+    const meshCanvas = hero.querySelector('.sim-mesh');
+    const layer = getMeshLayer();
+    const root = document.documentElement;
+
+    // Reduced motion: keep the pre-rendered frame and refine the hero mesh on the text only.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      hero.classList.add('is-static');
+      layer.setRegion('hero', { element: hero, canvas: meshCanvas, refine: () => false });
+      return;
+    }
+
+    const box = hero.getBoundingClientRect();
+    const { nx, ny } = gridFor(box.width, box.height);
+    hero.querySelector('[data-sim-grid]').textContent = `${nx} × ${ny}`;
+    const sim = createAllenCahn({ nx, ny, seed: 1 + Math.floor(Math.random() * 1e9) });
+    sim.step(120);
+
+    simCanvas.width = nx;
+    simCanvas.height = ny;
+    const ctx = simCanvas.getContext('2d');
+    const image = ctx.createImageData(nx, ny);
+    const interfaceCells = new Uint8Array(nx * ny);
+    let sat = null;
+
+    function draw() {
+      const d = image.data;
+      const u = sim.field;
+      for (let i = 0; i < u.length; i++) {
+        const c = u[i] > 1 ? 1 : u[i] < -1 ? -1 : u[i];
+        const e0 = 1 - c * c;
+        const e2 = e0 * e0;
+        const edge = e2 * e2; // bright only close to u = 0
+        const p = (c + 1) / 2;
+        d[4 * i] = 10 + 22 * p + 130 * edge;
+        d[4 * i + 1] = 11 + 16 * p + 90 * edge;
+        d[4 * i + 2] = 16 + 10 * p + 32 * edge;
+        d[4 * i + 3] = 255;
+      }
+      ctx.putImageData(image, 0, 0);
+    }
+
+    function updateInterface() {
+      const u = sim.field;
+      for (let i = 0; i < u.length; i++) interfaceCells[i] = u[i] > -0.5 && u[i] < 0.5 ? 1 : 0;
+      sat = summedArea(interfaceCells, nx, ny);
+    }
+
+    // Refine a hero cell when it, widened by a quarter of its size on each side, contains
+    // interface cells of the simulation. The interface is refined down to 8 px cells.
+    layer.setRegion('hero', {
+      element: hero,
+      canvas: meshCanvas,
+      refine(x, y, s, rect) {
+        if (!sat || s <= 8) return false;
+        const m = s * 0.25;
+        const sx = nx / rect.width;
+        const sy = ny / rect.height;
+        return rectSum(sat, nx, ny,
+          (x - m - rect.left) * sx, (y - m - rect.top) * sy,
+          (x + s + m - rect.left) * sx, (y + s + m - rect.top) * sy) > 0;
+      },
+    });
+
+    let running = false;
+    let onScreen = false; // set by the observer below, so nothing runs before it reports
+    let last = 0;
+    let frame = 0;
+    const timings = [];
+
+    function tick(t) {
+      if (!running) return;
+      requestAnimationFrame(tick);
+      if (t - last < 33) return; // at most 30 drawn frames per second
+      last = t;
+      const t0 = performance.now();
+      sim.step(3);
+      if (sim.steps > 24000) {
+        sim.reset(1 + Math.floor(Math.random() * 1e9));
+        sim.step(120);
+      }
+      draw();
+      timings.push(performance.now() - t0);
+      if (timings.length > 30) timings.shift();
+      if (++frame % 5 === 0) {
+        updateInterface();
+        layer.rebuildRegion('hero');
+      }
+      root.dataset.simSteps = String(sim.steps);
+      root.dataset.simMs = (timings.reduce((a, b) => a + b, 0) / timings.length).toFixed(2);
+    }
+
+    function update() {
+      const on = onScreen && !document.hidden;
+      if (on === running) return;
+      running = on;
+      if (on) requestAnimationFrame(tick);
+    }
+
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      update();
+    }).observe(hero);
+    document.addEventListener('visibilitychange', update);
+
+    draw();
+    updateInterface();
+    layer.rebuildRegion('hero');
+    root.dataset.simSteps = String(sim.steps);
+  }
+</script>
+
+<style>
+  .sim-hero {
+    position: relative;
+    min-height: min(86vh, 820px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hairline);
+    background: #07080b url('/img/allen-cahn-frame.jpg') center / cover no-repeat;
+  }
+  .sim-canvas,
+  .sim-mesh,
+  .sim-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .sim-canvas { z-index: 0; }
+  .sim-mesh { z-index: 1; pointer-events: none; }
+  .sim-shade {
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(7, 8, 11, 0.9) 0%, rgba(7, 8, 11, 0.25) 50%, rgba(7, 8, 11, 0) 72%);
+  }
+  .is-static .sim-canvas { display: none; }
+  .sim-inner {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    padding-block: var(--s-24) var(--s-12);
+  }
+  .sim-caption {
+    position: absolute;
+    right: var(--s-6);
+    bottom: var(--s-6);
+    z-index: 3;
+    max-width: none;
+    font-size: 0.66rem;
+    line-height: 1.7;
+    letter-spacing: 0.04em;
+    text-align: right;
+    color: rgba(242, 239, 232, 0.55);
+  }
+  @media (max-width: 900px) {
+    .sim-caption {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      padding: 0 var(--s-6) var(--s-6);
+      text-align: left;
+    }
+  }
+</style>

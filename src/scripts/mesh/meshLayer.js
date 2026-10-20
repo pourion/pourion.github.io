@@ -68,7 +68,6 @@ function createMeshLayer() {
   const regions = new Map();
 
   const minSize = () => (window.matchMedia('(max-width: 640px)').matches ? 8 : 4);
-  const intersects = (x, y, s, r) => x < r.right && x + s > r.left && y < r.bottom && y + s > r.top;
   const docSize = () =>
     `${document.documentElement.clientWidth}x${Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)}`;
 
@@ -114,11 +113,9 @@ function createMeshLayer() {
     mask = rasterizeText({ root: document.body });
     builtSize = docSize();
     for (const r of regions.values()) r.rect = docRect(r.element);
-    const rects = [...regions.values()].map((r) => r.rect);
     page = buildQuadtree({
       x0: 0, y0: 0, width: mask.width, height: mask.height,
       root: ROOT, minSize: minSize(),
-      skipRoot: (x, y) => rects.some((rc) => intersects(x, y, ROOT, rc)),
       shouldRefine: textRefine,
     });
     let leaves = page.length / 3;

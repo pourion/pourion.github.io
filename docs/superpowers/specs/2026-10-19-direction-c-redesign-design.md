@@ -81,8 +81,10 @@ pixels.
 
 - The simulation pauses when the hero leaves the viewport (`IntersectionObserver`) and when the
   tab is hidden (`visibilitychange`).
-- With `prefers-reduced-motion: reduce`, the simulation advances to an evolved state once,
-  draws it, and stops. The mesh is drawn once.
+- With `prefers-reduced-motion: reduce`, the hero shows the pre-rendered frame
+  (`img/allen-cahn-frame.jpg`), and the hero mesh is refined on the text only. Computing an
+  evolved state in the browser takes about 1500 steps, which blocks the page for one to two
+  seconds.
 - Without JavaScript, the hero shows `public/img/allen-cahn-frame.jpg`, rendered by
   `scripts/render_allen_cahn_frame.py`, and no mesh is drawn.
 - On phones the smallest mesh cell is 8 px.
