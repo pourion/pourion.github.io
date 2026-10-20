@@ -14,11 +14,12 @@
     <span class="sim-line">Allen–Cahn phase separation, <span data-sim-grid>640 × 328</span> grid</span>
     <span class="sim-line" data-sim-mode>explicit finite differences, pre-rendered frame</span>
     <span class="sim-line" data-sim-mesh-note hidden></span>
+    <button type="button" class="sim-pause" data-sim-pause aria-pressed="false" hidden>Pause simulation</button>
   </p>
 </section>
 
 <script>
-  import { createAllenCahn, gridFor } from '../scripts/sim/allenCahn.js';
+  import { createAllenCahn, gridFor, cellBudget, stepsPerFrame } from '../scripts/sim/allenCahn.js';
   import { summedArea, rectSum } from '../scripts/mesh/sat.js';
   import { getMeshLayer } from '../scripts/mesh/meshLayer.js';
 
@@ -32,7 +33,8 @@
     const root = document.documentElement;
 
     // Reduced motion: keep the pre-rendered frame and refine the hero mesh on the text only.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduceQuery.matches) {
       hero.classList.add('is-static');
       const note = hero.querySelector('[data-sim-mesh-note]');
       note.textContent = 'quadtree refined on the text';
@@ -42,14 +44,15 @@
     }
 
     const box = hero.getBoundingClientRect();
-    const { nx, ny } = gridFor(box.width, box.height);
+    const { nx, ny } = gridFor(box.width, box.height, cellBudget(window.matchMedia('(max-width: 640px)').matches));
     hero.querySelector('[data-sim-grid]').textContent = `${nx} × ${ny}`;
     hero.querySelector('[data-sim-mode]').textContent = 'explicit finite differences, computed in this browser';
     const note = hero.querySelector('[data-sim-mesh-note]');
     note.textContent = 'quadtree refined on the interface u = 0 and on the text';
     note.hidden = false;
     const sim = createAllenCahn({ nx, ny, seed: 1 + Math.floor(Math.random() * 1e9) });
-    sim.step(120);
+    // The warm-up runs on the first tick with the hero visible, so an off-screen hero costs nothing.
+    let warmed = false;
 
     simCanvas.width = nx;
     simCanvas.height = ny;
@@ -97,39 +100,67 @@
       },
     });
 
+    const pauseButton = hero.querySelector('[data-sim-pause]');
     let running = false;
+    let paused = false;
+    let stopped = false; // reduced motion switched on while the page is open
     let onScreen = false; // set by the observer below, so nothing runs before it reports
     let last = 0;
+    let visibleSince = 0;
     let frame = 0;
+    let perFrame = 3;
     const timings = [];
+    root.dataset.simStepsPerFrame = String(perFrame);
 
     function tick(t) {
       if (!running) return;
       requestAnimationFrame(tick);
       if (t - last < 33) return; // at most 30 drawn frames per second
+      // Wait briefly before the first warm-up, so a hash jump away from the hero costs nothing.
+      if (!warmed && t - visibleSince < 250) return;
       last = t;
       const t0 = performance.now();
-      sim.step(3);
-      if (sim.steps > 24000) {
-        sim.reset(1 + Math.floor(Math.random() * 1e9));
+      let warmUp = false;
+      if (!warmed) {
         sim.step(120);
+        warmed = true;
+        warmUp = true;
+      } else {
+        sim.step(perFrame);
+        if (sim.steps > 24000) {
+          sim.reset(1 + Math.floor(Math.random() * 1e9));
+          sim.step(120);
+        }
       }
       draw();
-      timings.push(performance.now() - t0);
-      if (timings.length > 30) timings.shift();
-      if (++frame % 5 === 0) {
+      frame++;
+      if (warmUp || frame % 5 === 0) {
         updateInterface();
         layer.rebuildRegion('hero');
       }
+      if (!warmUp) {
+        timings.push(performance.now() - t0);
+        if (timings.length > 30) timings.shift();
+      }
       root.dataset.simSteps = String(sim.steps);
-      root.dataset.simMs = (timings.reduce((a, b) => a + b, 0) / timings.length).toFixed(2);
+      if (timings.length) {
+        const mean = timings.reduce((a, b) => a + b, 0) / timings.length;
+        root.dataset.simMs = mean.toFixed(2);
+        if (frame % 30 === 0) {
+          perFrame = stepsPerFrame(mean, perFrame);
+          root.dataset.simStepsPerFrame = String(perFrame);
+        }
+      }
     }
 
     function update() {
-      const on = onScreen && !document.hidden;
+      const on = onScreen && !document.hidden && !paused && !stopped;
       if (on === running) return;
       running = on;
-      if (on) requestAnimationFrame(tick);
+      if (on) {
+        visibleSince = performance.now();
+        requestAnimationFrame(tick);
+      }
     }
 
     new IntersectionObserver(([entry]) => {
@@ -138,9 +169,22 @@
     }).observe(hero);
     document.addEventListener('visibilitychange', update);
 
-    draw();
-    updateInterface();
-    layer.rebuildRegion('hero');
+    pauseButton.hidden = false;
+    pauseButton.addEventListener('click', () => {
+      paused = !paused;
+      pauseButton.setAttribute('aria-pressed', String(paused));
+      pauseButton.textContent = paused ? 'Play simulation' : 'Pause simulation';
+      update();
+    });
+
+    // Reduced motion switched on while the page is open: stop and keep the current frame.
+    reduceQuery.addEventListener('change', (e) => {
+      if (!e.matches) return;
+      stopped = true;
+      pauseButton.hidden = true;
+      update();
+    });
+
     root.dataset.simSteps = String(sim.steps);
   }
 </script>
@@ -192,6 +236,25 @@
   }
   .sim-line { display: block; }
   .sim-line[hidden] { display: none; }
+  .sim-pause[hidden] { display: none; }
+  .sim-pause,
+  .sim-pause:hover {
+    display: block;
+    margin: 0.35rem 0 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    letter-spacing: inherit;
+    text-transform: none;
+    text-align: inherit;
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .sim-pause:hover,
+  .sim-pause:focus-visible { color: var(--accent); }
   @media (max-width: 900px) {
     .sim-caption {
       position: relative;
@@ -200,5 +263,6 @@
       padding: 0 var(--s-6) var(--s-6);
       text-align: left;
     }
+    .sim-pause { margin-left: 0; }
   }
 </style>

@@ -26,6 +26,21 @@ export function gridFor(width, height, cells = 210000) {
   return { nx, ny };
 }
 
+/** Grid cell budget: phones get fewer cells because their main thread is several times slower. */
+export function cellBudget(isPhone) {
+  return isPhone ? 90000 : 210000;
+}
+
+/**
+ * Solver steps per drawn frame (1, 2 or 3) from the mean full-tick time in ms:
+ * above 8 ms step down one level, below 4 ms step up one level, otherwise keep.
+ */
+export function stepsPerFrame(meanTickMs, current) {
+  if (meanTickMs > 8) return Math.max(1, current - 1);
+  if (meanTickMs < 4) return Math.min(3, current + 1);
+  return current;
+}
+
 /**
  * @param {{ nx: number, ny: number, dt?: number, k?: number, seed?: number }} options
  */

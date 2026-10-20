@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createAllenCahn, gridFor } from '../src/scripts/sim/allenCahn.js';
+import { createAllenCahn, gridFor, cellBudget, stepsPerFrame } from '../src/scripts/sim/allenCahn.js';
 
 const maxAbs = (a) => a.reduce((m, v) => Math.max(m, Math.abs(v)), 0);
 
@@ -63,5 +63,30 @@ describe('Allen–Cahn solver', () => {
     expect(sim.steps).toBe(3);
     sim.reset(2);
     expect(sim.steps).toBe(0);
+  });
+});
+
+describe('cellBudget', () => {
+  it('gives about 90 000 cells on phones and 210 000 elsewhere', () => {
+    expect(cellBudget(true)).toBe(90000);
+    expect(cellBudget(false)).toBe(210000);
+  });
+});
+
+describe('stepsPerFrame', () => {
+  it('steps down one level above 8 ms', () => {
+    expect(stepsPerFrame(9, 3)).toBe(2);
+    expect(stepsPerFrame(9, 2)).toBe(1);
+    expect(stepsPerFrame(9, 1)).toBe(1);
+  });
+  it('steps up one level below 4 ms, up to 3', () => {
+    expect(stepsPerFrame(3, 1)).toBe(2);
+    expect(stepsPerFrame(3, 2)).toBe(3);
+    expect(stepsPerFrame(3, 3)).toBe(3);
+  });
+  it('keeps the level between 4 and 8 ms', () => {
+    expect(stepsPerFrame(4, 2)).toBe(2);
+    expect(stepsPerFrame(6, 3)).toBe(3);
+    expect(stepsPerFrame(8, 1)).toBe(1);
   });
 });
