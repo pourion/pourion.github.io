@@ -11,9 +11,9 @@
     <slot />
   </div>
   <p class="sim-caption mono">
-    Allen–Cahn phase separation, <span data-sim-grid>640 × 328</span> grid<br />
-    explicit finite differences, computed in this browser<br />
-    quadtree refined on the interface u = 0 and on the text
+    <span class="sim-line">Allen–Cahn phase separation, <span data-sim-grid>640 × 328</span> grid</span>
+    <span class="sim-line" data-sim-mode>explicit finite differences, pre-rendered frame</span>
+    <span class="sim-line" data-sim-mesh-note hidden></span>
   </p>
 </section>
 
@@ -34,6 +34,9 @@
     // Reduced motion: keep the pre-rendered frame and refine the hero mesh on the text only.
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       hero.classList.add('is-static');
+      const note = hero.querySelector('[data-sim-mesh-note]');
+      note.textContent = 'quadtree refined on the text';
+      note.hidden = false;
       layer.setRegion('hero', { element: hero, canvas: meshCanvas, refine: () => false });
       return;
     }
@@ -41,6 +44,10 @@
     const box = hero.getBoundingClientRect();
     const { nx, ny } = gridFor(box.width, box.height);
     hero.querySelector('[data-sim-grid]').textContent = `${nx} × ${ny}`;
+    hero.querySelector('[data-sim-mode]').textContent = 'explicit finite differences, computed in this browser';
+    const note = hero.querySelector('[data-sim-mesh-note]');
+    note.textContent = 'quadtree refined on the interface u = 0 and on the text';
+    note.hidden = false;
     const sim = createAllenCahn({ nx, ny, seed: 1 + Math.floor(Math.random() * 1e9) });
     sim.step(120);
 
@@ -183,6 +190,8 @@
     text-align: right;
     color: rgba(242, 239, 232, 0.55);
   }
+  .sim-line { display: block; }
+  .sim-line[hidden] { display: none; }
   @media (max-width: 900px) {
     .sim-caption {
       position: relative;
